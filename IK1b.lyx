@@ -1,0 +1,4083 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass report
+\begin_preamble
+\usepackage{tikz}
+%\usepackage{tikz-3dplot}
+\usetikzlibrary{matrix,arrows,calc,decorations.pathmorphing,snakes}
+\usepackage{latexsym,stmaryrd,stackrel,array,tabularx,multirow,icomma,braket,polynom,cancel}
+\usepackage[explicit]{titlesec}
+
+% Inhaltsverzeichnis
+\usepackage{tocloft}
+\tocloftpagestyle{fancy}
+
+\renewcommand{\cftchapindent}{1 em}
+\renewcommand{\cftchapnumwidth}{1.5 em}
+
+\renewcommand{\cftsecindent}{2.7 em}
+\renewcommand{\cftsecnumwidth}{2.5em}
+
+\renewcommand{\cftsubsecindent}{5.2 em}
+\renewcommand{\cftsubsecnumwidth}{3.8 em}
+
+\renewcommand{\cftsubsubsecindent}{9 em}
+\renewcommand{\cftsubsubsecnumwidth}{4.5 em}
+
+% Mathe-Operatoren
+\DeclareMathOperator*{\exsop}{\exists}
+\DeclareMathOperator*{\exsgop}{\exists!}
+\DeclareMathOperator*{\fallop}{\forall}
+\DeclareMathOperator*{\bcupdop}{\dot{\bigcup}}
+\DeclareMathOperator*{\bcapdop}{\dot{\bigcap}}
+
+% Rotieren
+\newcommand{\Rotate}[1]{
+\begin{tikzpicture}
+\node[rotate=90] {\ensuremath{#1}};
+\end{tikzpicture}
+}
+
+%QED-Zeichen (Box)
+\newcommand{\qed}{\ensuremath{\Box}}
+\newcommand{\qqed}[1][\arabic{chapter}.\arabic{section}\ifnum\arabic{subsection}>0{.\arabic{subsection}}\fi]{\hfill\qed\ensuremath{_{\text{#1}}}}
+
+% Mengen Modulo
+\newcommand{\moduloT}[2]{
+\mbox{\raisebox{0.6ex}{\ensuremath{\displaystyle #1}}
+{\hspace*{-1.5mm}\Large /}
+\raisebox{-0.6ex}{\hspace*{-1.5mm}\ensuremath{\displaystyle #2}}
+}}
+
+% Links Modulo
+\newcommand{\lmoduloT}[2]{
+\mbox{\raisebox{-0.6ex}{\ensuremath{\displaystyle #1}}
+{\hspace*{-1.5mm}\Large \ensuremath{\backslash}}
+\raisebox{0.6ex}{\hspace*{-1.5mm}\ensuremath{\displaystyle #2}}
+}}
+
+% Für Z/2Z, um nicht soviel schreiben zu müssen
+\newcommand{\modloT}[2]{\moduloT{ \mathbb{#1}}{#2\mathbb{#1}}}
+
+%Die Modulo-Kommandos in klein, für die Darstellungen unter Quantoren.
+\newcommand{\moduloScriptT}[2]{
+\mbox{\raisebox{0.4ex}{\scriptsize\ensuremath{\displaystyle #1}}
+{\hspace*{-1.5mm}\footnotesize /}
+\raisebox{-0.4ex}{\hspace*{-1.5mm}\scriptsize\ensuremath{\displaystyle #2}}
+}}
+
+\newcommand{\lmoduloScriptT}[2]{
+\mbox{\raisebox{-0.4ex}{\scriptsize\ensuremath{\displaystyle #1}}
+{\hspace*{-1.5mm}\footnotesize \ensuremath{\backslash}}
+\raisebox{0.4ex}{\hspace*{-1.5mm}\scriptsize\ensuremath{\displaystyle #2}}
+}}
+
+\newcommand{\modloScriptT}[2]{\moduloScriptT{ \mathbb{#1}}{#2\mathbb{#1}}}
+
+% stehendes Winkelzeichen
+\newcommand{\winkel}{
+\begin{tikzpicture}[scale=0.25]
+\draw ({-2+3^(1/2)},0) -- (0,1) -- ({2-3^(1/2)},0);
+\draw ($(0,1) + ({cos(235)*0.7},{sin(315)*0.7})$) arc (235:315:0.7);
+\end{tikzpicture}}
+
+% Wurzel mit Häkchen
+\newcommand{\hsqrt}[2][{}]{\setbox0=\hbox{$\sqrt[#1]{\phantom{|}\!\! #2\hspace*{1pt}}$}\dimen0=\ht0
+  \advance\dimen0-0.2\ht0
+  \setbox2=\hbox{\vrule height\ht0 depth -\dimen0}
+  {\box0\lower0.4pt\box2}}
+
+% alphabetische Aufzählung
+\newcounter{ale}
+\newcommand{\abc}{\stepcounter{ale}\item[\alph{ale})]}
+\newenvironment{abclist}{\begin{itemize} \setcounter{ale}{0}}{\end{itemize}}
+
+%klein-römische Aufzählung
+\newcounter{ale2}
+\newcommand{\iii}{\stepcounter{ale2}\item[\textnormal{\roman{ale2})}]}
+\newenvironment{iiilist}{\begin{itemize} \setcounter{ale2}{0}}{\end{itemize}}
+
+% Damit nicht immer "Kapitel 1" etc. über der Kapitelüberschrift steht
+\titleformat{\chapter}
+  {\huge\bfseries}
+  {\textrm{\thechapter} }{0pt}
+  {\textrm{#1} \thispagestyle{fancy}
+  }
+
+% Neudefinition der Abschnittsmarker für die Kopfzeile
+\renewcommand\partmark[1]{\markboth{#1}{}}
+\renewcommand\chaptermark[1]{\markright{\arabic{chapter} #1}}
+\renewcommand\sectionmark[1]{}
+\renewcommand\subsectionmark[1]{}
+
+% Kopf- und Fußzeile
+% Höhe der Kopfzeile
+\setlength{\headheight}{14pt}
+% obere Trennlinie
+%\renewcommand{\headrulewidth}{0.4pt}
+\fancyhf{} %alle Kopf- und Fußzeilenfelder bereinigen
+\fancyhead[L]{\textbf{IK1b - Theoretical QM}} %Kopfzeile links
+%\fancyhead[C]{\leftmark} %zentrierte Kopfzeile
+\fancyhead[R]{\rightmark} %Kopfzeile rechts
+\fancyfoot[C]{\thepage\quad\!\!\!\slash\quad\!\!\!\pageref{END-front}} %Seitenzahl der Front-Matter
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 11
+\spacing single
+\use_hyperref true
+\pdf_title "Algebra"
+\pdf_author "Andreas Völklein"
+\pdf_keywords "Algebra, Mathematik"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered true
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks true
+\pdf_pdfborder true
+\pdf_colorlinks false
+\pdf_backref page
+\pdf_pdfusetitle false
+\papersize a4paper
+\use_geometry true
+\use_amsmath 2
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\use_refstyle 0
+\index Stichwortverzeichnis
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2.6cm
+\topmargin 2.6cm
+\rightmargin 2.6cm
+\bottommargin 3.5cm
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation skip
+\defskip smallskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle fancy
+\bullet 0 0 0 -1
+\bullet 1 0 9 -1
+\bullet 2 0 15 -1
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Lyx:
+\end_layout
+
+\begin_layout Plain Layout
+$
+\backslash
+root{3}{2}$ entspricht $
+\backslash
+sqrt[3]{2}$
+\end_layout
+
+\begin_layout Plain Layout
+$
+\backslash
+unittwo{864}{
+\backslash
+frac{km}{h}}$ entspricht $
+\backslash
+unit[864]{
+\backslash
+frac{km}{h}}$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Vorlage: Kommutatives Diagramm
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}[description/.style={fill=white,inner sep=2pt}]
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+matrix (m) [matrix of math nodes, row sep=3em, column sep=2.5em, text height=1.5ex
+, text depth=0.25ex] { G & & G' 
+\backslash
+
+\backslash
+  & a & 
+\backslash
+
+\backslash
+ };
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+path[->,font=
+\backslash
+scriptsize] (m-1-1) edge node[auto] {$ 
+\backslash
+varphi $} (m-1-3) edge node[description] {$ 
+\backslash
+Psi $} (m-2-2) (m-1-3) edge node[auto] {$ 
+\backslash
+Phi $} (m-2-2); 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Vorlage: Funktions-Plot
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}[domain=0:4]
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[very thin,color=gray] (-0.1,-1.1) grid (3.9,3.9);
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[->] (-0.2,0) -- (4.2,0) node[right] {$x$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[->] (0,-1.2) -- (0,4.2) node[above] {$f(x)$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[color=red] plot (
+\backslash
+x,
+\backslash
+x) node[right] {$f(x) =x$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[color=blue] plot (
+\backslash
+x,{sin(
+\backslash
+x r)}) node[right] {$f(x) = 
+\backslash
+sin x$}; 
+\backslash
+draw[color=orange] plot (
+\backslash
+x,{0.05*exp(
+\backslash
+x)}) node[right] {$f(x) = 
+\backslash
+frac{1}{20} 
+\backslash
+mathrm e^x$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: 
+\backslash
+begin{iiilist} als LyX-Kommandos einbauen.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\norm}[1]{\left\lVert #1\right\rVert }
+{\left\Vert #1\right\Vert }
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\abs}[1]{\left\lvert #1\right\rvert }
+{\left|#1\right|}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\ket}[1]{\left|#1\right>}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\braket}[2]{\left\langle #1\middle|#2\right\rangle }
+{\left\langle #1|#2\right\rangle }
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\bra}[1]{\left<#1\right|}
+{\left<#1\right|}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\neg}{\text{-}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\exs}{\exsop}
+{\text{\exists}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\exsg}{\exsgop}
+{\text{\exists!}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\fall}{\fallop}
+{\text{\forall}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\bcupd}{\bcupdop}
+{\text{\dot{\bigcup}}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\bcapd}{\bcapdop}
+{\text{\dot{\bigcap}}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\sr}[3]{\underset{#3}{\overset{#2}{#1}}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\dd}{\textnormal{d}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\ii}{\textbf{i}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\modulo}[2]{\moduloT{#1}{#2}}
+{#1/#2}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\lmodulo}[2]{\lmoduloT{#1}{#2}}
+{#1\backslash#2}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\modlo}[2]{\modloT{#1}{#2}}
+{\mathbb{#1}/#2\mathbb{#1}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\moduloScript}[2]{\moduloScriptT{#1}{#2}}
+{{\scriptstyle #1/#2}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\lmoduloScript}[2]{\lmoduloScriptT{#1}{#2}}
+{{\scriptstyle #1\backslash#2}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\modloScript}[2]{\modloScriptT{#1}{#2}}
+{{\scriptstyle \mathbb{#1}/#2\mathbb{#1}}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pagenumbering{roman}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Title
+
+\series bold
+\size giant
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace*{-45mm}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Integrated Course Ib
+\begin_inset Newline newline
+\end_inset
+
+Theoretical quantum mechanics
+\end_layout
+
+\begin_layout Author
+
+\shape italic
+\size small
+lecture by
+\begin_inset Newline newline
+\end_inset
+
+
+\noun on
+Dr.
+ Juan-Diego Urbina
+\noun default
+
+\begin_inset Newline newline
+\end_inset
+
+during the summer semester 2012
+\begin_inset Newline newline
+\end_inset
+
+revision and layout in LyX by
+\begin_inset Newline newline
+\end_inset
+
+
+\noun on
+Andreas Völklein
+\begin_inset Newline newline
+\end_inset
+
+
+\shape default
+\noun default
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace*{10mm}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Graphics
+	filename unir.png
+	width 15cm
+	clip
+
+\end_inset
+
+
+\shape italic
+\noun on
+
+\begin_inset Newline newline
+\end_inset
+
+
+\shape default
+\noun default
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace*{3mm}
+\end_layout
+
+\end_inset
+
+
+\size default
+
+\begin_inset Newline newline
+\end_inset
+
+Last changed: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+today
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[R]{License}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+setcounter{page}{2} % sonst gibt es aus irgendeinem Grund zweimal die Seite
+ 1!?!?!?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace*{-15mm}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+ATTENTION
+\end_layout
+
+\begin_layout Standard
+This script does 
+\emph on
+not
+\emph default
+ replace the lecture.
+\end_layout
+
+\begin_layout Standard
+Therefore it is recommended 
+\emph on
+strongly
+\emph default
+ to attend the lecture.
+\end_layout
+
+\begin_layout Standard
+These notes are under constant revision, and the level of rigor is not uniform.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace vfill
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Copyright Notice
+\end_layout
+
+\begin_layout Standard
+Copyright © 2012 
+\noun on
+Andreas Völklein
+\end_layout
+
+\begin_layout Standard
+Permission is granted to copy, distribute and/or modify this document under
+ the terms of the GNU Free Documentation License, Version 1.3 or any later
+ version published by the Free Software Foundation;
+\end_layout
+
+\begin_layout Standard
+with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+\end_layout
+
+\begin_layout Standard
+A copy of the license is included in the section entitled “GNU Free Documentatio
+n License”.
+\end_layout
+
+\begin_layout Subsubsection*
+Disclaimer of Warranty
+\end_layout
+
+\begin_layout Standard
+
+\noun on
+Unless otherwise mutually agreed to by the parties in writing and to the
+ extent not prohibited by applicable law, 
+\series bold
+the Copyright Holders and any other party, who may distribute the Document
+ as permitted above,   provide the Document “as is
+\noun default
+”,
+\noun on
+ without warranty of any kind
+\series default
+, expressed, implied, statutory or otherwise, including, but not limited
+ to, the implied warranties of merchantability, fitness for a particular
+ purpose, non-infringement, the absence of latent or other defects, accuracy,
+ or the absence of errors, whether or not discoverable.
+\end_layout
+
+\begin_layout Subsubsection*
+Limitation of Liability
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\noun on
+In no event
+\series default
+ unless required by applicable law or agreed to in writing 
+\series bold
+will the Copyright Holders, or any other party, who may distribute the Document
+ as permitted above, be liable to you for any damages
+\series default
+, including, but not limited to, any general, special, incidental, consequential
+, punitive or exemplary damages, however caused, regardless of the theory
+ of liability, arising out of or related to this license or any use of or
+ inability to use the Document, even if they have been advised of the possibilit
+y of such damages.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\noun on
+In no event will the Copyright Holders'/Distributor's liability to you
+\series default
+, whether in contract, tort (including negligence), or otherwise, 
+\series bold
+exceed the amount you paid the Copyright Holders/Distributor
+\series default
+ for the document under this agreement.
+\end_layout
+
+\begin_layout Subsubsection*
+Links
+\end_layout
+
+\begin_layout Standard
+The text of the “GNU Free Documentation License” can also be read on the
+ following site:
+\end_layout
+
+\begin_layout Quote
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://www.gnu.org/licenses/fdl-1.3.en.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A transparent copy of the recent version of this document can be downloaded
+ from:
+\end_layout
+
+\begin_layout Quote
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://github.com/andiv/IK1b
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[R]{Literature}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Literature
+\end_layout
+
+\begin_layout Itemize
+
+\noun on
+Jun J.
+ Sakurai, Jim Napolitano
+\noun default
+: 
+\emph on
+Modern quantum mechanics
+\emph default
+, Addison-Wesley, 2011
+\begin_inset Newline newline
+\end_inset
+
+ISBN: 0-321-50336-8
+\end_layout
+
+\begin_layout Itemize
+
+\noun on
+Leonard I.
+ Schiff
+\noun default
+: 
+\emph on
+Quantum mechanics
+\emph default
+, McGraw-Hill, 1968
+\begin_inset Newline newline
+\end_inset
+
+ISBN: 0-07-085643-5
+\end_layout
+
+\begin_layout Itemize
+Any introductory book on quantum mechanics.
+\end_layout
+
+\begin_layout Itemize
+
+\noun on
+Richard P.
+ Feynman, Robert B.
+ Leighton, Matthew L.
+ Sands
+\noun default
+: 
+\emph on
+Lectures on physics
+\end_layout
+
+\begin_layout Standard
+
+\size small
+\begin_inset Newpage newpage
+\end_inset
+
+
+\size default
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[R]{Table of Contents}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[C]{}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{END-front}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newpage newpage
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pagenumbering{arabic}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyfoot[C]{
+\backslash
+thepage
+\backslash
+quad
+\backslash
+!
+\backslash
+!
+\backslash
+!
+\backslash
+slash
+\backslash
+quad
+\backslash
+!
+\backslash
+!
+\backslash
+!
+\backslash
+pageref{END}} % Seitenzahl des Hauptteils
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[R]{
+\backslash
+rightmark}
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+fancyhead[C]{
+\backslash
+leftmark}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%DATE: Mo 16.04.2012
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%
+\backslash
+setcounter{chapter}{-1}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+The Formalism and its interpretation
+\end_layout
+
+\begin_layout Standard
+As any theory about physical phenomenons, quantum mechanics requires
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{iiilist}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ kinematical aspects: The (mathematical) space where physical states are
+ represented.
+\end_layout
+
+\begin_layout Standard
+Example from classical mechanics: points in phase space
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ the definition of observables: Which quantities can be measured and how
+ to represent them in the space of states?
+\end_layout
+
+\begin_layout Standard
+Example from classical mechanics: any function 
+\begin_inset Formula $f\left(\vec{r},\vec{p}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+(This is more complicated in quantum mechanics.)
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ an dynamical law: How do states evolve in “time”?
+\end_layout
+
+\begin_layout Standard
+Example from classical mechanics: Hamilton's equations determine 
+\begin_inset Formula $\left(\vec{q}\left(t\right)\!,\,\vec{p}\left(t\right)\right)$
+\end_inset
+
+ depending on 
+\begin_inset Formula $\left(\vec{q}\left(t_{0}\right)\!,\,\vec{p}\left(t_{0}\right)\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{iiilist}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+The kinematical aspects of quantum mechanics
+\end_layout
+
+\begin_layout Standard
+The 
+\noun on
+first postulate
+\noun default
+ says:
+\end_layout
+
+\begin_layout Quote
+“The state of a quantum mechanical system is represented as a normalized
+ vector in a (complex) Hilbert space.
+\begin_inset Newline newline
+\end_inset
+
+Vectors, which differ only by a phase, represent the same state.”
+\end_layout
+
+\begin_layout Standard
+To understand what this means, we introduce some concepts:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{abclist}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+abc
+\end_layout
+
+\end_inset
+
+ 
+\emph on
+Hilbert space
+\emph default
+: A (finite or infinite dimensional) complete vector space with a positive
+ definite scalar product.
+ Following Dirac, elements in the Hilbert space 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+ are called 
+\emph on
+kets
+\emph default
+ and we represent them by 
+\begin_inset Formula $\ket{\psi},\ket{\phi}\in\mathcal{H}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+For complex numbers 
+\begin_inset Formula $a,b\in\mathbb{C}$
+\end_inset
+
+ also 
+\begin_inset Formula $a\ket{\psi}+b\ket{\phi}\in\mathcal{H}$
+\end_inset
+
+ is a element of the Hilbert space.
+\end_layout
+
+\begin_layout Standard
+The sum is associative and the product by scalars is distributive.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+abc
+\end_layout
+
+\end_inset
+
+ 
+\emph on
+Scalar product
+\emph default
+: The operation associating a complex number to each pair of states
+\begin_inset Formula 
+\begin{align*}
+\left\langle .,.\right\rangle :\mathcal{H}\times\mathcal{H} & \to\mathbb{C}\\
+\left(\ket{\psi},\ket{\phi}\right) & \mapsto\left\langle \psi,\phi\right\rangle 
+\end{align*}
+
+\end_inset
+
+with the properties
+\begin_inset Formula 
+\begin{align*}
+\left\langle \eta,a\phi+b\psi\right\rangle  & =a\left\langle \eta,\phi\right\rangle +b\left\langle \eta,\psi\right\rangle  & \left\langle \psi,\phi\right\rangle  & =\left\langle \phi,\psi\right\rangle ^{*}\\
+\left\langle \psi,\psi\right\rangle  & \ge0 & \left\langle \psi,\psi\right\rangle =0 & \quad\Leftrightarrow\quad\ket{\psi}=0
+\end{align*}
+
+\end_inset
+
+for 
+\begin_inset Formula $a,b\in\mathbb{C}$
+\end_inset
+
+ and 
+\begin_inset Formula $ $
+\end_inset
+
+
+\begin_inset Formula $\ket{\phi},\ket{\psi},\ket{\eta}\in\mathcal{H}$
+\end_inset
+
+ is called the scalar product.
+\end_layout
+
+\begin_layout Standard
+The 
+\emph on
+norm
+\emph default
+ of a state 
+\begin_inset Formula $\ket{\psi}$
+\end_inset
+
+ is then defined as:
+\begin_inset Formula 
+\begin{align*}
+\norm{\psi}:=\norm{\ket{\psi}} & :=\sqrt{\left\langle \psi,\psi\right\rangle }
+\end{align*}
+
+\end_inset
+
+If 
+\begin_inset Formula $\norm{\ket{\psi}}=1$
+\end_inset
+
+, then 
+\begin_inset Formula $\ket{\psi}$
+\end_inset
+
+ is said to be 
+\emph on
+normalized
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+abc
+\end_layout
+
+\end_inset
+
+ 
+\emph on
+Phase
+\emph default
+: Complex number 
+\begin_inset Formula $z\in\mathbb{C}$
+\end_inset
+
+ with unit norm, that means 
+\begin_inset Formula $zz^{*}=1$
+\end_inset
+
+.
+ It can be represented via a real number 
+\begin_inset Formula $\alpha\in\mathbb{R}$
+\end_inset
+
+ as 
+\begin_inset Formula $z=e^{\ii\alpha}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The physical state associated with 
+\begin_inset Formula $\ket{\psi}$
+\end_inset
+
+ and 
+\begin_inset Formula $e^{\ii\alpha}\ket{\psi}$
+\end_inset
+
+ is 
+\noun on
+the same
+\noun default
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+abc
+\end_layout
+
+\end_inset
+
+ C
+\emph on
+omplete basis
+\emph default
+: A family of kets 
+\begin_inset Formula $\left(\ket{\phi_{i}}\right)_{i\in I\subseteq\mathbb{N}}$
+\end_inset
+
+ such that for 
+\noun on
+all
+\noun default
+ states 
+\begin_inset Formula $\ket{\psi}\in\mathcal{H}$
+\end_inset
+
+, there is a family of complex numbers 
+\begin_inset Formula $\left(c_{i}\right)_{i\in I\subseteq\mathbb{N}}$
+\end_inset
+
+ (depending on 
+\begin_inset Formula $\ket{\psi}$
+\end_inset
+
+) with:
+\begin_inset Formula 
+\begin{align*}
+\ket{\psi} & =\sum_{i\in I}c_{i}\ket{\phi_{i}}
+\end{align*}
+
+\end_inset
+
+If 
+\begin_inset Formula $\left\langle \phi_{i},\phi_{j}\right\rangle =\delta_{ij}$
+\end_inset
+
+, then the basis is 
+\emph on
+complete
+\emph default
+ and 
+\emph on
+orthonormal
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+In the case of an uncountably infinite vector space the basis 
+\begin_inset Formula $\left(\ket q\right)_{q\in\mathbb{R}}$
+\end_inset
+
+ can be written as a function of a real variable.
+ The representation of 
+\begin_inset Formula $\ket{\psi}$
+\end_inset
+
+ then is an infinite sum, that is an integral
+\begin_inset Formula 
+\begin{align*}
+\ket{\psi} & =\int\psi\left(q\right)\ket q\dd q
+\end{align*}
+
+\end_inset
+
+and a complete and orthonormal basis is characterized by 
+\begin_inset Formula $\left\langle q,q'\right\rangle =\delta\left(q-q'\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+abc
+\end_layout
+
+\end_inset
+
+ 
+\emph on
+Adjoint
+\emph default
+: For each Hilbert space 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+ there is another Hilbert space 
+\begin_inset Formula $\mathcal{H}^{*}$
+\end_inset
+
+ called 
+\emph on
+dual
+\emph default
+, with elements 
+\begin_inset Formula $\bra f\in\mathcal{H}^{*}$
+\end_inset
+
+, which are 
+\noun on
+linear functionals
+\noun default
+ acting on 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+\bra f:\mathcal{H} & \to\mathbb{C}\\
+\ket{\psi} & \mapsto\braket f{\psi}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula $\braket{\psi}{\phi}$
+\end_inset
+
+ is called 
+\emph on
+bracket
+\emph default
+.
+ Riesz theorem says, that there is a 
+\noun on
+one to one
+\noun default
+ correspondence between 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{H}^{*}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+\fall_{\ket{\psi}\in\mathcal{H}} & \ \exs_{\bra{\psi}\in\mathcal{H}^{*}}\ \fall_{\ket{\phi}\in\mathcal{H}}\ :\ \braket{\psi}{\phi}=\left\langle \psi,\phi\right\rangle ,\norm{\bra{\psi}}=\norm{\ket{\psi}}
+\end{align*}
+
+\end_inset
+
+The so associated 
+\begin_inset Formula $\bra{\psi}$
+\end_inset
+
+ is the 
+\emph on
+adjoint
+\emph default
+ of 
+\begin_inset Formula $\ket{\psi}$
+\end_inset
+
+, called 
+\emph on
+bra
+\emph default
+, and we write: 
+\begin_inset Formula 
+\begin{align*}
+^{\dagger}:\mathcal{H} & \to\mathcal{H}^{*}\\
+\ket{\psi} & \mapsto\left(\ket{\psi}\right)^{\dagger}=\bra{\psi}
+\end{align*}
+
+\end_inset
+
+The function 
+\begin_inset Formula $^{\dagger}$
+\end_inset
+
+ is semilinear, that means for 
+\begin_inset Formula $a,b\in\mathbb{C}$
+\end_inset
+
+ and 
+\begin_inset Formula $\ket{\psi},\ket{\phi}\in\mathcal{H}$
+\end_inset
+
+ is:
+\begin_inset Formula 
+\begin{align*}
+\left(a\ket{\psi}+b\ket{\phi}\right)^{\dagger} & =a^{*}\bra{\psi}+b^{*}\bra{\phi}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+abc
+\end_layout
+
+\end_inset
+
+ 
+\emph on
+Representation
+\emph default
+: Assume that 
+\begin_inset Formula $\left(\ket{\phi_{i}}\right)_{i\in I\subseteq\mathbb{N}}$
+\end_inset
+
+ (respectively 
+\begin_inset Formula $\left(\ket q\right)_{q\in\mathbb{R}}$
+\end_inset
+
+) is a complete orthonormal basis.
+ The ket 
+\begin_inset Formula $\ket{\psi}$
+\end_inset
+
+ is said to “be represented” in that basis by associating:
+\begin_inset Formula 
+\begin{align*}
+ & \text{discrete case} &  & \text{continous case}\\
+\ket{\psi} & \mapsto\left(\begin{array}{c}
+\braket{\phi_{1}}{\psi}\\
+\braket{\phi_{2}}{\psi}\\
+\vdots
+\end{array}\right)\in\mathbb{C}^{\left|I\right|} & \ket{\psi} & \mapsto\braket q{\psi}=:\psi\left(q\right)\\
+\bra{\psi} & \mapsto\left(\begin{array}{c}
+\braket{\phi_{1}}{\psi}^{*}\\
+\braket{\phi_{2}}{\psi}^{*}\\
+\vdots
+\end{array}\right)\in\mathbb{C}^{\left|I\right|} & \bra{\psi} & \mapsto\braket q{\psi}^{*}=\psi\left(q\right)^{*}
+\end{align*}
+
+\end_inset
+
+This 
+\begin_inset Formula $\psi\left(q\right)$
+\end_inset
+
+ is the wave function.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+abc
+\end_layout
+
+\end_inset
+
+ 
+\emph on
+Exterior product
+\emph default
+: The object 
+\begin_inset Formula $\ket{\phi}\bra{\psi}:\mathcal{H}\to\mathcal{H}$
+\end_inset
+
+ is a linear operator acting on 
+\begin_inset Formula $\ket{\eta}\in\mathcal{H}$
+\end_inset
+
+ defined by
+\begin_inset Formula 
+\begin{align*}
+\left(\ket{\phi}\bra{\psi}\right)\ket{\eta} & :=\underbrace{\braket{\psi}{\eta}}_{\in\mathbb{C}}\ket{\phi}
+\end{align*}
+
+\end_inset
+
+with the adjoint:
+\begin_inset Formula 
+\begin{align*}
+\left(\ket{\phi}\bra{\psi}\right)^{\dagger} & :=\ket{\psi}\bra{\phi}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Example from linear algebra:
+\begin_inset Formula 
+\begin{align*}
+\vec{v} & =\left(v_{1},\ldots,v_{n}\right)^{T} & \vec{u} & =\left(u_{1},\ldots,u_{n}\right)^{T}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\vec{v}\,^{T}\vec{u} & =\sum_{i=1}^{n}v_{i}u_{i}\\
+\vec{u}\vec{v}\,^{T} & =\left(\begin{array}{ccc}
+u_{1}v_{1} & \ldots & u_{1}v_{n}\\
+\vdots & \ddots & \vdots\\
+u_{n}v_{1} & \ldots & u_{n}v_{n}
+\end{array}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{abclist}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Observables and measurements in quantum mechanics
+\end_layout
+
+\begin_layout Standard
+What can be observed and how measurements affect quantum states is encoded
+ into the following two 
+\noun on
+postulates
+\noun default
+:
+\end_layout
+
+\begin_layout Quote
+“Observables in quantum mechanics are represented by 
+\noun on
+linear Hermitian operators
+\noun default
+ on 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+.”
+\end_layout
+
+\begin_layout Quote
+“The results of a measurement of the physical quantity represented by an
+ observable can only take values belonging to the 
+\noun on
+spectrum
+\noun default
+ of the observable.
+ Just after measurement, that gives one of the eigenvalues of the observable,
+ the state belongs to corresponding eigenspace.“
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{abclist}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+abc
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $\hat{A}:\mathcal{H}\to\mathcal{H}$
+\end_inset
+
+ is a 
+\emph on
+linear 
+\emph default
+operator if and only if:
+\begin_inset Formula 
+\begin{align*}
+\hat{A}\left(a\ket{\psi}+b\ket{\phi}\right) & =a\hat{A}\ket{\psi}+b\hat{A}\ket{\phi}
+\end{align*}
+
+\end_inset
+
+For every linear operator 
+\begin_inset Formula $\hat{A}$
+\end_inset
+
+ there is the identity:
+\begin_inset Formula 
+\begin{align*}
+\braket{\psi}{\hat{A}\phi} & =:\braket{\phi}{\hat{A}^{\dagger}\psi}^{*}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula $\hat{A}^{\dagger}$
+\end_inset
+
+ is called the 
+\emph on
+adjoint
+\emph default
+ of 
+\begin_inset Formula $\hat{A}$
+\end_inset
+
+.
+ If and only if 
+\begin_inset Formula $\hat{A}=\hat{A}^{\dagger}$
+\end_inset
+
+ then 
+\begin_inset Formula $\hat{A}$
+\end_inset
+
+ is called 
+\noun on
+Hermitian
+\emph on
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+abc
+\end_layout
+
+\end_inset
+
+ The 
+\emph on
+spectrum
+\emph default
+ of an operator 
+\begin_inset Formula $\hat{Q}$
+\end_inset
+
+ is defined by a set of numbers 
+\begin_inset Formula $Q_{i}$
+\end_inset
+
+, called 
+\emph on
+eigenvalues
+\emph default
+, that fulfill the equation:
+\begin_inset Formula 
+\begin{align*}
+\hat{Q}\ket{Q_{i}} & =Q_{i}\ket{Q_{i}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Formula $\ket{Q_{i}}$
+\end_inset
+
+ are the corresponding eigenvectors.
+ If there is more than one eigenvector for the same eigenvalue then the
+ spectrum is called 
+\emph on
+degenerated
+\emph default
+ and the different eigenvectors are denoted by 
+\begin_inset Formula $\ket{Q_{i}^{\left(d\right)}}$
+\end_inset
+
+ with 
+\begin_inset Formula $d\in D\subseteq\mathbb{N}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Hermitian operators have 
+\noun on
+real
+\noun default
+ eigenvalues and 
+\noun on
+orthogonal
+\noun default
+ eigenvectors.
+\end_layout
+
+\begin_layout Standard
+That means, if 
+\begin_inset Formula $\hat{A}=\hat{A}^{\dagger}$
+\end_inset
+
+, 
+\begin_inset Formula $\hat{A}\ket{a_{i}}=a_{i}\ket{a_{i}}$
+\end_inset
+
+, then 
+\begin_inset Formula $a_{i}=a_{i}^{*}$
+\end_inset
+
+ and 
+\begin_inset Formula $\braket{a_{i}}{a_{j}}=0$
+\end_inset
+
+ if 
+\begin_inset Formula $i\not=j$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+If the eigenvectors are normalized, then we can write 
+\begin_inset Formula $\braket{a_{i}}{a_{j}}=\delta_{ij}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%DATE: Do 19.04.2012
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+abc
+\end_layout
+
+\end_inset
+
+ The 
+\emph on
+spectrum decomposition 
+\emph default
+of a Hermitian operator (
+\begin_inset Formula $\hat{A}=\hat{A}^{\dagger}$
+\end_inset
+
+) 
+\begin_inset Formula 
+\begin{align*}
+ & \text{discrete case} &  & \text{continous case}\\
+\hat{A}\ket{a_{i}} & =a_{i}\ket{a_{i}} &  & \hat{A}\ket a=a\ket a
+\end{align*}
+
+\end_inset
+
+is given by:
+\begin_inset Formula 
+\begin{align*}
+\hat{A} & =\sum_{i\in I}a_{i}\ket{a_{i}}\bra{a_{i}} & \hat{A} & =\int a\ket a\bra a\dd a
+\end{align*}
+
+\end_inset
+
+In linear algebra a symmetric matrix 
+\begin_inset Formula $M=M^{T}$
+\end_inset
+
+ with eigenvalues 
+\begin_inset Formula $m_{i}$
+\end_inset
+
+ for 
+\begin_inset Formula $i\in\left\{ 1,\ldots,n\right\} $
+\end_inset
+
+ can be written as:
+\begin_inset Formula 
+\begin{align*}
+M & =\left(\begin{array}{cccc}
+m_{1} & 0 & \ldots & 0\\
+0 & m_{2} & \ddots & \vdots\\
+\vdots & \ddots & \ddots & 0\\
+0 & \ldots & 0 & m_{n}
+\end{array}\right)=m_{1}\left(\begin{array}{cccc}
+1 & 0 & \ldots & 0\\
+0 & 0 & \ddots & \vdots\\
+\vdots & \ddots & \ddots & 0\\
+0 & \ldots & 0 & 0
+\end{array}\right)+\ldots+m_{n}\left(\begin{array}{cccc}
+0 & 0 & \ldots & 0\\
+0 & \ddots & \ddots & \vdots\\
+\vdots & \ddots & 0 & 0\\
+0 & \ldots & 0 & 1
+\end{array}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+abc
+\end_layout
+
+\end_inset
+
+ The 
+\emph on
+unit operator
+\emph default
+ 
+\begin_inset Formula $\hat{I}$
+\end_inset
+
+ defined by
+\begin_inset Formula 
+\begin{align*}
+\fall_{\ket{\phi}\in\mathcal{H}}\ :\ \hat{I}\ket{\phi} & =\ket{\phi}
+\end{align*}
+
+\end_inset
+
+can be written as
+\begin_inset Formula 
+\begin{align*}
+ & \text{discrete case} &  & \text{continous case}\\
+\hat{I} & =\sum_{i\in I}\ket{a_{i}}\bra{a_{i}} & \hat{I} & =\int\ket a\bra a\dd a
+\end{align*}
+
+\end_inset
+
+where 
+\begin_inset Formula $\left(\ket{a_{i}}\right)_{i\in I\subseteq\mathbb{N}}$
+\end_inset
+
+ (respectively 
+\begin_inset Formula $\left(\ket a\right)_{a\in\mathbb{R}}$
+\end_inset
+
+) is a complete orthonormal basis.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+abc
+\end_layout
+
+\end_inset
+
+ The 
+\emph on
+projection
+\emph default
+ of 
+\begin_inset Formula $\ket{\psi}$
+\end_inset
+
+ along a basis vector 
+\begin_inset Formula $\ket{a_{i}}$
+\end_inset
+
+ (respectively 
+\begin_inset Formula $\ket a$
+\end_inset
+
+) is:
+\begin_inset Formula 
+\begin{align*}
+\text{discrete} & \text{ case} & \text{continous} & \text{ case}\\
+\left(\ket{a_{i}}\bra{a_{i}}\right)\ket{\psi} & =\braket{a_{i}}{\psi}\ket{a_{i}} & \left(\ket a\bra a\right)\ket{\psi} & =\braket a{\psi}\ket a
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+abc
+\end_layout
+
+\end_inset
+
+ The 
+\emph on
+algebra
+\emph default
+ of the operators 
+\begin_inset Formula $\hat{Q}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\hat{Q}_{2}$
+\end_inset
+
+ is:
+\begin_inset Formula 
+\begin{align*}
+\left(\hat{Q}_{1}\hat{Q}_{2}\right)\ket{\psi} & :=\hat{Q}_{1}\left(\hat{Q}_{2}\ket{\psi}\right)\not=\left(\hat{Q}_{2}\hat{Q}_{1}\right)\ket{\psi}\\
+\left(\hat{Q}_{1}\hat{Q}_{2}\right)^{\dagger} & :=\hat{Q}_{2}^{\dagger}\hat{Q}_{1}^{\dagger}
+\end{align*}
+
+\end_inset
+
+The 
+\emph on
+commutator
+\emph default
+ is defined by:
+\begin_inset Formula 
+\begin{align*}
+\left[\hat{Q}_{1},\hat{Q}_{2}\right] & :=\hat{Q}_{1}\hat{Q}_{2}-\hat{Q}_{2}\hat{Q}_{1}
+\end{align*}
+
+\end_inset
+
+It is bilinear and has the properties:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{iiilist}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ It is antisymmetric:
+\begin_inset Formula 
+\begin{align*}
+\left[\hat{Q}_{1},\hat{Q}_{2}\right] & =-\left[\hat{Q}_{2},\hat{Q}_{1}\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ Jacobi identity:
+\begin_inset Formula 
+\begin{align*}
+\left[\hat{Q}_{1},\left[\hat{Q}_{2},\hat{Q}_{3}\right]\right]+\left[\hat{Q}_{2},\left[\hat{Q}_{3},\hat{Q}_{1}\right]\right]+\left[\hat{Q}_{3},\left[\hat{Q}_{1},\hat{Q}_{2}\right]\right] & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ Leibniz identity:
+\begin_inset Formula 
+\begin{align*}
+\left[\hat{Q}_{1},\hat{Q}_{2}\hat{Q}_{3}\right]= & \hat{Q}_{2}\left[\hat{Q}_{1},\hat{Q}_{3}\right]+\left[\hat{Q}_{1},\hat{Q}_{2}\right]\hat{Q}_{3}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{iiilist}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Due to these identities the commutator is analogous to the classical Poisson
+ bracket.
+\end_layout
+
+\begin_layout Standard
+Two observables 
+\begin_inset Formula $\left(\hat{A}=\hat{A}^{\dagger}\!,\,\hat{B}=\hat{B}^{\dagger}\right)$
+\end_inset
+
+ are called 
+\emph on
+compatible
+\emph default
+ if and only if 
+\begin_inset Formula $\left[\hat{A},\hat{B}\right]=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Theorem: If 
+\begin_inset Formula $\hat{A}$
+\end_inset
+
+ and 
+\begin_inset Formula $\hat{B}$
+\end_inset
+
+ are compatible then there exists a basis 
+\begin_inset Formula $\left(\ket{k_{i}}\right)_{i\in I\subseteq\mathbb{N}}$
+\end_inset
+
+ such that:
+\begin_inset Formula 
+\begin{align*}
+\hat{A}\ket{k_{i}} & =a_{i}\ket{k_{i}}\\
+\hat{B}\ket{k_{i}} & =b_{i}\ket{k_{i}}
+\end{align*}
+
+\end_inset
+
+Therefore the states 
+\begin_inset Formula $\ket{k_{i}}$
+\end_inset
+
+ have well defined properties 
+\begin_inset Formula $\left(a_{i},b_{i}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+abc
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{iiilist}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ The 
+\emph on
+matrix representation
+\emph default
+ of an operator 
+\noun on
+with respect to the basis
+\noun default
+ 
+\begin_inset Formula $\left(\ket{a_{i}}\right)_{i\in\left\{ 1,\ldots,n\right\} }$
+\end_inset
+
+ (respectively 
+\begin_inset Formula $\left(\ket q\right)_{q\in\mathbb{R}}$
+\end_inset
+
+) is:
+\begin_inset Formula 
+\begin{align*}
+\negthickspace\negthickspace\negthickspace\negthickspace\negthickspace & \text{discrete case} &  & \text{continuous case}\\
+\negthickspace\negthickspace\negthickspace\negthickspace\negthickspace\hat{Q} & \to\left(\begin{array}{ccc}
+\bra{a_{1}}\hat{Q}\ket{a_{1}} & \ldots & \bra{a_{1}}\hat{Q}\ket{a_{n}}\\
+\vdots & \ddots & \vdots\\
+\bra{a_{n}}\hat{Q}\ket{a_{1}} & \ldots & \bra{a_{n}}\hat{Q}\ket{a_{n}}
+\end{array}\right)=\left(\bra{a_{i}}\hat{Q}\ket{a_{j}}\right)_{ij}=:Q_{ij} & \hat{Q} & \to\bra q\hat{Q}\ket{q'}=Q\left(q,q'\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ The 
+\emph on
+trace
+\emph default
+ of 
+\begin_inset Formula $\hat{Q}$
+\end_inset
+
+ is defined by
+\begin_inset Formula 
+\begin{align*}
+ & \text{discrete case} &  & \text{continuous case}\\
+\text{Tr}\left(\hat{Q}\right) & =\sum_{i=1}^{n}\bra{a_{i}}\hat{Q}\ket{a_{i}} & \text{Tr}\left(\hat{Q}\right) & =\int Q\left(q,q\right)\dd q
+\end{align*}
+
+\end_inset
+
+ans is independent of the basis.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{iiilist}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore the equation
+\begin_inset Formula 
+\begin{align*}
+\hat{Q}\ket{\psi} & =\ket{\phi}
+\end{align*}
+
+\end_inset
+
+can be written in this basis by:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{iiilist}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ Multiplying 
+\begin_inset Formula $\bra{a_{i}}$
+\end_inset
+
+ from the left: 
+\begin_inset Formula $\bra{a_{i}}\hat{Q}\ket{\phi}=\braket{a_{i}}{\phi}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ Insert an unit operator after 
+\begin_inset Formula $\hat{Q}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+\bra{a_{i}}\hat{Q}\hat{I}\ket{\phi} & =\bra{a_{i}}\hat{Q}\left(\sum_{j=1}^{n}\ket{a_{j}}\bra{a_{j}}\right)\ket{\phi}=\sum_{j=1}^{n}\bra{a_{i}}\hat{Q}\ket{a_{j}}\braket{a_{j}}{\psi}=\braket{a_{i}}{\phi}
+\end{align*}
+
+\end_inset
+
+This is the component form of the vector equation:
+\begin_inset Formula 
+\begin{align*}
+\left(\begin{array}{ccc}
+Q_{11} & \ldots & Q_{1n}\\
+\vdots &  & \vdots\\
+Q_{n1} & \ldots & Q_{nn}
+\end{array}\right)\left(\begin{array}{c}
+\psi_{1}\\
+\vdots\\
+\psi_{n}
+\end{array}\right) & =\left(\begin{array}{c}
+\phi_{1}\\
+\vdots\\
+\phi_{n}
+\end{array}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{iiilist}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The continuous version is
+\begin_inset Formula 
+\begin{align*}
+\int Q\left(q,q'\right)\psi\left(q'\right)\dd q' & =\phi\left(q\right)
+\end{align*}
+
+\end_inset
+
+with 
+\begin_inset Formula $Q\left(q,q'\right):=\bra q\hat{Q}\ket q$
+\end_inset
+
+, 
+\begin_inset Formula $\psi\left(q'\right)=\braket{q'}{\psi}$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi\left(q\right)=\braket q{\phi}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+abc
+\end_layout
+
+\end_inset
+
+ Change of basis and unitary transformations.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{iiilist}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ An operator 
+\begin_inset Formula $\hat{U}$
+\end_inset
+
+ is called 
+\emph on
+unitary
+\emph default
+ if and only if 
+\begin_inset Formula $\hat{U}^{T}=\hat{U}^{-1}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ Unitary transformations (“transformation” is the same as “operator”) preserve
+ scalar products.
+ For 
+\begin_inset Formula $\ket{\psi},\ket{\phi}\in\mathcal{H}$
+\end_inset
+
+ we define:
+\begin_inset Formula 
+\begin{align*}
+\ket{\psi'} & :=\hat{U}\ket{\psi} & \ket{\phi'} & :=\hat{U}\ket{\phi}
+\end{align*}
+
+\end_inset
+
+Then the scalar product is the same:
+\begin_inset Formula 
+\begin{align*}
+\braket{\psi'}{\phi'} & =\braket{\psi}{\phi}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ Unitary transformations represent changes of the basis.
+\begin_inset Formula 
+\begin{align*}
+\ket{\psi} & =\hat{I}\ket{\psi}=\left(\sum_{i}\ket{a_{i}}\bra{a_{i}}\right)\ket{\psi}=\sum_{i\in I}\braket{a_{i}}{\psi}\ket{a_{i}}\\
+\braket{b_{i}}{\psi} & =\sum_{j\in I}\braket{b_{i}}{a_{j}}\braket{a_{j}}{\psi}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\left(\begin{array}{c}
+\psi_{1}^{\left(b\right)}\\
+\vdots\\
+\psi_{N}^{\left(b\right)}
+\end{array}\right) & =\mathbb{U}\cdot\left(\begin{array}{c}
+\psi_{1}^{\left(a\right)}\\
+\vdots\\
+\psi_{N}^{\left(a\right)}
+\end{array}\right)\\
+\left[\mathbb{U}\right]_{ij} & =U_{ij}=\braket{b_{i}}{a_{j}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ For operators the transformations are:
+\begin_inset Formula 
+\begin{align*}
+Q_{ij}^{\left(b\right)} & =\bra{b_{i}}\hat{Q}\ket{b_{j}}=\bra{b_{i}}\hat{I}\hat{Q}\hat{I}\ket{b_{j}}=\sum_{l,m\in I}\braket{b_{i}}{a_{l}}\bra{a_{l}}\hat{Q}\ket{a_{m}}\braket{a_{m}}{b_{j}}=\\
+ & =\sum_{l,m\in I}U_{il}Q_{lm}^{\left(a\right)}U_{mj}=\sum_{l,m}U_{il}Q_{lm}^{\left(a\right)}\left(U_{jm}\right)^{*}\\
+\mathbb{Q}^{\left(b\right)} & =\mathbb{U}\mathbb{Q}^{\left(a\right)}\mathbb{U}^{\dagger}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{iiilist}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{abclist}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+„Simple“ applications
+\end_layout
+
+\begin_layout Chapter
+Symmetries in quantum mechanics (Angular momentum)
+\begin_inset Argument
+status open
+
+\begin_layout Plain Layout
+Symmetries in quantum mechanics
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Perturbation theory (time-independent)
+\end_layout
+
+\begin_layout Chapter
+Perturbation theory (time-dependent)
+\end_layout
+
+\begin_layout Chapter
+Many-particle systems
+\end_layout
+
+\begin_layout Chapter
+Scattering theory
+\end_layout
+
+\begin_layout Part*
+Appendix
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{part}{Appendix}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[R]{}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[C]{Appendix}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter*
+Acknowledgements
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{section}{
+\backslash
+hspace*{2.7em}Danksagungen}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[R]{Danksagungen}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+My special thanks goes to Doctor Urbina, who gave this lecture and allowed
+ me to publish this script of the lecture.
+\end_layout
+
+\begin_layout Standard
+I would also like to thank all those, who found errors by careful reading
+ and told me of them.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace 1cm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset space \hfill{}
+\end_inset
+
+Andreas Völklein
+\end_layout
+
+\begin_layout Chapter*
+GNU Free Documentation License
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{section}{
+\backslash
+hspace*{2.7em}GNU Free Documentation License}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+fancyhead[R]{GNU Free Documentation License}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+Version 1.3, 3 November 2008
+\begin_inset Newline newline
+\end_inset
+
+Copyright © 2000, 2001, 2002, 2007, 2008 Free Software Foundation, Inc.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+
+\family typewriter
+<
+\family default
+
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://fsf.org/
+\end_layout
+
+\end_inset
+
+
+\family typewriter
+>
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+Everyone is permitted to copy and distribute verbatim copies of this license
+ document,
+\begin_inset Newline newline
+\end_inset
+
+but changing it is not allowed
+\end_layout
+
+\begin_layout Section*
+
+\noun on
+0.
+ Preamble
+\end_layout
+
+\begin_layout Standard
+\noindent
+The purpose of this License is to make a manual, textbook, or other functional
+ and useful document “free” in the sense of freedom: to assure everyone
+ the effective freedom to copy and redistribute it, with or without modifying
+ it, either commercially or noncommercially.
+ Secondarily, this License preserves for the author and publisher a way
+ to get credit for their work, while not being considered responsible for
+ modifications made by others.
+\end_layout
+
+\begin_layout Standard
+\noindent
+This License is a kind of “copyleft”, which means that derivative works
+ of the document must themselves be free in the same sense.
+ It complements the GNU General Public License, which is a copyleft license
+ designed for free software.
+\end_layout
+
+\begin_layout Standard
+\noindent
+We have designed this License in order to use it for manuals for free software,
+ because free software needs free documentation: a free program should come
+ with manuals providing the same freedoms that the software does.
+ But this License is not limited to software manuals; it can be used for
+ any textual work, regardless of subject matter or whether it is published
+ as a printed book.
+ We recommend this License principally for works whose purpose is instruction
+ or reference.
+\end_layout
+
+\begin_layout Section*
+
+\noun on
+1.
+ Applicability and definitions
+\end_layout
+
+\begin_layout Standard
+This License applies to any manual or other work, in any medium, that contains
+ a notice placed by the copyright holder saying it can be distributed under
+ the terms of this License.
+ Such a notice grants a world-wide, royalty-free license, unlimited in duration,
+ to use that work under the conditions stated herein.
+ The “
+\series bold
+Document
+\series default
+”, below, refers to any such manual or work.
+ Any member of the public is a licensee, and is addressed as “
+\series bold
+you
+\series default
+”.
+ You accept the license if you copy, modify or distribute the work in a
+ way requiring permission under copyright law.
+\end_layout
+
+\begin_layout Standard
+A “
+\series bold
+Modified Version
+\series default
+” of the Document means any work containing the Document or a portion of
+ it, either copied verbatim, or with modifications and/or translated into
+ another language.
+\end_layout
+
+\begin_layout Standard
+A “
+\series bold
+Secondary Section
+\series default
+” is a named appendix or a front-matter section of the Document that deals
+ exclusively with the relationship of the publishers or authors of the Document
+ to the Document's overall subject (or to related matters) and contains
+ nothing that could fall directly within that overall subject.
+ (Thus, if the Document is in part a textbook of mathematics, a Secondary
+ Section may not explain any mathematics.) The relationship could be a matter
+ of historical connection with the subject or with related matters, or of
+ legal, commercial, philosophical, ethical or political position regarding
+ them.
+\end_layout
+
+\begin_layout Standard
+The “
+\series bold
+Invariant Sections
+\series default
+” are certain Secondary Sections whose titles are designated, as being those
+ of Invariant Sections, in the notice that says that the Document is released
+ under this License.
+ If a section does not fit the above definition of Secondary then it is
+ not allowed to be designated as Invariant.
+ The Document may contain zero Invariant Sections.
+ If the Document does not identify any Invariant Sections then there are
+ none.
+\end_layout
+
+\begin_layout Standard
+The “
+\series bold
+Cover Texts
+\series default
+” are certain short passages of text that are listed, as Front-Cover Texts
+ or Back-Cover Texts, in the notice that says that the Document is released
+ under this License.
+ A Front-Cover Text may be at most 5 words, and a Back-Cover Text may be
+ at most 25 words.
+\end_layout
+
+\begin_layout Standard
+A “
+\series bold
+Transparent
+\series default
+” copy of the Document means a machine-readable copy, represented in a format
+ whose specification is available to the general public, that is suitable
+ for revising the document straightforwardly with generic text editors or
+ (for images composed of pixels) generic paint programs or (for drawings)
+ some widely available drawing editor, and that is suitable for input to
+ text formatters or for automatic translation to a variety of formats suitable
+ for input to text formatters.
+ A copy made in an otherwise Transparent file format whose markup, or absence
+ of markup, has been arranged to thwart or discourage subsequent modification
+ by readers is not Transparent.
+ An image format is not Transparent if used for any substantial amount of
+ text.
+ A copy that is not “Transparent” is called “
+\series bold
+Opaque
+\series default
+”.
+\end_layout
+
+\begin_layout Standard
+Examples of suitable formats for Transparent copies include plain ASCII
+ without markup, Texinfo input format, LaTeX input format, SGML or XML using
+ a publicly available DTD, and standard-conforming simple HTML, PostScript
+ or PDF designed for human modification.
+ Examples of transparent image formats include PNG, XCF and JPG.
+ Opaque formats include proprietary formats that can be read and edited
+ only by proprietary word processors, SGML or XML for which the DTD and/or
+ processing tools are not generally available, and the machine-generated
+ HTML, PostScript or PDF produced by some word processors for output purposes
+ only.
+\end_layout
+
+\begin_layout Standard
+The “
+\series bold
+Title Page
+\series default
+” means, for a printed book, the title page itself, plus such following
+ pages as are needed to hold, legibly, the material this License requires
+ to appear in the title page.
+ For works in formats which do not have any title page as such, “Title Page”
+ means the text near the most prominent appearance of the work's title,
+ preceding the beginning of the body of the text.
+\end_layout
+
+\begin_layout Standard
+The “
+\series bold
+publisher
+\series default
+” means any person or entity that distributes copies of the Document to
+ the public.
+\end_layout
+
+\begin_layout Standard
+A section “
+\series bold
+Entitled XYZ
+\series default
+” means a named subunit of the Document whose title either is precisely
+ XYZ or contains XYZ in parentheses following text that translates XYZ in
+ another language.
+ (Here XYZ stands for a specific section name mentioned below, such as “
+\series bold
+Acknowledgements
+\series default
+”, “
+\series bold
+Dedications
+\series default
+”, “
+\series bold
+Endorsements
+\series default
+”, or “
+\series bold
+History
+\series default
+”.) To “
+\series bold
+Preserve the Title
+\series default
+” of such a section when you modify the Document means that it remains a
+ section “Entitled XYZ” according to this definition.
+\end_layout
+
+\begin_layout Standard
+The Document may include Warranty Disclaimers next to the notice which states
+ that this License applies to the Document.
+ These Warranty Disclaimers are considered to be included by reference in
+ this License, but only as regards disclaiming warranties: any other implication
+ that these Warranty Disclaimers may have is void and has no effect on the
+ meaning of this License.
+\end_layout
+
+\begin_layout Section*
+
+\noun on
+2.
+ Verbatim copying
+\end_layout
+
+\begin_layout Standard
+You may copy and distribute the Document in any medium, either commercially
+ or noncommercially, provided that this License, the copyright notices,
+ and the license notice saying this License applies to the Document are
+ reproduced in all copies, and that you add no other conditions whatsoever
+ to those of this License.
+ You may not use technical measures to obstruct or control the reading or
+ further copying of the copies you make or distribute.
+ However, you may accept compensation in exchange for copies.
+ If you distribute a large enough number of copies you must also follow
+ the conditions in section 3.
+\end_layout
+
+\begin_layout Standard
+You may also lend copies, under the same conditions stated above, and you
+ may publicly display copies.
+\end_layout
+
+\begin_layout Section*
+
+\noun on
+3.
+ Copying in quantity
+\end_layout
+
+\begin_layout Standard
+If you publish printed copies (or copies in media that commonly have printed
+ covers) of the Document, numbering more than 100, and the Document's license
+ notice requires Cover Texts, you must enclose the copies in covers that
+ carry, clearly and legibly, all these Cover Texts: Front-Cover Texts on
+ the front cover, and Back-Cover Texts on the back cover.
+ Both covers must also clearly and legibly identify you as the publisher
+ of these copies.
+ The front cover must present the full title with all words of the title
+ equally prominent and visible.
+ You may add other material on the covers in addition.
+ Copying with changes limited to the covers, as long as they preserve the
+ title of the Document and satisfy these conditions, can be treated as verbatim
+ copying in other respects.
+\end_layout
+
+\begin_layout Standard
+If the required texts for either cover are too voluminous to fit legibly,
+ you should put the first ones listed (as many as fit reasonably) on the
+ actual cover, and continue the rest onto adjacent pages.
+\end_layout
+
+\begin_layout Standard
+If you publish or distribute Opaque copies of the Document numbering more
+ than 100, you must either include a machine-readable Transparent copy along
+ with each Opaque copy, or state in or with each Opaque copy a computer-network
+ location from which the general network-using public has access to download
+ using public-standard network protocols a complete Transparent copy of
+ the Document, free of added material.
+ If you use the latter option, you must take reasonably prudent steps, when
+ you begin distribution of Opaque copies in quantity, to ensure that this
+ Transparent copy will remain thus accessible at the stated location until
+ at least one year after the last time you distribute an Opaque copy (directly
+ or through your agents or retailers) of that edition to the public.
+\end_layout
+
+\begin_layout Standard
+It is requested, but not required, that you contact the authors of the Document
+ well before redistributing any large number of copies, to give them a chance
+ to provide you with an updated version of the Document.
+\end_layout
+
+\begin_layout Section*
+
+\noun on
+4.
+ Modifications
+\end_layout
+
+\begin_layout Standard
+You may copy and distribute a Modified Version of the Document under the
+ conditions of sections 2 and 3 above, provided that you release the Modified
+ Version under precisely this License, with the Modified Version filling
+ the role of the Document, thus licensing distribution and modification
+ of the Modified Version to whoever possesses a copy of it.
+ In addition, you must do these things in the Modified Version:
+\end_layout
+
+\begin_layout Description
+A.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hspace*{3.2mm}
+\end_layout
+
+\end_inset
+
+ Use in the Title Page (and on the covers, if any) a title distinct from
+ that of the Document, and from those of previous versions (which should,
+ if there were any, be listed in the History section of the Document).
+ You may use the same title as a previous version if the original publisher
+ of that version gives permission.
+\end_layout
+
+\begin_layout Description
+B.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hspace*{3.4mm}
+\end_layout
+
+\end_inset
+
+ List on the Title Page, as authors, one or more persons or entities responsible
+ for authorship of the modifications in the Modified Version, together with
+ at least five of the principal authors of the Document (all of its principal
+ authors, if it has fewer than five), unless they release you from this
+ requirement.
+\end_layout
+
+\begin_layout Description
+C.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hspace*{3.4mm}
+\end_layout
+
+\end_inset
+
+ State on the Title page the name of the publisher of the Modified Version,
+ as the publisher.
+\end_layout
+
+\begin_layout Description
+D.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hspace*{3.4mm}
+\end_layout
+
+\end_inset
+
+ Preserve all the copyright notices of the Document.
+\end_layout
+
+\begin_layout Description
+E.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hspace*{3.4mm}
+\end_layout
+
+\end_inset
+
+ Add an appropriate copyright notice for your modifications adjacent to
+ the other copyright notices.
+\end_layout
+
+\begin_layout Description
+F.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hspace*{3.8mm}
+\end_layout
+
+\end_inset
+
+ Include, immediately after the copyright notices, a license notice giving
+ the public permission to use the Modified Version under the terms of this
+ License, in the form shown in the Addendum below.
+\end_layout
+
+\begin_layout Description
+G.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hspace*{3.1mm}
+\end_layout
+
+\end_inset
+
+ Preserve in that license notice the full lists of Invariant Sections and
+ required Cover Texts given in the Document's license notice.
+\end_layout
+
+\begin_layout Description
+H.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hspace*{3.2mm}
+\end_layout
+
+\end_inset
+
+ Include an unaltered copy of this License.
+\end_layout
+
+\begin_layout Description
+I.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hspace*{5.0mm}
+\end_layout
+
+\end_inset
+
+ Preserve the section Entitled “History”, Preserve its Title, and add to
+ it an item stating at least the title, year, new authors, and publisher
+ of the Modified Version as given on the Title Page.
+ If there is no section Entitled “History” in the Document, create one stating
+ the title, year, authors, and publisher of the Document as given on its
+ Title Page, then add an item describing the Modified Version as stated
+ in the previous sentence.
+\end_layout
+
+\begin_layout Description
+J.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hspace*{4.3mm}
+\end_layout
+
+\end_inset
+
+ Preserve the network location, if any, given in the Document for public
+ access to a Transparent copy of the Document, and likewise the network
+ locations given in the Document for previous versions it was based on.
+ These may be placed in the “History” section.
+ You may omit a network location for a work that was published at least
+ four years before the Document itself, or if the original publisher of
+ the version it refers to gives permission.
+\end_layout
+
+\begin_layout Description
+K.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hspace*{3.3mm}
+\end_layout
+
+\end_inset
+
+ For any section Entitled “Acknowledgements” or “Dedications”, Preserve
+ the Title of the section, and preserve in the section all the substance
+ and tone of each of the contributor acknowledgements and/or dedications
+ given therein.
+\end_layout
+
+\begin_layout Description
+L.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hspace*{4.1mm}
+\end_layout
+
+\end_inset
+
+ Preserve all the Invariant Sections of the Document, unaltered in their
+ text and in their titles.
+ Section numbers or the equivalent are not considered part of the section
+ titles.
+\end_layout
+
+\begin_layout Description
+M.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hspace*{3mm}
+\end_layout
+
+\end_inset
+
+ Delete any section Entitled “Endorsements”.
+ Such a section may not be included in the Modified Version.
+\end_layout
+
+\begin_layout Description
+N.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hspace*{3.4mm}
+\end_layout
+
+\end_inset
+
+ Do not retitle any existing section to be Entitled “Endorsements” or to
+ conflict in title with any Invariant Section.
+\end_layout
+
+\begin_layout Description
+O.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hspace*{3.4mm}
+\end_layout
+
+\end_inset
+
+ Preserve any Warranty Disclaimers.
+\end_layout
+
+\begin_layout Standard
+If the Modified Version includes new front-matter sections or appendices
+ that qualify as Secondary Sections and contain no material copied from
+ the Document, you may at your option designate some or all of these sections
+ as invariant.
+ To do this, add their titles to the list of Invariant Sections in the Modified
+ Version's license notice.
+ These titles must be distinct from any other section titles.
+\end_layout
+
+\begin_layout Standard
+You may add a section Entitled “Endorsements”, provided it contains nothing
+ but endorsements of your Modified Version by various parties—for example,
+ statements of peer review or that the text has been approved by an organization
+ as the authoritative definition of a standard.
+\end_layout
+
+\begin_layout Standard
+You may add a passage of up to five words as a Front-Cover Text, and a passage
+ of up to 25 words as a Back-Cover Text, to the end of the list of Cover
+ Texts in the Modified Version.
+ Only one passage of Front-Cover Text and one of Back-Cover Text may be
+ added by (or through arrangements made by) any one entity.
+ If the Document already includes a cover text for the same cover, previously
+ added by you or by arrangement made by the same entity you are acting on
+ behalf of, you may not add another; but you may replace the old one, on
+ explicit permission from the previous publisher that added the old one.
+\end_layout
+
+\begin_layout Standard
+The author(s) and publisher(s) of the Document do not by this License give
+ permission to use their names for publicity for or to assert or imply endorseme
+nt of any Modified Version.
+\end_layout
+
+\begin_layout Section*
+
+\noun on
+5.
+ Combining documents
+\end_layout
+
+\begin_layout Standard
+You may combine the Document with other documents released under this License,
+ under the terms defined in section 4 above for modified versions, provided
+ that you include in the combination all of the Invariant Sections of all
+ of the original documents, unmodified, and list them all as Invariant Sections
+ of your combined work in its license notice, and that you preserve all
+ their Warranty Disclaimers.
+\end_layout
+
+\begin_layout Standard
+The combined work need only contain one copy of this License, and multiple
+ identical Invariant Sections may be replaced with a single copy.
+ If there are multiple Invariant Sections with the same name but different
+ contents, make the title of each such section unique by adding at the end
+ of it, in parentheses, the name of the original author or publisher of
+ that section if known, or else a unique number.
+ Make the same adjustment to the section titles in the list of Invariant
+ Sections in the license notice of the combined work.
+\end_layout
+
+\begin_layout Standard
+In the combination, you must combine any sections Entitled “History” in
+ the various original documents, forming one section Entitled “History”;
+ likewise combine any sections Entitled “Acknowledgements”, and any sections
+ Entitled “Dedications”.
+ You must delete all sections Entitled “Endorsements”.
+\end_layout
+
+\begin_layout Section*
+
+\noun on
+6.
+ Collections of documents
+\end_layout
+
+\begin_layout Standard
+You may make a collection consisting of the Document and other documents
+ released under this License, and replace the individual copies of this
+ License in the various documents with a single copy that is included in
+ the collection, provided that you follow the rules of this License for
+ verbatim copying of each of the documents in all other respects.
+\end_layout
+
+\begin_layout Standard
+You may extract a single document from such a collection, and distribute
+ it individually under this License, provided you insert a copy of this
+ License into the extracted document, and follow this License in all other
+ respects regarding verbatim copying of that document.
+\end_layout
+
+\begin_layout Section*
+
+\noun on
+7.
+ Aggregation with independent works
+\end_layout
+
+\begin_layout Standard
+A compilation of the Document or its derivatives with other separate and
+ independent documents or works, in or on a volume of a storage or distribution
+ medium, is called an “aggregate” if the copyright resulting from the compilatio
+n is not used to limit the legal rights of the compilation's users beyond
+ what the individual works permit.
+ When the Document is included in an aggregate, this License does not apply
+ to the other works in the aggregate which are not themselves derivative
+ works of the Document.
+\end_layout
+
+\begin_layout Standard
+If the Cover Text requirement of section 3 is applicable to these copies
+ of the Document, then if the Document is less than one half of the entire
+ aggregate, the Document's Cover Texts may be placed on covers that bracket
+ the Document within the aggregate, or the electronic equivalent of covers
+ if the Document is in electronic form.
+ Otherwise they must appear on printed covers that bracket the whole aggregate.
+\end_layout
+
+\begin_layout Section*
+
+\noun on
+8.
+ Translation
+\end_layout
+
+\begin_layout Standard
+Translation is considered a kind of modification, so you may distribute
+ translations of the Document under the terms of section 4.
+ Replacing Invariant Sections with translations requires special permission
+ from their copyright holders, but you may include translations of some
+ or all Invariant Sections in addition to the original versions of these
+ Invariant Sections.
+ You may include a translation of this License, and all the license notices
+ in the Document, and any Warranty Disclaimers, provided that you also include
+ the original English version of this License and the original versions
+ of those notices and disclaimers.
+ In case of a disagreement between the translation and the original version
+ of this License or a notice or disclaimer, the original version will prevail.
+\end_layout
+
+\begin_layout Standard
+If a section in the Document is Entitled “Acknowledgements”, “Dedications”,
+ or “History”, the requirement (section 4) to Preserve its Title (section
+ 1) will typically require changing the actual title.
+\end_layout
+
+\begin_layout Section*
+
+\noun on
+9.
+ Termination
+\end_layout
+
+\begin_layout Standard
+You may not copy, modify, sublicense, or distribute the Document except
+ as expressly provided under this License.
+ Any attempt otherwise to copy, modify, sublicense, or distribute it is
+ void, and will automatically terminate your rights under this License.
+\end_layout
+
+\begin_layout Standard
+However, if you cease all violation of this License, then your license from
+ a particular copyright holder is reinstated (a) provisionally, unless and
+ until the copyright holder explicitly and finally terminates your license,
+ and (b) permanently, if the copyright holder fails to notify you of the
+ violation by some reasonable means prior to 60 days after the cessation.
+\end_layout
+
+\begin_layout Standard
+Moreover, your license from a particular copyright holder is reinstated
+ permanently if the copyright holder notifies you of the violation by some
+ reasonable means, this is the first time you have received notice of violation
+ of this License (for any work) from that copyright holder, and you cure
+ the violation prior to 30 days after your receipt of the notice.
+\end_layout
+
+\begin_layout Standard
+Termination of your rights under this section does not terminate the licenses
+ of parties who have received copies or rights from you under this License.
+ If your rights have been terminated and not permanently reinstated, receipt
+ of a copy of some or all of the same material does not give you any rights
+ to use it.
+\end_layout
+
+\begin_layout Section*
+
+\noun on
+10.
+ Future revisions of this license
+\end_layout
+
+\begin_layout Standard
+The Free Software Foundation may publish new, revised versions of the GNU
+ Free Documentation License from time to time.
+ Such new versions will be similar in spirit to the present version, but
+ may differ in detail to address new problems or concerns.
+ See 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://www.gnu.org/copyleft/
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Each version of the License is given a distinguishing version number.
+ If the Document specifies that a particular numbered version of this License
+ "or any later version" applies to it, you have the option of following
+ the terms and conditions either of that specified version or of any later
+ version that has been published (not as a draft) by the Free Software Foundatio
+n.
+ If the Document does not specify a version number of this License, you
+ may choose any version ever published (not as a draft) by the Free Software
+ Foundation.
+ If the Document specifies that a proxy can decide which future versions
+ of this License can be used, that proxy's public statement of acceptance
+ of a version permanently authorizes you to choose that version for the
+ Document.
+\end_layout
+
+\begin_layout Section*
+
+\noun on
+11.
+ Relicensing
+\end_layout
+
+\begin_layout Standard
+“Massive Multiauthor Collaboration Site” (or “MMC Site”) means any World
+ Wide Web server that publishes copyrightable works and also provides prominent
+ facilities for anybody to edit those works.
+ A public wiki that anybody can edit is an example of such a server.
+ A “Massive Multiauthor Collaboration” (or “MMC”) contained in the site
+ means any set of copyrightable works thus published on the MMC site.
+\end_layout
+
+\begin_layout Standard
+“CC-BY-SA” means the Creative Commons Attribution-Share Alike 3.0 license
+ published by Creative Commons Corporation, a not-for-profit corporation
+ with a principal place of business in San Francisco, California, as well
+ as future copyleft versions of that license published by that same organization.
+\end_layout
+
+\begin_layout Standard
+“Incorporate” means to publish or republish a Document, in whole or in part,
+ as part of another Document.
+\end_layout
+
+\begin_layout Standard
+An MMC is “eligible for relicensing” if it is licensed under this License,
+ and if all works that were first published under this License somewhere
+ other than this MMC, and subsequently incorporated in whole or in part
+ into the MMC, (1) had no cover texts or invariant sections, and (2) were
+ thus incorporated prior to November 1, 2008.
+\end_layout
+
+\begin_layout Standard
+The operator of an MMC Site may republish an MMC contained in the site under
+ CC-BY-SA on the same site at any time before August 1, 2009, provided the
+ MMC is eligible for relicensing.
+\end_layout
+
+\begin_layout Section*
+
+\noun on
+Addendum
+\noun default
+: How to use this License for your documents
+\end_layout
+
+\begin_layout Standard
+To use this License in a document you have written, include a copy of the
+ License in the document and put the following copyright and license notices
+ just after the title page:
+\end_layout
+
+\begin_layout Quote
+Copyright © YEAR YOUR NAME.
+\begin_inset Newline newline
+\end_inset
+
+Permission is granted to copy, distribute and/or modify this document under
+ the terms of the GNU Free Documentation License, Version 1.3 or any later
+ version published by the Free Software Foundation;
+\end_layout
+
+\begin_layout Quote
+with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+\end_layout
+
+\begin_layout Quote
+A copy of the license is included in the section entitled "GNU Free Documentatio
+n License".
+\end_layout
+
+\begin_layout Standard
+If you have Invariant Sections, Front-Cover Texts and Back-Cover Texts,
+ replace the "with 
+\begin_inset Formula $\ldots$
+\end_inset
+
+ Texts." line with this:
+\end_layout
+
+\begin_layout Quote
+with the Invariant Sections being LIST THEIR TITLES, with the Front-Cover
+ Texts being LIST, and with the Back-Cover Texts being LIST.
+\end_layout
+
+\begin_layout Standard
+If you have Invariant Sections without Cover Texts, or some other combination
+ of the three, merge those two alternatives to suit the situation.
+\end_layout
+
+\begin_layout Standard
+If your document contains nontrivial examples of program code, we recommend
+ releasing these examples in parallel under your choice of free software
+ license, such as the GNU General Public License, to permit their use in
+ free software.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "END"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

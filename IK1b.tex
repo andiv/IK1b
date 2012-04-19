@@ -1,0 +1,1321 @@
+%% LyX 2.0.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[11pt,english]{report}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[a4paper]{geometry}
+\geometry{verbose,tmargin=2.6cm,bmargin=3.5cm,lmargin=2.6cm,rmargin=2.6cm}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\setlength{\parskip}{\smallskipamount}
+\setlength{\parindent}{0pt}
+\usepackage{babel}
+\usepackage{textcomp}
+\usepackage{url}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{esint}
+\usepackage[unicode=true,
+ bookmarks=true,bookmarksnumbered=true,bookmarksopen=false,
+ breaklinks=true,pdfborder={0 0 0},backref=page,colorlinks=false]
+ {hyperref}
+\hypersetup{pdftitle={Algebra},
+ pdfauthor={Andreas Völklein},
+ pdfkeywords={Algebra, Mathematik}}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\providecommand{\LyX}{\texorpdfstring%
+  {L\kern-.1667em\lower.25em\hbox{Y}\kern-.125emX\@}
+  {LyX}}
+\newcommand{\noun}[1]{\textsc{#1}}
+
+\@ifundefined{date}{}{\date{}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{tikz}
+%\usepackage{tikz-3dplot}
+\usetikzlibrary{matrix,arrows,calc,decorations.pathmorphing,snakes}
+\usepackage{latexsym,stmaryrd,stackrel,array,tabularx,multirow,icomma,braket,polynom,cancel}
+\usepackage[explicit]{titlesec}
+
+% Inhaltsverzeichnis
+\usepackage{tocloft}
+\tocloftpagestyle{fancy}
+
+\renewcommand{\cftchapindent}{1 em}
+\renewcommand{\cftchapnumwidth}{1.5 em}
+
+\renewcommand{\cftsecindent}{2.7 em}
+\renewcommand{\cftsecnumwidth}{2.5em}
+
+\renewcommand{\cftsubsecindent}{5.2 em}
+\renewcommand{\cftsubsecnumwidth}{3.8 em}
+
+\renewcommand{\cftsubsubsecindent}{9 em}
+\renewcommand{\cftsubsubsecnumwidth}{4.5 em}
+
+% Mathe-Operatoren
+\DeclareMathOperator*{\exsop}{\exists}
+\DeclareMathOperator*{\exsgop}{\exists!}
+\DeclareMathOperator*{\fallop}{\forall}
+\DeclareMathOperator*{\bcupdop}{\dot{\bigcup}}
+\DeclareMathOperator*{\bcapdop}{\dot{\bigcap}}
+
+% Rotieren
+\newcommand{\Rotate}[1]{
+\begin{tikzpicture}
+\node[rotate=90] {\ensuremath{#1}};
+\end{tikzpicture}
+}
+
+%QED-Zeichen (Box)
+\newcommand{\qed}{\ensuremath{\Box}}
+\newcommand{\qqed}[1][\arabic{chapter}.\arabic{section}\ifnum\arabic{subsection}>0{.\arabic{subsection}}\fi]{\hfill\qed\ensuremath{_{\text{#1}}}}
+
+% Mengen Modulo
+\newcommand{\moduloT}[2]{
+\mbox{\raisebox{0.6ex}{\ensuremath{\displaystyle #1}}
+{\hspace*{-1.5mm}\Large /}
+\raisebox{-0.6ex}{\hspace*{-1.5mm}\ensuremath{\displaystyle #2}}
+}}
+
+% Links Modulo
+\newcommand{\lmoduloT}[2]{
+\mbox{\raisebox{-0.6ex}{\ensuremath{\displaystyle #1}}
+{\hspace*{-1.5mm}\Large \ensuremath{\backslash}}
+\raisebox{0.6ex}{\hspace*{-1.5mm}\ensuremath{\displaystyle #2}}
+}}
+
+% Für Z/2Z, um nicht soviel schreiben zu müssen
+\newcommand{\modloT}[2]{\moduloT{ \mathbb{#1}}{#2\mathbb{#1}}}
+
+%Die Modulo-Kommandos in klein, für die Darstellungen unter Quantoren.
+\newcommand{\moduloScriptT}[2]{
+\mbox{\raisebox{0.4ex}{\scriptsize\ensuremath{\displaystyle #1}}
+{\hspace*{-1.5mm}\footnotesize /}
+\raisebox{-0.4ex}{\hspace*{-1.5mm}\scriptsize\ensuremath{\displaystyle #2}}
+}}
+
+\newcommand{\lmoduloScriptT}[2]{
+\mbox{\raisebox{-0.4ex}{\scriptsize\ensuremath{\displaystyle #1}}
+{\hspace*{-1.5mm}\footnotesize \ensuremath{\backslash}}
+\raisebox{0.4ex}{\hspace*{-1.5mm}\scriptsize\ensuremath{\displaystyle #2}}
+}}
+
+\newcommand{\modloScriptT}[2]{\moduloScriptT{ \mathbb{#1}}{#2\mathbb{#1}}}
+
+% stehendes Winkelzeichen
+\newcommand{\winkel}{
+\begin{tikzpicture}[scale=0.25]
+\draw ({-2+3^(1/2)},0) -- (0,1) -- ({2-3^(1/2)},0);
+\draw ($(0,1) + ({cos(235)*0.7},{sin(315)*0.7})$) arc (235:315:0.7);
+\end{tikzpicture}}
+
+% Wurzel mit Häkchen
+\newcommand{\hsqrt}[2][{}]{\setbox0=\hbox{$\sqrt[#1]{\phantom{|}\!\! #2\hspace*{1pt}}$}\dimen0=\ht0
+  \advance\dimen0-0.2\ht0
+  \setbox2=\hbox{\vrule height\ht0 depth -\dimen0}
+  {\box0\lower0.4pt\box2}}
+
+% alphabetische Aufzählung
+\newcounter{ale}
+\newcommand{\abc}{\stepcounter{ale}\item[\alph{ale})]}
+\newenvironment{abclist}{\begin{itemize} \setcounter{ale}{0}}{\end{itemize}}
+
+%klein-römische Aufzählung
+\newcounter{ale2}
+\newcommand{\iii}{\stepcounter{ale2}\item[\textnormal{\roman{ale2})}]}
+\newenvironment{iiilist}{\begin{itemize} \setcounter{ale2}{0}}{\end{itemize}}
+
+% Damit nicht immer "Kapitel 1" etc. über der Kapitelüberschrift steht
+\titleformat{\chapter}
+  {\huge\bfseries}
+  {\textrm{\thechapter} }{0pt}
+  {\textrm{#1} \thispagestyle{fancy}
+  }
+
+% Neudefinition der Abschnittsmarker für die Kopfzeile
+\renewcommand\partmark[1]{\markboth{#1}{}}
+\renewcommand\chaptermark[1]{\markright{\arabic{chapter} #1}}
+\renewcommand\sectionmark[1]{}
+\renewcommand\subsectionmark[1]{}
+
+% Kopf- und Fußzeile
+% Höhe der Kopfzeile
+\setlength{\headheight}{14pt}
+% obere Trennlinie
+%\renewcommand{\headrulewidth}{0.4pt}
+\fancyhf{} %alle Kopf- und Fußzeilenfelder bereinigen
+\fancyhead[L]{\textbf{IK1b - Theoretical QM}} %Kopfzeile links
+%\fancyhead[C]{\leftmark} %zentrierte Kopfzeile
+\fancyhead[R]{\rightmark} %Kopfzeile rechts
+\fancyfoot[C]{\thepage\quad\!\!\!\slash\quad\!\!\!\pageref{END-front}} %Seitenzahl der Front-Matter
+
+\AtBeginDocument{
+  \def\labelitemi{\normalfont\bfseries{--}}
+  \def\labelitemii{\(\circ\)}
+  \def\labelitemiii{\(\triangleright\)}
+}
+
+\makeatother
+
+\begin{document}
+
+
+
+
+
+
+\global\long\def\norm#1{\left\lVert #1\right\rVert }
+
+
+\global\long\def\abs#1{\left\lvert #1\right\rvert }
+
+
+\global\long\def\ket#1{\left|#1\right>}
+
+
+\global\long\def\braket#1#2{\left\langle #1\middle|#2\right\rangle }
+
+
+\global\long\def\bra#1{\left<#1\right|}
+
+
+\global\long\def\neg{\text{-}}
+
+
+\global\long\def\exs{\exsop}
+
+
+\global\long\def\exsg{\exsgop}
+
+
+\global\long\def\fall{\fallop}
+
+
+\global\long\def\bcupd{\bcupdop}
+
+
+\global\long\def\bcapd{\bcapdop}
+
+
+\global\long\def\sr#1#2#3{\underset{#3}{\overset{#2}{#1}}}
+
+
+\global\long\def\dd{\textnormal{d}}
+
+
+\global\long\def\ii{\textbf{i}}
+
+
+\global\long\def\modulo#1#2{\moduloT{#1}{#2}}
+
+
+\global\long\def\lmodulo#1#2{\lmoduloT{#1}{#2}}
+
+
+\global\long\def\modlo#1#2{\modloT{#1}{#2}}
+
+
+\global\long\def\moduloScript#1#2{\moduloScriptT{#1}{#2}}
+
+
+\global\long\def\lmoduloScript#1#2{\lmoduloScriptT{#1}{#2}}
+
+
+\global\long\def\modloScript#1#2{\modloScriptT{#1}{#2}}
+
+
+\pagenumbering{roman}
+
+
+\title{\textbf{\Huge \vspace*{-45mm}}\\
+\textbf{\Huge Integrated Course Ib}\\
+\textbf{\Huge Theoretical quantum mechanics}}
+
+
+\author{\textit{\small lecture by}\\
+\textit{\noun{\small Dr. Juan-Diego Urbina}}\textit{\small }\\
+\textit{\small during the summer semester 2012}\\
+\textit{\small revision and layout in \LyX{} by}\\
+\textit{\noun{\small Andreas Völklein}}\\
+{\small \vspace*{10mm}}\\
+{\small \includegraphics[clip,width=15cm]{unir}}\textit{\noun{\small }}\\
+{\small \vspace*{3mm}}\\
+Last changed: \today}
+
+\maketitle
+\fancyhead[R]{License}
+\setcounter{page}{2} % sonst gibt es aus irgendeinem Grund zweimal die Seite 1!?!?!?
+
+\vspace*{-15mm}
+
+
+\subsubsection*{ATTENTION}
+
+This script does \emph{not} replace the lecture.
+
+Therefore it is recommended \emph{strongly} to attend the lecture.
+
+These notes are under constant revision, and the level of rigor is
+not uniform.
+
+\vfill{}
+
+
+
+\subsubsection*{Copyright Notice}
+
+Copyright © 2012 \noun{Andreas Völklein}
+
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.3
+or any later version published by the Free Software Foundation;
+
+with no Invariant Sections, no Front-Cover Texts, and no Back-Cover
+Texts.
+
+A copy of the license is included in the section entitled \textquotedblleft{}GNU
+Free Documentation License\textquotedblright{}.
+
+
+\subsubsection*{Disclaimer of Warranty}
+
+\noun{Unless otherwise mutually agreed to by the parties in writing
+and to the extent not prohibited by applicable law, }\textbf{\noun{the
+Copyright Holders and any other party, who may distribute the Document
+as permitted above,   provide the Document \textquotedblleft{}as is}}\textbf{\textquotedblright{},}\textbf{\noun{
+without warranty of any kind}}\noun{, expressed, implied, statutory
+or otherwise, including, but not limited to, the implied warranties
+of merchantability, fitness for a particular purpose, non-infringement,
+the absence of latent or other defects, accuracy, or the absence of
+errors, whether or not discoverable.}
+
+
+\subsubsection*{Limitation of Liability}
+
+\textbf{\noun{In no event}}\noun{ unless required by applicable law
+or agreed to in writing }\textbf{\noun{will the Copyright Holders,
+or any other party, who may distribute the Document as permitted above,
+be liable to you for any damages}}\noun{, including, but not limited
+to, any general, special, incidental, consequential, punitive or exemplary
+damages, however caused, regardless of the theory of liability, arising
+out of or related to this license or any use of or inability to use
+the Document, even if they have been advised of the possibility of
+such damages.}
+
+\textbf{\noun{In no event will the Copyright Holders'/Distributor's
+liability to you}}\noun{, whether in contract, tort (including negligence),
+or otherwise, }\textbf{\noun{exceed the amount you paid the Copyright
+Holders/Distributor}}\noun{ for the document under this agreement.}
+
+
+\subsubsection*{Links}
+
+The text of the \textquotedblleft{}GNU Free Documentation License\textquotedblright{}
+can also be read on the following site:
+\begin{quote}
+\url{https://www.gnu.org/licenses/fdl-1.3.en.html}
+\end{quote}
+A transparent copy of the recent version of this document can be downloaded
+from:
+\begin{quote}
+\url{https://github.com/andiv/IK1b}
+\end{quote}
+\newpage{}
+
+\fancyhead[R]{Literature}
+
+
+\subsection*{Literature}
+\begin{itemize}
+\item \noun{Jun J. Sakurai, Jim Napolitano}: \emph{Modern quantum mechanics},
+Addison-Wesley, 2011\\
+ISBN: 0-321-50336-8
+\item \noun{Leonard I. Schiff}: \emph{Quantum mechanics}, McGraw-Hill, 1968\\
+ISBN: 0-07-085643-5
+\item Any introductory book on quantum mechanics.
+\item \noun{Richard P. Feynman, Robert B. Leighton, Matthew L. Sands}: \emph{Lectures
+on physics}
+\end{itemize}
+{\small \newpage{}}\fancyhead[R]{Table of Contents}
+\fancyhead[C]{}
+
+\tableofcontents{}\label{END-front}\newpage{}\pagenumbering{arabic}
+\fancyfoot[C]{\thepage\quad\!\!\!\slash\quad\!\!\!\pageref{END}} % Seitenzahl des Hauptteils
+\fancyhead[R]{\rightmark}
+%\fancyhead[C]{\leftmark}%DATE: Mo 16.04.2012
+
+%\setcounter{chapter}{-1}
+
+
+\chapter{The Formalism and its interpretation}
+
+As any theory about physical phenomenons, quantum mechanics requires
+
+\begin{iiilist}
+
+\iii kinematical aspects: The (mathematical) space where physical
+states are represented.
+
+Example from classical mechanics: points in phase space
+
+\iii the definition of observables: Which quantities can be measured
+and how to represent them in the space of states?
+
+Example from classical mechanics: any function $f\left(\vec{r},\vec{p}\right)$
+
+(This is more complicated in quantum mechanics.)
+
+\iii an dynamical law: How do states evolve in \textquotedblleft{}time\textquotedblright{}?
+
+Example from classical mechanics: Hamilton's equations determine $\left(\vec{q}\left(t\right)\!,\,\vec{p}\left(t\right)\right)$
+depending on $\left(\vec{q}\left(t_{0}\right)\!,\,\vec{p}\left(t_{0}\right)\right)$.
+
+\end{iiilist}
+
+
+\section{The kinematical aspects of quantum mechanics}
+
+The \noun{first postulate} says:
+\begin{quote}
+\textquotedblleft{}The state of a quantum mechanical system is represented
+as a normalized vector in a (complex) Hilbert space.\\
+Vectors, which differ only by a phase, represent the same state.\textquotedblright{}
+\end{quote}
+To understand what this means, we introduce some concepts:
+
+\begin{abclist}
+
+\abc \emph{Hilbert space}: A (finite or infinite dimensional) complete
+vector space with a positive definite scalar product. Following Dirac,
+elements in the Hilbert space $\mathcal{H}$ are called \emph{kets}
+and we represent them by $\ket{\psi},\ket{\phi}\in\mathcal{H}$.
+
+For complex numbers $a,b\in\mathbb{C}$ also $a\ket{\psi}+b\ket{\phi}\in\mathcal{H}$
+is a element of the Hilbert space.
+
+The sum is associative and the product by scalars is distributive.
+
+\abc \emph{Scalar product}: The operation associating a complex number
+to each pair of states
+\begin{align*}
+\left\langle .,.\right\rangle :\mathcal{H}\times\mathcal{H} & \to\mathbb{C}\\
+\left(\ket{\psi},\ket{\phi}\right) & \mapsto\left\langle \psi,\phi\right\rangle 
+\end{align*}
+with the properties
+\begin{align*}
+\left\langle \eta,a\phi+b\psi\right\rangle  & =a\left\langle \eta,\phi\right\rangle +b\left\langle \eta,\psi\right\rangle  & \left\langle \psi,\phi\right\rangle  & =\left\langle \phi,\psi\right\rangle ^{*}\\
+\left\langle \psi,\psi\right\rangle  & \ge0 & \left\langle \psi,\psi\right\rangle =0 & \quad\Leftrightarrow\quad\ket{\psi}=0
+\end{align*}
+for $a,b\in\mathbb{C}$ and $ $$\ket{\phi},\ket{\psi},\ket{\eta}\in\mathcal{H}$
+is called the scalar product.
+
+The \emph{norm} of a state $\ket{\psi}$ is then defined as:
+\begin{align*}
+\norm{\psi}:=\norm{\ket{\psi}} & :=\sqrt{\left\langle \psi,\psi\right\rangle }
+\end{align*}
+If $\norm{\ket{\psi}}=1$, then $\ket{\psi}$ is said to be \emph{normalized}.
+
+\abc \emph{Phase}: Complex number $z\in\mathbb{C}$ with unit norm,
+that means $zz^{*}=1$. It can be represented via a real number $\alpha\in\mathbb{R}$
+as $z=e^{\ii\alpha}$.
+
+The physical state associated with $\ket{\psi}$ and $e^{\ii\alpha}\ket{\psi}$
+is \noun{the same}.
+
+\abc C\emph{omplete basis}: A family of kets $\left(\ket{\phi_{i}}\right)_{i\in I\subseteq\mathbb{N}}$
+such that for \noun{all} states $\ket{\psi}\in\mathcal{H}$, there
+is a family of complex numbers $\left(c_{i}\right)_{i\in I\subseteq\mathbb{N}}$
+(depending on $\ket{\psi}$) with:
+\begin{align*}
+\ket{\psi} & =\sum_{i\in I}c_{i}\ket{\phi_{i}}
+\end{align*}
+If $\left\langle \phi_{i},\phi_{j}\right\rangle =\delta_{ij}$, then
+the basis is \emph{complete} and \emph{orthonormal}.
+
+In the case of an uncountably infinite vector space the basis $\left(\ket q\right)_{q\in\mathbb{R}}$
+can be written as a function of a real variable. The representation
+of $\ket{\psi}$ then is an infinite sum, that is an integral
+\begin{align*}
+\ket{\psi} & =\int\psi\left(q\right)\ket q\dd q
+\end{align*}
+and a complete and orthonormal basis is characterized by $\left\langle q,q'\right\rangle =\delta\left(q-q'\right)$.
+
+\abc \emph{Adjoint}: For each Hilbert space $\mathcal{H}$ there
+is another Hilbert space $\mathcal{H}^{*}$ called \emph{dual}, with
+elements $\bra f\in\mathcal{H}^{*}$, which are \noun{linear functionals}
+acting on $\mathcal{H}$:
+\begin{align*}
+\bra f:\mathcal{H} & \to\mathbb{C}\\
+\ket{\psi} & \mapsto\braket f{\psi}
+\end{align*}
+$\braket{\psi}{\phi}$ is called \emph{bracket}. Riesz theorem says,
+that there is a \noun{one to one} correspondence between $\mathcal{H}$
+and $\mathcal{H}^{*}$:
+\begin{align*}
+\fall_{\ket{\psi}\in\mathcal{H}} & \ \exs_{\bra{\psi}\in\mathcal{H}^{*}}\ \fall_{\ket{\phi}\in\mathcal{H}}\ :\ \braket{\psi}{\phi}=\left\langle \psi,\phi\right\rangle ,\norm{\bra{\psi}}=\norm{\ket{\psi}}
+\end{align*}
+The so associated $\bra{\psi}$ is the \emph{adjoint} of $\ket{\psi}$,
+called \emph{bra}, and we write: 
+\begin{align*}
+^{\dagger}:\mathcal{H} & \to\mathcal{H}^{*}\\
+\ket{\psi} & \mapsto\left(\ket{\psi}\right)^{\dagger}=\bra{\psi}
+\end{align*}
+The function $^{\dagger}$ is semilinear, that means for $a,b\in\mathbb{C}$
+and $\ket{\psi},\ket{\phi}\in\mathcal{H}$ is:
+\begin{align*}
+\left(a\ket{\psi}+b\ket{\phi}\right)^{\dagger} & =a^{*}\bra{\psi}+b^{*}\bra{\phi}
+\end{align*}
+
+
+\abc \emph{Representation}: Assume that $\left(\ket{\phi_{i}}\right)_{i\in I\subseteq\mathbb{N}}$
+(respectively $\left(\ket q\right)_{q\in\mathbb{R}}$) is a complete
+orthonormal basis. The ket $\ket{\psi}$ is said to \textquotedblleft{}be
+represented\textquotedblright{} in that basis by associating:
+\begin{align*}
+ & \text{discrete case} &  & \text{continous case}\\
+\ket{\psi} & \mapsto\left(\begin{array}{c}
+\braket{\phi_{1}}{\psi}\\
+\braket{\phi_{2}}{\psi}\\
+\vdots
+\end{array}\right)\in\mathbb{C}^{\left|I\right|} & \ket{\psi} & \mapsto\braket q{\psi}=:\psi\left(q\right)\\
+\bra{\psi} & \mapsto\left(\begin{array}{c}
+\braket{\phi_{1}}{\psi}^{*}\\
+\braket{\phi_{2}}{\psi}^{*}\\
+\vdots
+\end{array}\right)\in\mathbb{C}^{\left|I\right|} & \bra{\psi} & \mapsto\braket q{\psi}^{*}=\psi\left(q\right)^{*}
+\end{align*}
+This $\psi\left(q\right)$ is the wave function.
+
+\abc \emph{Exterior product}: The object $\ket{\phi}\bra{\psi}:\mathcal{H}\to\mathcal{H}$
+is a linear operator acting on $\ket{\eta}\in\mathcal{H}$ defined
+by
+\begin{align*}
+\left(\ket{\phi}\bra{\psi}\right)\ket{\eta} & :=\underbrace{\braket{\psi}{\eta}}_{\in\mathbb{C}}\ket{\phi}
+\end{align*}
+with the adjoint:
+\begin{align*}
+\left(\ket{\phi}\bra{\psi}\right)^{\dagger} & :=\ket{\psi}\bra{\phi}
+\end{align*}
+
+
+Example from linear algebra:
+\begin{align*}
+\vec{v} & =\left(v_{1},\ldots,v_{n}\right)^{T} & \vec{u} & =\left(u_{1},\ldots,u_{n}\right)^{T}
+\end{align*}
+\begin{align*}
+\vec{v}\,^{T}\vec{u} & =\sum_{i=1}^{n}v_{i}u_{i}\\
+\vec{u}\vec{v}\,^{T} & =\left(\begin{array}{ccc}
+u_{1}v_{1} & \ldots & u_{1}v_{n}\\
+\vdots & \ddots & \vdots\\
+u_{n}v_{1} & \ldots & u_{n}v_{n}
+\end{array}\right)
+\end{align*}
+
+
+\end{abclist}
+
+
+\section{Observables and measurements in quantum mechanics}
+
+What can be observed and how measurements affect quantum states is
+encoded into the following two \noun{postulates}:
+\begin{quote}
+\textquotedblleft{}Observables in quantum mechanics are represented
+by \noun{linear Hermitian operators} on $\mathcal{H}$.\textquotedblright{}
+
+\textquotedblleft{}The results of a measurement of the physical quantity
+represented by an observable can only take values belonging to the
+\noun{spectrum} of the observable. Just after measurement, that gives
+one of the eigenvalues of the observable, the state belongs to corresponding
+eigenspace.\textquotedblleft{}
+\end{quote}
+\begin{abclist}
+
+\abc $\hat{A}:\mathcal{H}\to\mathcal{H}$ is a \emph{linear }operator
+if and only if:
+\begin{align*}
+\hat{A}\left(a\ket{\psi}+b\ket{\phi}\right) & =a\hat{A}\ket{\psi}+b\hat{A}\ket{\phi}
+\end{align*}
+For every linear operator $\hat{A}$ there is the identity:
+\begin{align*}
+\braket{\psi}{\hat{A}\phi} & =:\braket{\phi}{\hat{A}^{\dagger}\psi}^{*}
+\end{align*}
+$\hat{A}^{\dagger}$ is called the \emph{adjoint} of $\hat{A}$. If
+and only if $\hat{A}=\hat{A}^{\dagger}$ then $\hat{A}$ is called
+\noun{Hermitian}\emph{\noun{.}}
+
+\abc The \emph{spectrum} of an operator $\hat{Q}$ is defined by
+a set of numbers $Q_{i}$, called \emph{eigenvalues}, that fulfill
+the equation:
+\begin{align*}
+\hat{Q}\ket{Q_{i}} & =Q_{i}\ket{Q_{i}}
+\end{align*}
+
+
+The $\ket{Q_{i}}$ are the corresponding eigenvectors. If there is
+more than one eigenvector for the same eigenvalue then the spectrum
+is called \emph{degenerated} and the different eigenvectors are denoted
+by $\ket{Q_{i}^{\left(d\right)}}$ with $d\in D\subseteq\mathbb{N}$.
+
+Hermitian operators have \noun{real} eigenvalues and \noun{orthogonal}
+eigenvectors.
+
+That means, if $\hat{A}=\hat{A}^{\dagger}$, $\hat{A}\ket{a_{i}}=a_{i}\ket{a_{i}}$,
+then $a_{i}=a_{i}^{*}$ and $\braket{a_{i}}{a_{j}}=0$ if $i\not=j$.
+
+If the eigenvectors are normalized, then we can write $\braket{a_{i}}{a_{j}}=\delta_{ij}$.
+
+%DATE: Do 19.04.2012
+
+\abc The \emph{spectrum decomposition }of a Hermitian operator ($\hat{A}=\hat{A}^{\dagger}$)
+\begin{align*}
+ & \text{discrete case} &  & \text{continous case}\\
+\hat{A}\ket{a_{i}} & =a_{i}\ket{a_{i}} &  & \hat{A}\ket a=a\ket a
+\end{align*}
+is given by:
+\begin{align*}
+\hat{A} & =\sum_{i\in I}a_{i}\ket{a_{i}}\bra{a_{i}} & \hat{A} & =\int a\ket a\bra a\dd a
+\end{align*}
+In linear algebra a symmetric matrix $M=M^{T}$ with eigenvalues $m_{i}$
+for $i\in\left\{ 1,\ldots,n\right\} $ can be written as:
+\begin{align*}
+M & =\left(\begin{array}{cccc}
+m_{1} & 0 & \ldots & 0\\
+0 & m_{2} & \ddots & \vdots\\
+\vdots & \ddots & \ddots & 0\\
+0 & \ldots & 0 & m_{n}
+\end{array}\right)=m_{1}\left(\begin{array}{cccc}
+1 & 0 & \ldots & 0\\
+0 & 0 & \ddots & \vdots\\
+\vdots & \ddots & \ddots & 0\\
+0 & \ldots & 0 & 0
+\end{array}\right)+\ldots+m_{n}\left(\begin{array}{cccc}
+0 & 0 & \ldots & 0\\
+0 & \ddots & \ddots & \vdots\\
+\vdots & \ddots & 0 & 0\\
+0 & \ldots & 0 & 1
+\end{array}\right)
+\end{align*}
+
+
+\abc The \emph{unit operator} $\hat{I}$ defined by
+\begin{align*}
+\fall_{\ket{\phi}\in\mathcal{H}}\ :\ \hat{I}\ket{\phi} & =\ket{\phi}
+\end{align*}
+can be written as
+\begin{align*}
+ & \text{discrete case} &  & \text{continous case}\\
+\hat{I} & =\sum_{i\in I}\ket{a_{i}}\bra{a_{i}} & \hat{I} & =\int\ket a\bra a\dd a
+\end{align*}
+where $\left(\ket{a_{i}}\right)_{i\in I\subseteq\mathbb{N}}$ (respectively
+$\left(\ket a\right)_{a\in\mathbb{R}}$) is a complete orthonormal
+basis.
+
+\abc The \emph{projection} of $\ket{\psi}$ along a basis vector
+$\ket{a_{i}}$ (respectively $\ket a$) is:
+\begin{align*}
+\text{discrete} & \text{ case} & \text{continous} & \text{ case}\\
+\left(\ket{a_{i}}\bra{a_{i}}\right)\ket{\psi} & =\braket{a_{i}}{\psi}\ket{a_{i}} & \left(\ket a\bra a\right)\ket{\psi} & =\braket a{\psi}\ket a
+\end{align*}
+
+
+\abc The \emph{algebra} of the operators $\hat{Q}_{1}$ and $\hat{Q}_{2}$
+is:
+\begin{align*}
+\left(\hat{Q}_{1}\hat{Q}_{2}\right)\ket{\psi} & :=\hat{Q}_{1}\left(\hat{Q}_{2}\ket{\psi}\right)\not=\left(\hat{Q}_{2}\hat{Q}_{1}\right)\ket{\psi}\\
+\left(\hat{Q}_{1}\hat{Q}_{2}\right)^{\dagger} & :=\hat{Q}_{2}^{\dagger}\hat{Q}_{1}^{\dagger}
+\end{align*}
+The \emph{commutator} is defined by:
+\begin{align*}
+\left[\hat{Q}_{1},\hat{Q}_{2}\right] & :=\hat{Q}_{1}\hat{Q}_{2}-\hat{Q}_{2}\hat{Q}_{1}
+\end{align*}
+It is bilinear and has the properties:
+
+\begin{iiilist}
+
+\iii It is antisymmetric:
+\begin{align*}
+\left[\hat{Q}_{1},\hat{Q}_{2}\right] & =-\left[\hat{Q}_{2},\hat{Q}_{1}\right]
+\end{align*}
+
+
+\iii Jacobi identity:
+\begin{align*}
+\left[\hat{Q}_{1},\left[\hat{Q}_{2},\hat{Q}_{3}\right]\right]+\left[\hat{Q}_{2},\left[\hat{Q}_{3},\hat{Q}_{1}\right]\right]+\left[\hat{Q}_{3},\left[\hat{Q}_{1},\hat{Q}_{2}\right]\right] & =0
+\end{align*}
+
+
+\iii Leibniz identity:
+\begin{align*}
+\left[\hat{Q}_{1},\hat{Q}_{2}\hat{Q}_{3}\right]= & \hat{Q}_{2}\left[\hat{Q}_{1},\hat{Q}_{3}\right]+\left[\hat{Q}_{1},\hat{Q}_{2}\right]\hat{Q}_{3}
+\end{align*}
+
+
+\end{iiilist}
+
+Due to these identities the commutator is analogous to the classical
+Poisson bracket.
+
+Two observables $\left(\hat{A}=\hat{A}^{\dagger}\!,\,\hat{B}=\hat{B}^{\dagger}\right)$
+are called \emph{compatible} if and only if $\left[\hat{A},\hat{B}\right]=0$.
+
+Theorem: If $\hat{A}$ and $\hat{B}$ are compatible then there exists
+a basis $\left(\ket{k_{i}}\right)_{i\in I\subseteq\mathbb{N}}$ such
+that:
+\begin{align*}
+\hat{A}\ket{k_{i}} & =a_{i}\ket{k_{i}}\\
+\hat{B}\ket{k_{i}} & =b_{i}\ket{k_{i}}
+\end{align*}
+Therefore the states $\ket{k_{i}}$ have well defined properties $\left(a_{i},b_{i}\right)$.
+
+\abc
+
+\begin{iiilist}
+
+\iii The \emph{matrix representation} of an operator \noun{with respect
+to the basis} $\left(\ket{a_{i}}\right)_{i\in\left\{ 1,\ldots,n\right\} }$
+(respectively $\left(\ket q\right)_{q\in\mathbb{R}}$) is:
+\begin{align*}
+\negthickspace\negthickspace\negthickspace\negthickspace\negthickspace & \text{discrete case} &  & \text{continuous case}\\
+\negthickspace\negthickspace\negthickspace\negthickspace\negthickspace\hat{Q} & \to\left(\begin{array}{ccc}
+\bra{a_{1}}\hat{Q}\ket{a_{1}} & \ldots & \bra{a_{1}}\hat{Q}\ket{a_{n}}\\
+\vdots & \ddots & \vdots\\
+\bra{a_{n}}\hat{Q}\ket{a_{1}} & \ldots & \bra{a_{n}}\hat{Q}\ket{a_{n}}
+\end{array}\right)=\left(\bra{a_{i}}\hat{Q}\ket{a_{j}}\right)_{ij}=:Q_{ij} & \hat{Q} & \to\bra q\hat{Q}\ket{q'}=Q\left(q,q'\right)
+\end{align*}
+
+
+\iii The \emph{trace} of $\hat{Q}$ is defined by
+\begin{align*}
+ & \text{discrete case} &  & \text{continuous case}\\
+\text{Tr}\left(\hat{Q}\right) & =\sum_{i=1}^{n}\bra{a_{i}}\hat{Q}\ket{a_{i}} & \text{Tr}\left(\hat{Q}\right) & =\int Q\left(q,q\right)\dd q
+\end{align*}
+ans is independent of the basis.
+
+\end{iiilist}
+
+Therefore the equation
+\begin{align*}
+\hat{Q}\ket{\psi} & =\ket{\phi}
+\end{align*}
+can be written in this basis by:
+
+\begin{iiilist}
+
+\iii Multiplying $\bra{a_{i}}$ from the left: $\bra{a_{i}}\hat{Q}\ket{\phi}=\braket{a_{i}}{\phi}$
+
+\iii Insert an unit operator after $\hat{Q}$:
+\begin{align*}
+\bra{a_{i}}\hat{Q}\hat{I}\ket{\phi} & =\bra{a_{i}}\hat{Q}\left(\sum_{j=1}^{n}\ket{a_{j}}\bra{a_{j}}\right)\ket{\phi}=\sum_{j=1}^{n}\bra{a_{i}}\hat{Q}\ket{a_{j}}\braket{a_{j}}{\psi}=\braket{a_{i}}{\phi}
+\end{align*}
+This is the component form of the vector equation:
+\begin{align*}
+\left(\begin{array}{ccc}
+Q_{11} & \ldots & Q_{1n}\\
+\vdots &  & \vdots\\
+Q_{n1} & \ldots & Q_{nn}
+\end{array}\right)\left(\begin{array}{c}
+\psi_{1}\\
+\vdots\\
+\psi_{n}
+\end{array}\right) & =\left(\begin{array}{c}
+\phi_{1}\\
+\vdots\\
+\phi_{n}
+\end{array}\right)
+\end{align*}
+
+
+\end{iiilist}
+
+The continuous version is
+\begin{align*}
+\int Q\left(q,q'\right)\psi\left(q'\right)\dd q' & =\phi\left(q\right)
+\end{align*}
+with $Q\left(q,q'\right):=\bra q\hat{Q}\ket q$, $\psi\left(q'\right)=\braket{q'}{\psi}$
+and $\phi\left(q\right)=\braket q{\phi}$.
+
+\abc Change of basis and unitary transformations.
+
+\begin{iiilist}
+
+\iii An operator $\hat{U}$ is called \emph{unitary} if and only
+if $\hat{U}^{T}=\hat{U}^{-1}$.
+
+\iii Unitary transformations (\textquotedblleft{}transformation\textquotedblright{}
+is the same as \textquotedblleft{}operator\textquotedblright{}) preserve
+scalar products. For $\ket{\psi},\ket{\phi}\in\mathcal{H}$ we define:
+\begin{align*}
+\ket{\psi'} & :=\hat{U}\ket{\psi} & \ket{\phi'} & :=\hat{U}\ket{\phi}
+\end{align*}
+Then the scalar product is the same:
+\begin{align*}
+\braket{\psi'}{\phi'} & =\braket{\psi}{\phi}
+\end{align*}
+
+
+\iii Unitary transformations represent changes of the basis.
+\begin{align*}
+\ket{\psi} & =\hat{I}\ket{\psi}=\left(\sum_{i}\ket{a_{i}}\bra{a_{i}}\right)\ket{\psi}=\sum_{i\in I}\braket{a_{i}}{\psi}\ket{a_{i}}\\
+\braket{b_{i}}{\psi} & =\sum_{j\in I}\braket{b_{i}}{a_{j}}\braket{a_{j}}{\psi}
+\end{align*}
+\begin{align*}
+\left(\begin{array}{c}
+\psi_{1}^{\left(b\right)}\\
+\vdots\\
+\psi_{N}^{\left(b\right)}
+\end{array}\right) & =\mathbb{U}\cdot\left(\begin{array}{c}
+\psi_{1}^{\left(a\right)}\\
+\vdots\\
+\psi_{N}^{\left(a\right)}
+\end{array}\right)\\
+\left[\mathbb{U}\right]_{ij} & =U_{ij}=\braket{b_{i}}{a_{j}}
+\end{align*}
+
+
+\iii For operators the transformations are:
+\begin{align*}
+Q_{ij}^{\left(b\right)} & =\bra{b_{i}}\hat{Q}\ket{b_{j}}=\bra{b_{i}}\hat{I}\hat{Q}\hat{I}\ket{b_{j}}=\sum_{l,m\in I}\braket{b_{i}}{a_{l}}\bra{a_{l}}\hat{Q}\ket{a_{m}}\braket{a_{m}}{b_{j}}=\\
+ & =\sum_{l,m\in I}U_{il}Q_{lm}^{\left(a\right)}U_{mj}=\sum_{l,m}U_{il}Q_{lm}^{\left(a\right)}\left(U_{jm}\right)^{*}\\
+\mathbb{Q}^{\left(b\right)} & =\mathbb{U}\mathbb{Q}^{\left(a\right)}\mathbb{U}^{\dagger}
+\end{align*}
+
+
+\end{iiilist}
+
+\end{abclist}
+
+
+\chapter{\quotedblbase{}Simple\textquotedblleft{} applications}
+
+
+\chapter[Symmetries in quantum mechanics]{Symmetries in quantum mechanics (Angular momentum)}
+
+
+\chapter{Perturbation theory (time-independent)}
+
+
+\chapter{Perturbation theory (time-dependent)}
+
+
+\chapter{Many-particle systems}
+
+
+\chapter{Scattering theory}
+
+
+\part*{Appendix\thispagestyle{empty}}
+
+\addcontentsline{toc}{part}{Appendix}
+
+\fancyhead[R]{}
+\fancyhead[C]{Appendix}
+
+
+\chapter*{Acknowledgements}
+
+\addcontentsline{toc}{section}{\hspace*{2.7em}Danksagungen}
+
+\fancyhead[R]{Danksagungen}
+
+My special thanks goes to Doctor Urbina, who gave this lecture and
+allowed me to publish this script of the lecture.
+
+I would also like to thank all those, who found errors by careful
+reading and told me of them.
+
+\vspace{1cm}
+
+
+\hfill{}Andreas Völklein
+
+
+\chapter*{GNU Free Documentation License}
+
+\addcontentsline{toc}{section}{\hspace*{2.7em}GNU Free Documentation License}
+
+\fancyhead[R]{GNU Free Documentation License}
+
+\noindent \begin{center}
+Version 1.3, 3 November 2008\\
+Copyright © 2000, 2001, 2002, 2007, 2008 Free Software Foundation,
+Inc. 
+\par\end{center}
+
+\noindent \begin{center}
+\texttt{<}\url{https://fsf.org/}\texttt{>}
+\par\end{center}
+
+\noindent \begin{center}
+Everyone is permitted to copy and distribute verbatim copies of this
+license document,\\
+but changing it is not allowed
+\par\end{center}
+
+
+\section*{\noun{0. Preamble}}
+
+\noindent The purpose of this License is to make a manual, textbook,
+or other functional and useful document \textquotedblleft{}free\textquotedblright{}
+in the sense of freedom: to assure everyone the effective freedom
+to copy and redistribute it, with or without modifying it, either
+commercially or noncommercially. Secondarily, this License preserves
+for the author and publisher a way to get credit for their work, while
+not being considered responsible for modifications made by others.
+
+\noindent This License is a kind of \textquotedblleft{}copyleft\textquotedblright{},
+which means that derivative works of the document must themselves
+be free in the same sense. It complements the GNU General Public License,
+which is a copyleft license designed for free software.
+
+\noindent We have designed this License in order to use it for manuals
+for free software, because free software needs free documentation:
+a free program should come with manuals providing the same freedoms
+that the software does. But this License is not limited to software
+manuals; it can be used for any textual work, regardless of subject
+matter or whether it is published as a printed book. We recommend
+this License principally for works whose purpose is instruction or
+reference.
+
+
+\section*{\noun{1. Applicability and definitions}}
+
+This License applies to any manual or other work, in any medium, that
+contains a notice placed by the copyright holder saying it can be
+distributed under the terms of this License. Such a notice grants
+a world-wide, royalty-free license, unlimited in duration, to use
+that work under the conditions stated herein. The \textquotedblleft{}\textbf{Document}\textquotedblright{},
+below, refers to any such manual or work. Any member of the public
+is a licensee, and is addressed as \textquotedblleft{}\textbf{you}\textquotedblright{}.
+You accept the license if you copy, modify or distribute the work
+in a way requiring permission under copyright law.
+
+A \textquotedblleft{}\textbf{Modified Version}\textquotedblright{}
+of the Document means any work containing the Document or a portion
+of it, either copied verbatim, or with modifications and/or translated
+into another language.
+
+A \textquotedblleft{}\textbf{Secondary Section}\textquotedblright{}
+is a named appendix or a front-matter section of the Document that
+deals exclusively with the relationship of the publishers or authors
+of the Document to the Document's overall subject (or to related matters)
+and contains nothing that could fall directly within that overall
+subject. (Thus, if the Document is in part a textbook of mathematics,
+a Secondary Section may not explain any mathematics.) The relationship
+could be a matter of historical connection with the subject or with
+related matters, or of legal, commercial, philosophical, ethical or
+political position regarding them.
+
+The \textquotedblleft{}\textbf{Invariant Sections}\textquotedblright{}
+are certain Secondary Sections whose titles are designated, as being
+those of Invariant Sections, in the notice that says that the Document
+is released under this License. If a section does not fit the above
+definition of Secondary then it is not allowed to be designated as
+Invariant. The Document may contain zero Invariant Sections. If the
+Document does not identify any Invariant Sections then there are none.
+
+The \textquotedblleft{}\textbf{Cover Texts}\textquotedblright{} are
+certain short passages of text that are listed, as Front-Cover Texts
+or Back-Cover Texts, in the notice that says that the Document is
+released under this License. A Front-Cover Text may be at most 5 words,
+and a Back-Cover Text may be at most 25 words.
+
+A \textquotedblleft{}\textbf{Transparent}\textquotedblright{} copy
+of the Document means a machine-readable copy, represented in a format
+whose specification is available to the general public, that is suitable
+for revising the document straightforwardly with generic text editors
+or (for images composed of pixels) generic paint programs or (for
+drawings) some widely available drawing editor, and that is suitable
+for input to text formatters or for automatic translation to a variety
+of formats suitable for input to text formatters. A copy made in an
+otherwise Transparent file format whose markup, or absence of markup,
+has been arranged to thwart or discourage subsequent modification
+by readers is not Transparent. An image format is not Transparent
+if used for any substantial amount of text. A copy that is not \textquotedblleft{}Transparent\textquotedblright{}
+is called \textquotedblleft{}\textbf{Opaque}\textquotedblright{}.
+
+Examples of suitable formats for Transparent copies include plain
+ASCII without markup, Texinfo input format, \LaTeX{} input format,
+SGML or XML using a publicly available DTD, and standard-conforming
+simple HTML, PostScript or PDF designed for human modification. Examples
+of transparent image formats include PNG, XCF and JPG. Opaque formats
+include proprietary formats that can be read and edited only by proprietary
+word processors, SGML or XML for which the DTD and/or processing tools
+are not generally available, and the machine-generated HTML, PostScript
+or PDF produced by some word processors for output purposes only.
+
+The \textquotedblleft{}\textbf{Title Page}\textquotedblright{} means,
+for a printed book, the title page itself, plus such following pages
+as are needed to hold, legibly, the material this License requires
+to appear in the title page. For works in formats which do not have
+any title page as such, \textquotedblleft{}Title Page\textquotedblright{}
+means the text near the most prominent appearance of the work's title,
+preceding the beginning of the body of the text.
+
+The \textquotedblleft{}\textbf{publisher}\textquotedblright{} means
+any person or entity that distributes copies of the Document to the
+public.
+
+A section \textquotedblleft{}\textbf{Entitled XYZ}\textquotedblright{}
+means a named subunit of the Document whose title either is precisely
+XYZ or contains XYZ in parentheses following text that translates
+XYZ in another language. (Here XYZ stands for a specific section name
+mentioned below, such as \textquotedblleft{}\textbf{Acknowledgements}\textquotedblright{},
+\textquotedblleft{}\textbf{Dedications}\textquotedblright{}, \textquotedblleft{}\textbf{Endorsements}\textquotedblright{},
+or \textquotedblleft{}\textbf{History}\textquotedblright{}.) To \textquotedblleft{}\textbf{Preserve
+the Title}\textquotedblright{} of such a section when you modify the
+Document means that it remains a section \textquotedblleft{}Entitled
+XYZ\textquotedblright{} according to this definition.
+
+The Document may include Warranty Disclaimers next to the notice which
+states that this License applies to the Document. These Warranty Disclaimers
+are considered to be included by reference in this License, but only
+as regards disclaiming warranties: any other implication that these
+Warranty Disclaimers may have is void and has no effect on the meaning
+of this License.
+
+
+\section*{\noun{2. Verbatim copying}}
+
+You may copy and distribute the Document in any medium, either commercially
+or noncommercially, provided that this License, the copyright notices,
+and the license notice saying this License applies to the Document
+are reproduced in all copies, and that you add no other conditions
+whatsoever to those of this License. You may not use technical measures
+to obstruct or control the reading or further copying of the copies
+you make or distribute. However, you may accept compensation in exchange
+for copies. If you distribute a large enough number of copies you
+must also follow the conditions in section 3.
+
+You may also lend copies, under the same conditions stated above,
+and you may publicly display copies.
+
+
+\section*{\noun{3. Copying in quantity}}
+
+If you publish printed copies (or copies in media that commonly have
+printed covers) of the Document, numbering more than 100, and the
+Document's license notice requires Cover Texts, you must enclose the
+copies in covers that carry, clearly and legibly, all these Cover
+Texts: Front-Cover Texts on the front cover, and Back-Cover Texts
+on the back cover. Both covers must also clearly and legibly identify
+you as the publisher of these copies. The front cover must present
+the full title with all words of the title equally prominent and visible.
+You may add other material on the covers in addition. Copying with
+changes limited to the covers, as long as they preserve the title
+of the Document and satisfy these conditions, can be treated as verbatim
+copying in other respects.
+
+If the required texts for either cover are too voluminous to fit legibly,
+you should put the first ones listed (as many as fit reasonably) on
+the actual cover, and continue the rest onto adjacent pages.
+
+If you publish or distribute Opaque copies of the Document numbering
+more than 100, you must either include a machine-readable Transparent
+copy along with each Opaque copy, or state in or with each Opaque
+copy a computer-network location from which the general network-using
+public has access to download using public-standard network protocols
+a complete Transparent copy of the Document, free of added material.
+If you use the latter option, you must take reasonably prudent steps,
+when you begin distribution of Opaque copies in quantity, to ensure
+that this Transparent copy will remain thus accessible at the stated
+location until at least one year after the last time you distribute
+an Opaque copy (directly or through your agents or retailers) of that
+edition to the public.
+
+It is requested, but not required, that you contact the authors of
+the Document well before redistributing any large number of copies,
+to give them a chance to provide you with an updated version of the
+Document.
+
+
+\section*{\noun{4. Modifications}}
+
+You may copy and distribute a Modified Version of the Document under
+the conditions of sections 2 and 3 above, provided that you release
+the Modified Version under precisely this License, with the Modified
+Version filling the role of the Document, thus licensing distribution
+and modification of the Modified Version to whoever possesses a copy
+of it. In addition, you must do these things in the Modified Version:
+\begin{description}
+\item [{A.\hspace*{3.2mm}}] Use in the Title Page (and on the covers,
+if any) a title distinct from that of the Document, and from those
+of previous versions (which should, if there were any, be listed in
+the History section of the Document). You may use the same title as
+a previous version if the original publisher of that version gives
+permission.
+\item [{B.\hspace*{3.4mm}}] List on the Title Page, as authors, one or
+more persons or entities responsible for authorship of the modifications
+in the Modified Version, together with at least five of the principal
+authors of the Document (all of its principal authors, if it has fewer
+than five), unless they release you from this requirement.
+\item [{C.\hspace*{3.4mm}}] State on the Title page the name of the publisher
+of the Modified Version, as the publisher.
+\item [{D.\hspace*{3.4mm}}] Preserve all the copyright notices of the
+Document.
+\item [{E.\hspace*{3.4mm}}] Add an appropriate copyright notice for your
+modifications adjacent to the other copyright notices.
+\item [{F.\hspace*{3.8mm}}] Include, immediately after the copyright notices,
+a license notice giving the public permission to use the Modified
+Version under the terms of this License, in the form shown in the
+Addendum below.
+\item [{G.\hspace*{3.1mm}}] Preserve in that license notice the full lists
+of Invariant Sections and required Cover Texts given in the Document's
+license notice.
+\item [{H.\hspace*{3.2mm}}] Include an unaltered copy of this License.
+\item [{I.\hspace*{5.0mm}}] Preserve the section Entitled \textquotedblleft{}History\textquotedblright{},
+Preserve its Title, and add to it an item stating at least the title,
+year, new authors, and publisher of the Modified Version as given
+on the Title Page. If there is no section Entitled \textquotedblleft{}History\textquotedblright{}
+in the Document, create one stating the title, year, authors, and
+publisher of the Document as given on its Title Page, then add an
+item describing the Modified Version as stated in the previous sentence.
+\item [{J.\hspace*{4.3mm}}] Preserve the network location, if any, given
+in the Document for public access to a Transparent copy of the Document,
+and likewise the network locations given in the Document for previous
+versions it was based on. These may be placed in the \textquotedblleft{}History\textquotedblright{}
+section. You may omit a network location for a work that was published
+at least four years before the Document itself, or if the original
+publisher of the version it refers to gives permission.
+\item [{K.\hspace*{3.3mm}}] For any section Entitled \textquotedblleft{}Acknowledgements\textquotedblright{}
+or \textquotedblleft{}Dedications\textquotedblright{}, Preserve the
+Title of the section, and preserve in the section all the substance
+and tone of each of the contributor acknowledgements and/or dedications
+given therein.
+\item [{L.\hspace*{4.1mm}}] Preserve all the Invariant Sections of the
+Document, unaltered in their text and in their titles. Section numbers
+or the equivalent are not considered part of the section titles.
+\item [{M.\hspace*{3mm}}] Delete any section Entitled \textquotedblleft{}Endorsements\textquotedblright{}.
+Such a section may not be included in the Modified Version.
+\item [{N.\hspace*{3.4mm}}] Do not retitle any existing section to be
+Entitled \textquotedblleft{}Endorsements\textquotedblright{} or to
+conflict in title with any Invariant Section.
+\item [{O.\hspace*{3.4mm}}] Preserve any Warranty Disclaimers.
+\end{description}
+If the Modified Version includes new front-matter sections or appendices
+that qualify as Secondary Sections and contain no material copied
+from the Document, you may at your option designate some or all of
+these sections as invariant. To do this, add their titles to the list
+of Invariant Sections in the Modified Version's license notice. These
+titles must be distinct from any other section titles.
+
+You may add a section Entitled \textquotedblleft{}Endorsements\textquotedblright{},
+provided it contains nothing but endorsements of your Modified Version
+by various parties\textemdash{}for example, statements of peer review
+or that the text has been approved by an organization as the authoritative
+definition of a standard.
+
+You may add a passage of up to five words as a Front-Cover Text, and
+a passage of up to 25 words as a Back-Cover Text, to the end of the
+list of Cover Texts in the Modified Version. Only one passage of Front-Cover
+Text and one of Back-Cover Text may be added by (or through arrangements
+made by) any one entity. If the Document already includes a cover
+text for the same cover, previously added by you or by arrangement
+made by the same entity you are acting on behalf of, you may not add
+another; but you may replace the old one, on explicit permission from
+the previous publisher that added the old one.
+
+The author(s) and publisher(s) of the Document do not by this License
+give permission to use their names for publicity for or to assert
+or imply endorsement of any Modified Version.
+
+
+\section*{\noun{5. Combining documents}}
+
+You may combine the Document with other documents released under this
+License, under the terms defined in section 4 above for modified versions,
+provided that you include in the combination all of the Invariant
+Sections of all of the original documents, unmodified, and list them
+all as Invariant Sections of your combined work in its license notice,
+and that you preserve all their Warranty Disclaimers.
+
+The combined work need only contain one copy of this License, and
+multiple identical Invariant Sections may be replaced with a single
+copy. If there are multiple Invariant Sections with the same name
+but different contents, make the title of each such section unique
+by adding at the end of it, in parentheses, the name of the original
+author or publisher of that section if known, or else a unique number.
+Make the same adjustment to the section titles in the list of Invariant
+Sections in the license notice of the combined work.
+
+In the combination, you must combine any sections Entitled \textquotedblleft{}History\textquotedblright{}
+in the various original documents, forming one section Entitled \textquotedblleft{}History\textquotedblright{};
+likewise combine any sections Entitled \textquotedblleft{}Acknowledgements\textquotedblright{},
+and any sections Entitled \textquotedblleft{}Dedications\textquotedblright{}.
+You must delete all sections Entitled \textquotedblleft{}Endorsements\textquotedblright{}.
+
+
+\section*{\noun{6. Collections of documents}}
+
+You may make a collection consisting of the Document and other documents
+released under this License, and replace the individual copies of
+this License in the various documents with a single copy that is included
+in the collection, provided that you follow the rules of this License
+for verbatim copying of each of the documents in all other respects.
+
+You may extract a single document from such a collection, and distribute
+it individually under this License, provided you insert a copy of
+this License into the extracted document, and follow this License
+in all other respects regarding verbatim copying of that document.
+
+
+\section*{\noun{7. Aggregation with independent works}}
+
+A compilation of the Document or its derivatives with other separate
+and independent documents or works, in or on a volume of a storage
+or distribution medium, is called an \textquotedblleft{}aggregate\textquotedblright{}
+if the copyright resulting from the compilation is not used to limit
+the legal rights of the compilation's users beyond what the individual
+works permit. When the Document is included in an aggregate, this
+License does not apply to the other works in the aggregate which are
+not themselves derivative works of the Document.
+
+If the Cover Text requirement of section 3 is applicable to these
+copies of the Document, then if the Document is less than one half
+of the entire aggregate, the Document's Cover Texts may be placed
+on covers that bracket the Document within the aggregate, or the electronic
+equivalent of covers if the Document is in electronic form. Otherwise
+they must appear on printed covers that bracket the whole aggregate.
+
+
+\section*{\noun{8. Translation}}
+
+Translation is considered a kind of modification, so you may distribute
+translations of the Document under the terms of section 4. Replacing
+Invariant Sections with translations requires special permission from
+their copyright holders, but you may include translations of some
+or all Invariant Sections in addition to the original versions of
+these Invariant Sections. You may include a translation of this License,
+and all the license notices in the Document, and any Warranty Disclaimers,
+provided that you also include the original English version of this
+License and the original versions of those notices and disclaimers.
+In case of a disagreement between the translation and the original
+version of this License or a notice or disclaimer, the original version
+will prevail.
+
+If a section in the Document is Entitled \textquotedblleft{}Acknowledgements\textquotedblright{},
+\textquotedblleft{}Dedications\textquotedblright{}, or \textquotedblleft{}History\textquotedblright{},
+the requirement (section 4) to Preserve its Title (section 1) will
+typically require changing the actual title.
+
+
+\section*{\noun{9. Termination}}
+
+You may not copy, modify, sublicense, or distribute the Document except
+as expressly provided under this License. Any attempt otherwise to
+copy, modify, sublicense, or distribute it is void, and will automatically
+terminate your rights under this License.
+
+However, if you cease all violation of this License, then your license
+from a particular copyright holder is reinstated (a) provisionally,
+unless and until the copyright holder explicitly and finally terminates
+your license, and (b) permanently, if the copyright holder fails to
+notify you of the violation by some reasonable means prior to 60 days
+after the cessation.
+
+Moreover, your license from a particular copyright holder is reinstated
+permanently if the copyright holder notifies you of the violation
+by some reasonable means, this is the first time you have received
+notice of violation of this License (for any work) from that copyright
+holder, and you cure the violation prior to 30 days after your receipt
+of the notice.
+
+Termination of your rights under this section does not terminate the
+licenses of parties who have received copies or rights from you under
+this License. If your rights have been terminated and not permanently
+reinstated, receipt of a copy of some or all of the same material
+does not give you any rights to use it.
+
+
+\section*{\noun{10. Future revisions of this license}}
+
+The Free Software Foundation may publish new, revised versions of
+the GNU Free Documentation License from time to time. Such new versions
+will be similar in spirit to the present version, but may differ in
+detail to address new problems or concerns. See \url{https://www.gnu.org/copyleft/}.
+
+Each version of the License is given a distinguishing version number.
+If the Document specifies that a particular numbered version of this
+License \textquotedbl{}or any later version\textquotedbl{} applies
+to it, you have the option of following the terms and conditions either
+of that specified version or of any later version that has been published
+(not as a draft) by the Free Software Foundation. If the Document
+does not specify a version number of this License, you may choose
+any version ever published (not as a draft) by the Free Software Foundation.
+If the Document specifies that a proxy can decide which future versions
+of this License can be used, that proxy's public statement of acceptance
+of a version permanently authorizes you to choose that version for
+the Document.
+
+
+\section*{\noun{11. Relicensing}}
+
+\textquotedblleft{}Massive Multiauthor Collaboration Site\textquotedblright{}
+(or \textquotedblleft{}MMC Site\textquotedblright{}) means any World
+Wide Web server that publishes copyrightable works and also provides
+prominent facilities for anybody to edit those works. A public wiki
+that anybody can edit is an example of such a server. A \textquotedblleft{}Massive
+Multiauthor Collaboration\textquotedblright{} (or \textquotedblleft{}MMC\textquotedblright{})
+contained in the site means any set of copyrightable works thus published
+on the MMC site.
+
+\textquotedblleft{}CC-BY-SA\textquotedblright{} means the Creative
+Commons Attribution-Share Alike 3.0 license published by Creative
+Commons Corporation, a not-for-profit corporation with a principal
+place of business in San Francisco, California, as well as future
+copyleft versions of that license published by that same organization.
+
+\textquotedblleft{}Incorporate\textquotedblright{} means to publish
+or republish a Document, in whole or in part, as part of another Document.
+
+An MMC is \textquotedblleft{}eligible for relicensing\textquotedblright{}
+if it is licensed under this License, and if all works that were first
+published under this License somewhere other than this MMC, and subsequently
+incorporated in whole or in part into the MMC, (1) had no cover texts
+or invariant sections, and (2) were thus incorporated prior to November
+1, 2008.
+
+The operator of an MMC Site may republish an MMC contained in the
+site under CC-BY-SA on the same site at any time before August 1,
+2009, provided the MMC is eligible for relicensing.
+
+
+\section*{\noun{Addendum}: How to use this License for your documents}
+
+To use this License in a document you have written, include a copy
+of the License in the document and put the following copyright and
+license notices just after the title page:
+\begin{quote}
+Copyright © YEAR YOUR NAME.\\
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.3
+or any later version published by the Free Software Foundation;
+
+with no Invariant Sections, no Front-Cover Texts, and no Back-Cover
+Texts.
+
+A copy of the license is included in the section entitled \textquotedbl{}GNU
+Free Documentation License\textquotedbl{}.
+\end{quote}
+If you have Invariant Sections, Front-Cover Texts and Back-Cover Texts,
+replace the \textquotedbl{}with $\ldots$ Texts.\textquotedbl{} line
+with this:
+\begin{quote}
+with the Invariant Sections being LIST THEIR TITLES, with the Front-Cover
+Texts being LIST, and with the Back-Cover Texts being LIST.
+\end{quote}
+If you have Invariant Sections without Cover Texts, or some other
+combination of the three, merge those two alternatives to suit the
+situation.
+
+If your document contains nontrivial examples of program code, we
+recommend releasing these examples in parallel under your choice of
+free software license, such as the GNU General Public License, to
+permit their use in free software.
+
+\label{END}
+\end{document}
