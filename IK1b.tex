@@ -1,4 +1,4 @@
-%% LyX 2.0.3 created this file.  For more info, see http://www.lyx.org/.
+%% LyX 2.0.1 created this file.  For more info, see http://www.lyx.org/.
 %% Do not edit unless you really know what you are doing.
 \documentclass[11pt,english]{report}
 \usepackage[T1]{fontenc}
@@ -183,7 +183,7 @@
 \global\long\def\bra#1{\left<#1\right|}
 
 
-\global\long\def\neg{\text{-}}
+\global\long\def\mins{\text{-}}
 
 
 \global\long\def\exs{\exsop}
@@ -787,8 +787,179 @@ Q_{ij}^{\left(b\right)} & =\bra{b_{i}}\hat{Q}\ket{b_{j}}=\bra{b_{i}}\hat{I}\hat{
 
 \end{iiilist}
 
+%DATE: Di 24.4.12
+
+\abc One can describe functions mapping one operator to another by
+their Taylor series:
+\begin{align*}
+f\left(x\right) & =\sum_{n=0}^{\infty}c_{n}x^{n}\\
+c_{n} & =\frac{1}{n!}\partial_{x}^{n}f\left(x\right)\big|_{x=0}\\
+f\left(\hat{Q}\right) & :=\sum_{n=0}^{\infty}c_{n}\hat{Q}^{n}
+\end{align*}
+This is very nice. But this does not work for more than one operator,
+if they do not commute.
+\begin{align*}
+f\left(x,y\right) & =\sum_{n,m}c_{n,m}x^{n}y^{m}\\
+f\left(\hat{Q}_{1},\hat{Q}_{2}\right) & \not=\sum_{n,m}c_{n,m}\hat{Q}_{1}^{n}\hat{Q}_{2}^{m}\\
+xy & \stackrel{?}{\to}\begin{cases}
+\hat{Q}_{1}\hat{Q}_{2}\\
+\hat{Q}_{2}\hat{Q}_{1}\\
+\frac{1}{2}\left(\hat{Q}_{1}\hat{Q}_{2}+\hat{Q}_{2}\hat{Q}_{1}\right)
+\end{cases}
+\end{align*}
+In a basis of eigenvectors $\ket{q_{i}}$, that means $\hat{Q}\ket{q_{i}}=q_{i}\ket{q_{i}}$,
+one can write:
+\begin{align*}
+ & \text{discrete case} &  & \text{continuous case}\\
+f\left(\hat{Q}\right) & =\sum_{i}f\left(q_{i}\right)\ket{q_{i}}\bra{q_{i}} & f\left(\hat{Q}\right)= & \int f\left(q\right)\ket q\bra q\dd q
+\end{align*}
+
+
+\abc An operator can also depend on parameters:
+\begin{align*}
+\underbrace{t}_{\in\mathbb{R}} & \mapsto\underbrace{\hat{A}\left(t\right)}_{\text{acting on }\mathcal{H}}
+\end{align*}
+It has all the nice properties, but one has to be careful not to change
+the ordering of the operators, if they do not commute:
+
+\begin{align*}
+\frac{\dd}{\dd t}\left(\hat{A}\left(t\right)\hat{B}\left(t\right)\right) & =\left(\frac{\dd\hat{A}\left(t\right)}{\dd t}\right)\hat{B}\left(t\right)+\hat{A}\left(t\right)\left(\frac{\dd\hat{B}\left(t\right)}{\dd t}\right)
+\end{align*}
+\begin{align*}
+\frac{\dd\hat{A}\left(t\right)}{\dd t} & =\hat{B}\left(t\right)\quad\Rightarrow\quad\hat{A}\left(t\right)=\int_{0}^{t}\hat{B}\left(t'\right)\dd t'+\hat{A}_{0}
+\end{align*}
+
+
+Extra property: 
+\begin{align*}
+\frac{\dd}{\dd t}\left(\braket{\psi\left(t\right)}{\phi\left(t\right)}\right) & =\left(\frac{\dd\bra{\psi\left(t\right)}}{\dd t}\right)\ket{\phi\left(t\right)}+\bra{\psi\left(t\right)}\left(\frac{\dd\ket{\phi\left(t\right)}}{\dd t}\right)
+\end{align*}
+
+
+As norm one usually uses:
+\begin{align*}
+\norm{\hat{A}}^{2} & =\text{Tr}\left(\hat{A}\hat{A}^{\dagger}\right)
+\end{align*}
+
+
 \end{abclist}
 
+
+\section{What does quantum actually predict?}
+
+Think about classical mechanics:
+\begin{align*}
+\left(x\left(0\right),p\left(0\right)\right) & \xrightarrow{\text{evolution}}\left(x\left(t\right),p\left(t\right)\right)\to f\left(x\left(t\right),p\left(t\right)\right)\text{ is known}
+\end{align*}
+So classical mechanics is \noun{deterministic} (the state of a system
+is determined by the initial conditions) and \noun{realistic} (the
+value you are going to measure already exists before the actual measurement).
+
+Back to quantum mechanics:
+
+The full dynamics is encoded in the postulate:
+\begin{quote}
+\textquotedblleft{}In each quantum mechanical system there exists
+an observable $\hat{H}\!\left(t\right)$, called \emph{Hamiltonian}
+which is assumed to be \noun{bounded} from below (and it is a nice
+operator). The solution of the equation
+\begin{align*}
+\ii\hbar\partial_{t}\hat{U}\left(t,t_{0}\right) & =\hat{H}\left(t\right)\hat{U}\left(t,t_{0}\right) & \hat{U}\left(t_{0},t_{0}\right) & =\hat{I} &  & \text{for }t>t_{0}
+\end{align*}
+is an unitary operator $\hat{U}$, called \noun{time evolution operator}.
+The time evolution of an initial state $\ket{\psi\left(t_{0}\right)}$
+is given by $\ket{\psi\left(t\right)}=\hat{U}\left(t,t_{0}\right)\ket{\psi\left(t_{0}\right)}$.\textquotedblright{}
+\end{quote}
+Comments:
+
+\begin{abclist}
+
+\abc If $\partial_{t}\hat{H}\left(t\right)=0$, the one can directly
+solve the Schrödinger equation:
+\begin{align}
+\hat{U}\left(t,t_{0}\right) & =e^{\frac{-\ii}{\hbar}\hat{H}\cdot\left(t-t_{0}\right)} &  & \text{for }t>t_{0}\label{eq:SchroedingerOperator}
+\end{align}
+\abc $\hat{U}$ has a \noun{semigroup} property:
+\begin{align*}
+\hat{U}\left(t,t'\right)\hat{U}\left(t',t_{0}\right) & =\hat{U}\left(t,t_{0}\right) &  & t>t'>t_{0}
+\end{align*}
+Semigroup means:
+\begin{align*}
+\hat{U}\left(t,t_{0}\right)^{-1} & =\hat{U}\left(t,t_{0}\right)^{\dagger}\not=\hat{U}\left(t_{0},t\right)
+\end{align*}
+
+
+\abc Constructing $\hat{H}\left(t\right)$ is the main step to define
+a quantum mechanical system, at the end it relies on experimental
+verification.
+
+\abc The formal solution of \eqref{eq:SchroedingerOperator} is found
+by iteration:
+\begin{align*}
+\hat{U}\left(t,t_{0}\right) & =\hat{I}-\frac{\ii}{\hbar}\int_{t_{0}}^{t}\hat{H}\left(t'\right)\hat{U}\left(t',t_{0}\right)\dd t' &  & t>t'\\
+ & =\hat{I}-\frac{\ii}{\hbar}\int_{t_{0}}^{t}\hat{H}\left(t'\right)\left(\hat{I}-\frac{\ii}{\hbar}\int_{t_{0}}^{t}\hat{H}\left(t''\right)\hat{U}\left(t'',t_{0}\right)\dd t''\right)\dd t'=\\
+ & =\hat{I}-\frac{\ii}{\hbar}\int_{t_{0}}^{t}\hat{H}\left(t'\right)\dd t'+\left(\frac{\mins\ii}{\hbar}\right)^{2}\int_{t_{0}}^{t}\int_{t_{0}}^{t'}\hat{H}\left(t'\right)\hat{H}\left(t''\right)\hat{U}\left(t'',t_{0}\right)\dd t''\dd t'=\\
+ & =\tau e^{\frac{\mins\ii}{\hbar}\int_{t_{0}}^{t}\hat{H}\left(t'\right)\dd t'}
+\end{align*}
+$\tau$ is the \noun{time ordering operator}.
+\begin{align*}
+\tau\left(\hat{H}\left(t\right)\hat{H}\left(t'\right)\right) & =\begin{cases}
+\hat{H}\left(t\right)\hat{H}\left(t'\right) & t>t'\\
+\hat{H}\left(t'\right)\hat{H}\left(t\right) & t<t'
+\end{cases}
+\end{align*}
+
+
+\abc Stationary states: Assume $\partial_{t}\hat{H}\left(t\right)=0$,
+then the eigenstates of $\hat{H}$ are defined by the time-independent
+Schrödinger equation:
+\begin{align*}
+\hat{H}\ket{e_{n}} & =e_{n}\ket{e_{n}}
+\end{align*}
+Their time evolution is:
+\begin{align*}
+\ket{e_{n}\left(t\right)} & =e^{\mins\frac{\ii}{\hbar}\hat{H}t}\ket{e_{n}}=\underbrace{e^{\mins\frac{\ii e_{n}}{\hbar}t}}_{\text{phase}}\ket{e_{n}}=e^{\mins\ii\omega_{n}t}\ket{e_{n}}
+\end{align*}
+ For an arbitrary initial state $\ket{\psi\left(t_{0}\right)}$ we
+can calculate the final state:
+\begin{align*}
+\ket{\psi\left(t\right)} & =e^{\mins\frac{\ii}{\hbar}\hat{H}\cdot\left(t-t_{0}\right)}\ket{\psi\left(t_{0}\right)}=e^{\mins\frac{\ii}{\hbar}\hat{H}\cdot\left(t-t_{0}\right)}\hat{I}\ket{\psi\left(t_{0}\right)}=\\
+ & =\sum_{n=0}^{\infty}\braket{e_{n}}{\psi\left(t_{0}\right)}e^{\mins\ii\omega_{n}\cdot\left(t-t_{0}\right)}\ket{e_{n}}
+\end{align*}
+
+
+\abc Instead of finding $\hat{U}$ we can solve the \noun{Schrödinger
+equation} directly for $\ket{\psi\left(t\right)}$:
+\begin{align*}
+\ii\hbar\partial_{t}\ket{\psi\left(t\right)} & =\hat{H}\left(t\right)\ket{\psi\left(t\right)}\\
+\ket{\psi\left(t=t_{0}\right)} & =\ket{\psi\left(t_{0}\right)}
+\end{align*}
+
+
+\end{abclist}
+
+
+\section{The probabilistic interpretation of quantum mechanics (Born's rule)}
+\begin{quote}
+\textquotedblleft{}If the states of a system at time $t$ is given
+by the normalized state $\ket{\psi\left(t\right)}$, then the \noun{probability}
+to get the outcome $a_{i}$ when the observable $\hat{A}$ is measured
+is given by:\textquotedblright{}
+\begin{align*}
+ & \text{discrete case} &  & \text{continuous case}\\
+P\left(a_{i},t\right) & =\abs{\braket{a_{i}}{\psi\left(t\right)}}^{2} & P\left(q,t\right) & =\abs{\braket q{\psi\left(t\right)}}^{2}\dd q\\
+\sum_{i}P\left(a_{i},t\right) & =1 & \int P\left(q,t\right)\dd q & =1
+\end{align*}
+$\braket{a_{i}}{\psi\left(t\right)}$ is called probability Amplitude,
+$P\left(q,t\right)$ is the density of probability and $\abs{\braket q{\psi\left(t\right)}}^{2}$
+is the probability to obtain an outcome between $q$ and $q+\dd q$.\\
+The expectation value is given by:
+\begin{align*}
+\overline{A} & :=\sum_{i}a_{i}P\left(a_{i},t\right)=\sum_{i}a_{i}\abs{\braket{a_{i}}{\psi\left(t\right)}}^{2}=\sum_{i}a_{i}\braket{a_{i}}{\psi\left(t\right)}\cdot\braket{a_{i}}{\psi\left(t\right)}^{*}=\\
+ & =\sum_{i}a_{i}\braket{\psi\left(t\right)}{a_{i}}\cdot\braket{a_{i}}{\psi\left(t\right)}=\bra{\psi\left(t\right)}\sum_{i}a_{i}\ket{a_{i}}\cdot\bra{a_{i}}\ket{\psi\left(t\right)}=\bra{\psi\left(t\right)}\hat{A}\ket{\psi\left(t\right)}=:\left\langle \hat{A}\right\rangle 
+\end{align*}
+
+\end{quote}
 
 \chapter{\quotedblbase{}Simple\textquotedblleft{} applications}
 
