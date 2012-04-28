@@ -234,7 +234,7 @@ frac{km}{h}}$
 
 \begin_layout Standard
 \begin_inset Note Note
-status collapsed
+status open
 
 \begin_layout Plain Layout
 Vorlage: Kommutatives Diagramm
@@ -416,25 +416,26 @@ begin{iiilist} als LyX-Kommandos einbauen.
 
 \begin_layout Standard
 \begin_inset FormulaMacro
-\newcommand{\ket}[1]{\left|#1\right>}
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset FormulaMacro
-\newcommand{\braket}[2]{\left\langle #1\middle|#2\right\rangle }
-{\left\langle #1|#2\right\rangle }
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset FormulaMacro
-\newcommand{\bra}[1]{\left<#1\right|}
+\newcommand{\BRA}[1]{\Bra{#1}}
 {\left<#1\right|}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\KET}[1]{\Ket{#1}}
+{\left|#1\right>}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\BraKet}[1]{\Braket{#1}}
+{\left\langle #1\right\rangle }
 \end_inset
 
 
@@ -1323,7 +1324,7 @@ Hilbert space
 kets
 \emph default
  and we represent them by 
-\begin_inset Formula $\ket{\psi},\ket{\phi}\in\mathcal{H}$
+\begin_inset Formula $\KET{\psi},\KET{\phi}\in\mathcal{H}$
 \end_inset
 
 .
@@ -1335,7 +1336,7 @@ For complex numbers
 \end_inset
 
  also 
-\begin_inset Formula $a\ket{\psi}+b\ket{\phi}\in\mathcal{H}$
+\begin_inset Formula $a\KET{\psi}+b\KET{\phi}\in\mathcal{H}$
 \end_inset
 
  is a element of the Hilbert space.
@@ -1366,7 +1367,7 @@ Scalar product
 \begin_inset Formula 
 \begin{align*}
 \left\langle .,.\right\rangle :\mathcal{H}\times\mathcal{H} & \to\mathbb{C}\\
-\left(\ket{\psi},\ket{\phi}\right) & \mapsto\left\langle \psi,\phi\right\rangle 
+\left(\KET{\psi},\KET{\phi}\right) & \mapsto\left\langle \psi,\phi\right\rangle 
 \end{align*}
 
 \end_inset
@@ -1375,7 +1376,7 @@ with the properties
 \begin_inset Formula 
 \begin{align*}
 \left\langle \eta,a\phi+b\psi\right\rangle  & =a\left\langle \eta,\phi\right\rangle +b\left\langle \eta,\psi\right\rangle  & \left\langle \psi,\phi\right\rangle  & =\left\langle \phi,\psi\right\rangle ^{*}\\
-\left\langle \psi,\psi\right\rangle  & \ge0 & \left\langle \psi,\psi\right\rangle =0 & \quad\Leftrightarrow\quad\ket{\psi}=0
+\left\langle \psi,\psi\right\rangle  & \ge0 & \left\langle \psi,\psi\right\rangle =0 & \quad\Leftrightarrow\quad\ket\psi=0
 \end{align*}
 
 \end_inset
@@ -1389,7 +1390,7 @@ for
 \end_inset
 
 
-\begin_inset Formula $\ket{\phi},\ket{\psi},\ket{\eta}\in\mathcal{H}$
+\begin_inset Formula $\KET{\phi},\KET{\psi},\KET{\eta}\in\mathcal{H}$
 \end_inset
 
  is called the scalar product.
@@ -1401,23 +1402,23 @@ The
 norm
 \emph default
  of a state 
-\begin_inset Formula $\ket{\psi}$
+\begin_inset Formula $\KET{\psi}$
 \end_inset
 
  is then defined as:
 \begin_inset Formula 
 \begin{align*}
-\norm{\psi}:=\norm{\ket{\psi}} & :=\sqrt{\left\langle \psi,\psi\right\rangle }
+\norm{\psi}:=\norm{\KET{\psi}} & :=\sqrt{\left\langle \psi,\psi\right\rangle }
 \end{align*}
 
 \end_inset
 
 If 
-\begin_inset Formula $\norm{\ket{\psi}}=1$
+\begin_inset Formula $\norm{\KET{\psi}}=1$
 \end_inset
 
 , then 
-\begin_inset Formula $\ket{\psi}$
+\begin_inset Formula $\KET{\psi}$
 \end_inset
 
  is said to be 
@@ -1444,7 +1445,7 @@ abc
 \emph on
 Phase
 \emph default
-: Complex number 
+: A Complex number 
 \begin_inset Formula $z\in\mathbb{C}$
 \end_inset
 
@@ -1466,11 +1467,11 @@ Phase
 
 \begin_layout Standard
 The physical state associated with 
-\begin_inset Formula $\ket{\psi}$
+\begin_inset Formula $\KET{\psi}$
 \end_inset
 
  and 
-\begin_inset Formula $e^{\ii\alpha}\ket{\psi}$
+\begin_inset Formula $e^{\ii\alpha}\KET{\psi}$
 \end_inset
 
  is 
@@ -1498,7 +1499,7 @@ abc
 omplete basis
 \emph default
 : A family of kets 
-\begin_inset Formula $\left(\ket{\phi_{i}}\right)_{i\in I\subseteq\mathbb{N}}$
+\begin_inset Formula $\left(\KET{\phi_{i}}\right)_{i\in I\subseteq\mathbb{N}}$
 \end_inset
 
  such that for 
@@ -1506,7 +1507,7 @@ omplete basis
 all
 \noun default
  states 
-\begin_inset Formula $\ket{\psi}\in\mathcal{H}$
+\begin_inset Formula $\KET{\psi}\in\mathcal{H}$
 \end_inset
 
 , there is a family of complex numbers 
@@ -1514,13 +1515,13 @@ all
 \end_inset
 
  (depending on 
-\begin_inset Formula $\ket{\psi}$
+\begin_inset Formula $\KET{\psi}$
 \end_inset
 
 ) with:
 \begin_inset Formula 
 \begin{align*}
-\ket{\psi} & =\sum_{i\in I}c_{i}\ket{\phi_{i}}
+\KET{\psi} & =\sum_{i\in I}c_{i}\KET{\phi_{i}}
 \end{align*}
 
 \end_inset
@@ -1542,18 +1543,18 @@ orthonormal
 
 \begin_layout Standard
 In the case of an uncountably infinite vector space the basis 
-\begin_inset Formula $\left(\ket q\right)_{q\in\mathbb{R}}$
+\begin_inset Formula $\left(\KET q\right)_{q\in\mathbb{R}}$
 \end_inset
 
  can be written as a function of a real variable.
  The representation of 
-\begin_inset Formula $\ket{\psi}$
+\begin_inset Formula $\KET{\psi}$
 \end_inset
 
  then is an infinite sum, that is an integral
 \begin_inset Formula 
 \begin{align*}
-\ket{\psi} & =\int\psi\left(q\right)\ket q\dd q
+\KET{\psi} & =\int\psi\left(q\right)\KET q\dd q
 \end{align*}
 
 \end_inset
@@ -1609,14 +1610,14 @@ linear functionals
 :
 \begin_inset Formula 
 \begin{align*}
-\bra f:\mathcal{H} & \to\mathbb{C}\\
-\ket{\psi} & \mapsto\braket f{\psi}
+\BRA f:\mathcal{H} & \to\mathbb{C}\\
+\KET{\psi} & \mapsto\BraKet{f|\psi}
 \end{align*}
 
 \end_inset
 
 
-\begin_inset Formula $\braket{\psi}{\phi}$
+\begin_inset Formula $\BraKet{\psi|\phi}$
 \end_inset
 
  is called 
@@ -1639,13 +1640,13 @@ one to one
 :
 \begin_inset Formula 
 \begin{align*}
-\fall_{\ket{\psi}\in\mathcal{H}} & \ \exs_{\bra{\psi}\in\mathcal{H}^{*}}\ \fall_{\ket{\phi}\in\mathcal{H}}\ :\ \braket{\psi}{\phi}=\left\langle \psi,\phi\right\rangle ,\norm{\bra{\psi}}=\norm{\ket{\psi}}
+\fall_{\KET{\psi}\in\mathcal{H}} & \ \exs_{\BRA{\psi}\in\mathcal{H}^{*}}\ \fall_{\KET{\phi}\in\mathcal{H}}\ :\ \BraKet{\psi|\phi}=\left\langle \psi,\phi\right\rangle ,\norm{\BRA{\psi}}=\norm{\KET{\psi}}
 \end{align*}
 
 \end_inset
 
 The so associated 
-\begin_inset Formula $\bra{\psi}$
+\begin_inset Formula $\BRA{\psi}$
 \end_inset
 
  is the 
@@ -1653,7 +1654,7 @@ The so associated
 adjoint
 \emph default
  of 
-\begin_inset Formula $\ket{\psi}$
+\begin_inset Formula $\KET{\psi}$
 \end_inset
 
 , called 
@@ -1664,7 +1665,7 @@ bra
 \begin_inset Formula 
 \begin{align*}
 ^{\dagger}:\mathcal{H} & \to\mathcal{H}^{*}\\
-\ket{\psi} & \mapsto\left(\ket{\psi}\right)^{\dagger}=\bra{\psi}
+\KET{\psi} & \mapsto\left(\KET{\psi}\right)^{\dagger}=\BRA{\psi}
 \end{align*}
 
 \end_inset
@@ -1678,13 +1679,13 @@ The function
 \end_inset
 
  and 
-\begin_inset Formula $\ket{\psi},\ket{\phi}\in\mathcal{H}$
+\begin_inset Formula $\KET{\psi},\KET{\phi}\in\mathcal{H}$
 \end_inset
 
  is:
 \begin_inset Formula 
 \begin{align*}
-\left(a\ket{\psi}+b\ket{\phi}\right)^{\dagger} & =a^{*}\bra{\psi}+b^{*}\bra{\phi}
+\left(a\KET{\psi}+b\KET{\phi}\right)^{\dagger} & =a^{*}\BRA{\psi}+b^{*}\BRA{\phi}
 \end{align*}
 
 \end_inset
@@ -1710,32 +1711,32 @@ abc
 Representation
 \emph default
 : Assume that 
-\begin_inset Formula $\left(\ket{\phi_{i}}\right)_{i\in I\subseteq\mathbb{N}}$
+\begin_inset Formula $\left(\KET{\phi_{i}}\right)_{i\in I\subseteq\mathbb{N}}$
 \end_inset
 
  (respectively 
-\begin_inset Formula $\left(\ket q\right)_{q\in\mathbb{R}}$
+\begin_inset Formula $\left(\KET q\right)_{q\in\mathbb{R}}$
 \end_inset
 
 ) is a complete orthonormal basis.
  The ket 
-\begin_inset Formula $\ket{\psi}$
+\begin_inset Formula $\KET{\psi}$
 \end_inset
 
  is said to “be represented” in that basis by associating:
 \begin_inset Formula 
 \begin{align*}
  & \text{discrete case} &  & \text{continous case}\\
-\ket{\psi} & \mapsto\left(\begin{array}{c}
-\braket{\phi_{1}}{\psi}\\
-\braket{\phi_{2}}{\psi}\\
+\BRA{\psi} & \mapsto\left(\begin{array}{c}
+\BraKet{\phi_{1}|\psi}\\
+\BraKet{\phi_{2}|\psi}\\
 \vdots
-\end{array}\right)\in\mathbb{C}^{\left|I\right|} & \ket{\psi} & \mapsto\braket q{\psi}=:\psi\left(q\right)\\
-\bra{\psi} & \mapsto\left(\begin{array}{c}
-\braket{\phi_{1}}{\psi}^{*}\\
-\braket{\phi_{2}}{\psi}^{*}\\
+\end{array}\right)\in\mathbb{C}^{\left|I\right|} & \KET{\psi} & \mapsto\BraKet{q|\psi}=:\psi\left(q\right)\\
+\BRA{\psi} & \mapsto\left(\begin{array}{c}
+\BraKet{\phi_{1}|\psi}^{*}\\
+\BraKet{\phi_{2}|\psi}^{*}\\
 \vdots
-\end{array}\right)\in\mathbb{C}^{\left|I\right|} & \bra{\psi} & \mapsto\braket q{\psi}^{*}=\psi\left(q\right)^{*}
+\end{array}\right)\in\mathbb{C}^{\left|I\right|} & \BRA{\psi} & \mapsto\BraKet{q|\psi}^{*}=\psi\left(q\right)^{*}
 \end{align*}
 
 \end_inset
@@ -1765,17 +1766,17 @@ abc
 Exterior product
 \emph default
 : The object 
-\begin_inset Formula $\ket{\phi}\bra{\psi}:\mathcal{H}\to\mathcal{H}$
+\begin_inset Formula $\KET{\phi}\BRA{\psi}:\mathcal{H}\to\mathcal{H}$
 \end_inset
 
  is a linear operator acting on 
-\begin_inset Formula $\ket{\eta}\in\mathcal{H}$
+\begin_inset Formula $\KET{\eta}\in\mathcal{H}$
 \end_inset
 
  defined by
 \begin_inset Formula 
 \begin{align*}
-\left(\ket{\phi}\bra{\psi}\right)\ket{\eta} & :=\underbrace{\braket{\psi}{\eta}}_{\in\mathbb{C}}\ket{\phi}
+\left(\KET{\phi}\BRA{\psi}\right)\KET{\eta} & :=\underbrace{\BraKet{\psi\eta}}_{\in\mathbb{C}}\KET{\phi}
 \end{align*}
 
 \end_inset
@@ -1783,7 +1784,7 @@ Exterior product
 with the adjoint:
 \begin_inset Formula 
 \begin{align*}
-\left(\ket{\phi}\bra{\psi}\right)^{\dagger} & :=\ket{\psi}\bra{\phi}
+\left(\KET{\phi}\BRA{\psi}\right)^{\dagger} & :=\KET{\psi}\BRA{\phi}
 \end{align*}
 
 \end_inset
@@ -1908,7 +1909,7 @@ linear
 operator if and only if:
 \begin_inset Formula 
 \begin{align*}
-\hat{A}\left(a\ket{\psi}+b\ket{\phi}\right) & =a\hat{A}\ket{\psi}+b\hat{A}\ket{\phi}
+\hat{A}\left(a\KET{\psi}+b\KET{\phi}\right) & =a\hat{A}\KET{\psi}+b\hat{A}\KET{\phi}
 \end{align*}
 
 \end_inset
@@ -1920,7 +1921,7 @@ For every linear operator
  there is the identity:
 \begin_inset Formula 
 \begin{align*}
-\braket{\psi}{\hat{A}\phi} & =:\braket{\phi}{\hat{A}^{\dagger}\psi}^{*}
+\BraKet{\psi|\hat{A}\phi} & =\BraKet{\phi|\hat{A}^{\dagger}\psi}^{*}
 \end{align*}
 
 \end_inset
@@ -1985,7 +1986,7 @@ eigenvalues
 , that fulfill the equation:
 \begin_inset Formula 
 \begin{align*}
-\hat{Q}\ket{Q_{i}} & =Q_{i}\ket{Q_{i}}
+\hat{Q}\KET{Q_{i}} & =Q_{i}\KET{Q_{i}}
 \end{align*}
 
 \end_inset
@@ -1995,7 +1996,7 @@ eigenvalues
 
 \begin_layout Standard
 The 
-\begin_inset Formula $\ket{Q_{i}}$
+\begin_inset Formula $\KET{Q_{i}}$
 \end_inset
 
  are the corresponding eigenvectors.
@@ -2005,7 +2006,7 @@ The
 degenerated
 \emph default
  and the different eigenvectors are denoted by 
-\begin_inset Formula $\ket{Q_{i}^{\left(d\right)}}$
+\begin_inset Formula $\KET{Q_{i}^{\left(d\right)}}$
 \end_inset
 
  with 
@@ -2033,7 +2034,7 @@ That means, if
 \end_inset
 
 , 
-\begin_inset Formula $\hat{A}\ket{a_{i}}=a_{i}\ket{a_{i}}$
+\begin_inset Formula $\hat{A}\KET{a_{i}}=a_{i}\KET{a_{i}}$
 \end_inset
 
 , then 
@@ -2041,7 +2042,7 @@ That means, if
 \end_inset
 
  and 
-\begin_inset Formula $\braket{a_{i}}{a_{j}}=0$
+\begin_inset Formula $\BraKet{a_{i}|a_{j}}=0$
 \end_inset
 
  if 
@@ -2053,7 +2054,7 @@ That means, if
 
 \begin_layout Standard
 If the eigenvectors are normalized, then we can write 
-\begin_inset Formula $\braket{a_{i}}{a_{j}}=\delta_{ij}$
+\begin_inset Formula $\BraKet{a_{i}|a_{j}}=\delta_{ij}$
 \end_inset
 
 .
@@ -2094,11 +2095,11 @@ of a Hermitian operator (
 \begin_inset Formula $\hat{A}=\hat{A}^{\dagger}$
 \end_inset
 
-) 
+) with 
 \begin_inset Formula 
 \begin{align*}
  & \text{discrete case} &  & \text{continous case}\\
-\hat{A}\ket{a_{i}} & =a_{i}\ket{a_{i}} &  & \hat{A}\ket a=a\ket a
+\hat{A}\KET{a_{i}} & =a_{i}\KET{a_{i}} &  & \hat{A}\KET a=a\KET a
 \end{align*}
 
 \end_inset
@@ -2106,7 +2107,7 @@ of a Hermitian operator (
 is given by:
 \begin_inset Formula 
 \begin{align*}
-\hat{A} & =\sum_{i\in I}a_{i}\ket{a_{i}}\bra{a_{i}} & \hat{A} & =\int a\ket a\bra a\dd a
+\hat{A} & =\sum_{i\in I}a_{i}\KET{a_{i}}\BRA{a_{i}} & \hat{A} & =\int a\KET a\BRA a\dd a
 \end{align*}
 
 \end_inset
@@ -2173,7 +2174,7 @@ unit operator
  defined by
 \begin_inset Formula 
 \begin{align*}
-\fall_{\ket{\phi}\in\mathcal{H}}\ :\ \hat{I}\ket{\phi} & =\ket{\phi}
+\fall_{\KET{\phi}\in\mathcal{H}}\ :\ \hat{I}\KET{\phi} & =\KET{\phi}
 \end{align*}
 
 \end_inset
@@ -2182,17 +2183,17 @@ can be written as
 \begin_inset Formula 
 \begin{align*}
  & \text{discrete case} &  & \text{continous case}\\
-\hat{I} & =\sum_{i\in I}\ket{a_{i}}\bra{a_{i}} & \hat{I} & =\int\ket a\bra a\dd a
+\hat{I} & =\sum_{i\in I}\KET{a_{i}}\BRA{a_{i}} & \hat{I} & =\int\KET a\BRA a\dd a
 \end{align*}
 
 \end_inset
 
 where 
-\begin_inset Formula $\left(\ket{a_{i}}\right)_{i\in I\subseteq\mathbb{N}}$
+\begin_inset Formula $\left(\KET{a_{i}}\right)_{i\in I\subseteq\mathbb{N}}$
 \end_inset
 
  (respectively 
-\begin_inset Formula $\left(\ket a\right)_{a\in\mathbb{R}}$
+\begin_inset Formula $\left(\KET a\right)_{a\in\mathbb{R}}$
 \end_inset
 
 ) is a complete orthonormal basis.
@@ -2216,22 +2217,22 @@ abc
 projection
 \emph default
  of 
-\begin_inset Formula $\ket{\psi}$
+\begin_inset Formula $\KET{\psi}$
 \end_inset
 
  along a basis vector 
-\begin_inset Formula $\ket{a_{i}}$
+\begin_inset Formula $\KET{a_{i}}$
 \end_inset
 
  (respectively 
-\begin_inset Formula $\ket a$
+\begin_inset Formula $\KET a$
 \end_inset
 
 ) is:
 \begin_inset Formula 
 \begin{align*}
 \text{discrete} & \text{ case} & \text{continous} & \text{ case}\\
-\left(\ket{a_{i}}\bra{a_{i}}\right)\ket{\psi} & =\braket{a_{i}}{\psi}\ket{a_{i}} & \left(\ket a\bra a\right)\ket{\psi} & =\braket a{\psi}\ket a
+\left(\KET{a_{i}}\BRA{a_{i}}\right)\KET{\psi} & =\BraKet{a_{i}|\psi}\KET{a_{i}} & \left(\KET a\BRA a\right)\KET{\psi} & =\BraKet{a|\psi}\KET a
 \end{align*}
 
 \end_inset
@@ -2267,7 +2268,7 @@ algebra
  is:
 \begin_inset Formula 
 \begin{align*}
-\left(\hat{Q}_{1}\hat{Q}_{2}\right)\ket{\psi} & :=\hat{Q}_{1}\left(\hat{Q}_{2}\ket{\psi}\right)\not=\left(\hat{Q}_{2}\hat{Q}_{1}\right)\ket{\psi}\\
+\left(\hat{Q}_{1}\hat{Q}_{2}\right)\KET{\psi} & :=\hat{Q}_{1}\left(\hat{Q}_{2}\KET{\psi}\right)\not=\left(\hat{Q}_{2}\hat{Q}_{1}\right)\KET{\psi}\\
 \left(\hat{Q}_{1}\hat{Q}_{2}\right)^{\dagger} & :=\hat{Q}_{2}^{\dagger}\hat{Q}_{1}^{\dagger}
 \end{align*}
 
@@ -2423,20 +2424,20 @@ Theorem: If
 \end_inset
 
  are compatible then there exists a basis 
-\begin_inset Formula $\left(\ket{k_{i}}\right)_{i\in I\subseteq\mathbb{N}}$
+\begin_inset Formula $\left(\KET{k_{i}}\right)_{i\in I\subseteq\mathbb{N}}$
 \end_inset
 
  such that:
 \begin_inset Formula 
 \begin{align*}
-\hat{A}\ket{k_{i}} & =a_{i}\ket{k_{i}}\\
-\hat{B}\ket{k_{i}} & =b_{i}\ket{k_{i}}
+\hat{A}\KET{k_{i}} & =a_{i}\KET{k_{i}}\\
+\hat{B}\KET{k_{i}} & =b_{i}\KET{k_{i}}
 \end{align*}
 
 \end_inset
 
 Therefore the states 
-\begin_inset Formula $\ket{k_{i}}$
+\begin_inset Formula $\KET{k_{i}}$
 \end_inset
 
  have well defined properties 
@@ -2500,22 +2501,23 @@ matrix representation
 with respect to the basis
 \noun default
  
-\begin_inset Formula $\left(\ket{a_{i}}\right)_{i\in\left\{ 1,\ldots,n\right\} }$
+\begin_inset Formula $\left(\KET{a_{i}}\right)_{i\in\left\{ 1,\ldots,n\right\} }$
 \end_inset
 
  (respectively 
-\begin_inset Formula $\left(\ket q\right)_{q\in\mathbb{R}}$
+\begin_inset Formula $\left(\KET q\right)_{q\in\mathbb{R}}$
 \end_inset
 
 ) is:
 \begin_inset Formula 
 \begin{align*}
-\negthickspace\negthickspace\negthickspace\negthickspace\negthickspace & \text{discrete case} &  & \text{continuous case}\\
-\negthickspace\negthickspace\negthickspace\negthickspace\negthickspace\hat{Q} & \to\left(\begin{array}{ccc}
-\bra{a_{1}}\hat{Q}\ket{a_{1}} & \ldots & \bra{a_{1}}\hat{Q}\ket{a_{n}}\\
+ & \qquad\qquad\text{discrete case} &  & \text{continuous case}\\
+\hat{Q} & \to\left(\begin{array}{ccc}
+\BraKet{a_{1}|\hat{Q}|a_{1}} & \ldots & \BraKet{a_{1}|\hat{Q}|a_{n}}\\
 \vdots & \ddots & \vdots\\
-\bra{a_{n}}\hat{Q}\ket{a_{1}} & \ldots & \bra{a_{n}}\hat{Q}\ket{a_{n}}
-\end{array}\right)=\left(\bra{a_{i}}\hat{Q}\ket{a_{j}}\right)_{ij}=:Q_{ij} & \hat{Q} & \to\bra q\hat{Q}\ket{q'}=Q\left(q,q'\right)
+\BraKet{a_{n}|\hat{Q}|a_{1}} & \ldots & \BraKet{a_{n}|\hat{Q}|a_{n}}
+\end{array}\right)= & \hat{Q} & \to\BraKet{q|\hat{Q}|q'}=Q\left(q,q'\right)\\
+ & \quad=\left(\BraKet{a_{i}|\hat{Q}|a_{j}}\right)_{ij}=:Q_{ij}
 \end{align*}
 
 \end_inset
@@ -2548,7 +2550,7 @@ trace
 \begin_inset Formula 
 \begin{align*}
  & \text{discrete case} &  & \text{continuous case}\\
-\text{Tr}\left(\hat{Q}\right) & =\sum_{i=1}^{n}\bra{a_{i}}\hat{Q}\ket{a_{i}} & \text{Tr}\left(\hat{Q}\right) & =\int Q\left(q,q\right)\dd q
+\text{Tr}\left(\hat{Q}\right) & =\sum_{i=1}^{n}\BraKet{a_{i}|\hat{Q}|a_{i}} & \text{Tr}\left(\hat{Q}\right) & =\int Q\left(q,q\right)\dd q
 \end{align*}
 
 \end_inset
@@ -2576,7 +2578,7 @@ end{iiilist}
 Therefore the equation
 \begin_inset Formula 
 \begin{align*}
-\hat{Q}\ket{\psi} & =\ket{\phi}
+\hat{Q}\KET{\psi} & =\KET{\phi}
 \end{align*}
 
 \end_inset
@@ -2614,11 +2616,11 @@ iii
 \end_inset
 
  Multiplying 
-\begin_inset Formula $\bra{a_{i}}$
+\begin_inset Formula $\BRA{a_{i}}$
 \end_inset
 
  from the left: 
-\begin_inset Formula $\bra{a_{i}}\hat{Q}\ket{\phi}=\braket{a_{i}}{\phi}$
+\begin_inset Formula $\BraKet{a_{i}|\hat{Q}|\phi}=\BraKet{a_{i}|\phi}$
 \end_inset
 
 
@@ -2644,7 +2646,7 @@ iii
 :
 \begin_inset Formula 
 \begin{align*}
-\bra{a_{i}}\hat{Q}\hat{I}\ket{\phi} & =\bra{a_{i}}\hat{Q}\left(\sum_{j=1}^{n}\ket{a_{j}}\bra{a_{j}}\right)\ket{\phi}=\sum_{j=1}^{n}\bra{a_{i}}\hat{Q}\ket{a_{j}}\braket{a_{j}}{\psi}=\braket{a_{i}}{\phi}
+\BraKet{a_{i}|\hat{Q}\hat{I}|\phi} & =\BraKet{a_{i}|\hat{Q}\left(\sum_{j=1}^{n}\KET{a_{j}}\BRA{a_{j}}\right)|\phi}=\sum_{j=1}^{n}\BraKet{a_{i}|\hat{Q}|a_{j}}\BraKet{a_{j}|\phi}=\BraKet{a_{i}|\phi}
 \end{align*}
 
 \end_inset
@@ -2698,15 +2700,15 @@ The continuous version is
 \end_inset
 
 with 
-\begin_inset Formula $Q\left(q,q'\right):=\bra q\hat{Q}\ket q$
+\begin_inset Formula $Q\left(q,q'\right):=\BraKet{q|\hat{Q}|q}$
 \end_inset
 
 , 
-\begin_inset Formula $\psi\left(q'\right)=\braket{q'}{\psi}$
+\begin_inset Formula $\psi\left(q'\right)=\BraKet{q'|\psi}$
 \end_inset
 
  and 
-\begin_inset Formula $\phi\left(q\right)=\braket q{\phi}$
+\begin_inset Formula $\phi\left(q\right)=\BraKet{q|\phi}$
 \end_inset
 
 .
@@ -2788,13 +2790,13 @@ iii
  Unitary transformations (“transformation” is the same as “operator”) preserve
  scalar products.
  For 
-\begin_inset Formula $\ket{\psi},\ket{\phi}\in\mathcal{H}$
+\begin_inset Formula $\KET{\psi},\KET{\phi}\in\mathcal{H}$
 \end_inset
 
  we define:
 \begin_inset Formula 
 \begin{align*}
-\ket{\psi'} & :=\hat{U}\ket{\psi} & \ket{\phi'} & :=\hat{U}\ket{\phi}
+\KET{\psi'} & :=\hat{U}\KET{\psi} & \KET{\phi'} & :=\hat{U}\KET{\phi}
 \end{align*}
 
 \end_inset
@@ -2802,7 +2804,7 @@ iii
 Then the scalar product is the same:
 \begin_inset Formula 
 \begin{align*}
-\braket{\psi'}{\phi'} & =\braket{\psi}{\phi}
+\BraKet{\psi'|\phi'} & =\BraKet{\psi|\phi}
 \end{align*}
 
 \end_inset
@@ -2826,8 +2828,8 @@ iii
  Unitary transformations represent changes of the basis.
 \begin_inset Formula 
 \begin{align*}
-\ket{\psi} & =\hat{I}\ket{\psi}=\left(\sum_{i}\ket{a_{i}}\bra{a_{i}}\right)\ket{\psi}=\sum_{i\in I}\braket{a_{i}}{\psi}\ket{a_{i}}\\
-\braket{b_{i}}{\psi} & =\sum_{j\in I}\braket{b_{i}}{a_{j}}\braket{a_{j}}{\psi}
+\KET{\psi} & =\hat{I}\KET{\psi}=\left(\sum_{i}\KET{a_{i}}\BRA{a_{i}}\right)\KET{\psi}=\sum_{i\in I}\BraKet{a_{i}|\psi}\KET{a_{i}}\\
+\BraKet{b_{i}|\psi} & =\sum_{j\in I}\BraKet{b_{i}|a_{j}}\BraKet{a_{j}|\psi}
 \end{align*}
 
 \end_inset
@@ -2844,7 +2846,7 @@ iii
 \vdots\\
 \psi_{N}^{\left(a\right)}
 \end{array}\right)\\
-\left[\mathbb{U}\right]_{ij} & =U_{ij}=\braket{b_{i}}{a_{j}}
+\left[\mathbb{U}\right]_{ij} & =U_{ij}=\BraKet{b_{i}|a_{j}}
 \end{align*}
 
 \end_inset
@@ -2868,7 +2870,7 @@ iii
  For operators the transformations are:
 \begin_inset Formula 
 \begin{align*}
-Q_{ij}^{\left(b\right)} & =\bra{b_{i}}\hat{Q}\ket{b_{j}}=\bra{b_{i}}\hat{I}\hat{Q}\hat{I}\ket{b_{j}}=\sum_{l,m\in I}\braket{b_{i}}{a_{l}}\bra{a_{l}}\hat{Q}\ket{a_{m}}\braket{a_{m}}{b_{j}}=\\
+Q_{ij}^{\left(b\right)} & =\BraKet{b_{i}|\hat{Q}|b_{j}}=\BraKet{b_{i}|\hat{I}\hat{Q}\hat{I}|b_{j}}=\sum_{l,m\in I}\BraKet{b_{i}|a_{l}}\BraKet{a_{l}|\hat{Q}|a_{m}}\BraKet{a_{m}|b_{j}}=\\
  & =\sum_{l,m\in I}U_{il}Q_{lm}^{\left(a\right)}U_{mj}=\sum_{l,m}U_{il}Q_{lm}^{\left(a\right)}\left(U_{jm}\right)^{*}\\
 \mathbb{Q}^{\left(b\right)} & =\mathbb{U}\mathbb{Q}^{\left(a\right)}\mathbb{U}^{\dagger}
 \end{align*}
@@ -2948,18 +2950,18 @@ xy & \stackrel{?}{\to}\begin{cases}
 \end_inset
 
 In a basis of eigenvectors 
-\begin_inset Formula $\ket{q_{i}}$
+\begin_inset Formula $\KET{q_{i}}$
 \end_inset
 
 , that means 
-\begin_inset Formula $\hat{Q}\ket{q_{i}}=q_{i}\ket{q_{i}}$
+\begin_inset Formula $\hat{Q}\KET{q_{i}}=q_{i}\KET{q_{i}}$
 \end_inset
 
 , one can write:
 \begin_inset Formula 
 \begin{align*}
  & \text{discrete case} &  & \text{continuous case}\\
-f\left(\hat{Q}\right) & =\sum_{i}f\left(q_{i}\right)\ket{q_{i}}\bra{q_{i}} & f\left(\hat{Q}\right)= & \int f\left(q\right)\ket q\bra q\dd q
+f\left(\hat{Q}\right) & =\sum_{i}f\left(q_{i}\right)\KET{q_{i}}\BRA{q_{i}} & f\left(\hat{Q}\right)= & \int f\left(q\right)\KET q\BRA q\dd q
 \end{align*}
 
 \end_inset
@@ -2983,7 +2985,7 @@ abc
  An operator can also depend on parameters:
 \begin_inset Formula 
 \begin{align*}
-\underbrace{t}_{\in\mathbb{R}} & \mapsto\underbrace{\hat{A}\left(t\right)}_{\text{acting on }\mathcal{H}}
+\mathbb{R}\ni t & \mapsto\hat{A}\left(t\right)\in\text{End}_{\mathbb{C}}\left(\mathcal{H}\right)
 \end{align*}
 
 \end_inset
@@ -3015,7 +3017,7 @@ It has all the nice properties, but one has to be careful not to change
 Extra property: 
 \begin_inset Formula 
 \begin{align*}
-\frac{\dd}{\dd t}\left(\braket{\psi\left(t\right)}{\phi\left(t\right)}\right) & =\left(\frac{\dd\bra{\psi\left(t\right)}}{\dd t}\right)\ket{\phi\left(t\right)}+\bra{\psi\left(t\right)}\left(\frac{\dd\ket{\phi\left(t\right)}}{\dd t}\right)
+\frac{\dd}{\dd t}\left(\BraKet{\psi\left(t\right)|\phi\left(t\right)}\right) & =\left(\frac{\dd\BRA{\psi\left(t\right)}}{\dd t}\right)\KET{\phi\left(t\right)}+\BRA{\psi\left(t\right)}\left(\frac{\dd\KET{\phi\left(t\right)}}{\dd t}\right)
 \end{align*}
 
 \end_inset
@@ -3116,11 +3118,11 @@ time evolution operator
 \noun default
 .
  The time evolution of an initial state 
-\begin_inset Formula $\ket{\psi\left(t_{0}\right)}$
+\begin_inset Formula $\KET{\psi\left(t_{0}\right)}$
 \end_inset
 
  is given by 
-\begin_inset Formula $\ket{\psi\left(t\right)}=\hat{U}\left(t,t_{0}\right)\ket{\psi\left(t_{0}\right)}$
+\begin_inset Formula $\KET{\psi\left(t\right)}=\hat{U}\left(t,t_{0}\right)\KET{\psi\left(t_{0}\right)}$
 \end_inset
 
 .”
@@ -3333,7 +3335,7 @@ time-independent Schrödinger equation
 :
 \begin_inset Formula 
 \begin{align*}
-\hat{H}\ket{e_{n}} & =e_{n}\ket{e_{n}}
+\hat{H}\KET{e_{n}} & =e_{n}\KET{e_{n}}
 \end{align*}
 
 \end_inset
@@ -3341,20 +3343,20 @@ time-independent Schrödinger equation
 Their time evolution is:
 \begin_inset Formula 
 \begin{align*}
-\ket{e_{n}\left(t\right)} & =e^{\mins\frac{\ii}{\hbar}\hat{H}t}\ket{e_{n}}=\underbrace{e^{\mins\frac{\ii e_{n}}{\hbar}t}}_{\text{phase}}\ket{e_{n}}=e^{\mins\ii\omega_{n}t}\ket{e_{n}}
+\KET{e_{n}\left(t\right)} & =e^{\mins\frac{\ii}{\hbar}\hat{H}t}\KET{e_{n}}=\underbrace{e^{\mins\frac{\ii e_{n}}{\hbar}t}}_{\text{phase}}\KET{e_{n}}=e^{\mins\ii\omega_{n}t}\KET{e_{n}}
 \end{align*}
 
 \end_inset
 
  For an arbitrary initial state 
-\begin_inset Formula $\ket{\psi\left(t_{0}\right)}$
+\begin_inset Formula $\KET{\psi\left(t_{0}\right)}$
 \end_inset
 
  we can calculate the final state:
 \begin_inset Formula 
 \begin{align*}
-\ket{\psi\left(t\right)} & =e^{\mins\frac{\ii}{\hbar}\hat{H}\cdot\left(t-t_{0}\right)}\ket{\psi\left(t_{0}\right)}=e^{\mins\frac{\ii}{\hbar}\hat{H}\cdot\left(t-t_{0}\right)}\hat{I}\ket{\psi\left(t_{0}\right)}=\\
- & =\sum_{n=0}^{\infty}\braket{e_{n}}{\psi\left(t_{0}\right)}e^{\mins\ii\omega_{n}\cdot\left(t-t_{0}\right)}\ket{e_{n}}
+\KET{\psi\left(t\right)} & =e^{\mins\frac{\ii}{\hbar}\hat{H}\cdot\left(t-t_{0}\right)}\KET{\psi\left(t_{0}\right)}=e^{\mins\frac{\ii}{\hbar}\hat{H}\cdot\left(t-t_{0}\right)}\hat{I}\KET{\psi\left(t_{0}\right)}=\\
+ & =\sum_{n=0}^{\infty}\BraKet{e_{n}|\psi\left(t_{0}\right)}e^{\mins\ii\omega_{n}\cdot\left(t-t_{0}\right)}\KET{e_{n}}
 \end{align*}
 
 \end_inset
@@ -3384,14 +3386,14 @@ abc
 Schrödinger equation
 \noun default
  directly for 
-\begin_inset Formula $\ket{\psi\left(t\right)}$
+\begin_inset Formula $\KET{\psi\left(t\right)}$
 \end_inset
 
 :
 \begin_inset Formula 
 \begin{align*}
-\ii\hbar\partial_{t}\ket{\psi\left(t\right)} & =\hat{H}\left(t\right)\ket{\psi\left(t\right)}\\
-\ket{\psi\left(t=t_{0}\right)} & =\ket{\psi\left(t_{0}\right)}
+\ii\hbar\partial_{t}\KET{\psi\left(t\right)} & =\hat{H}\left(t\right)\KET{\psi\left(t\right)}\\
+\KET{\psi\left(t=t_{0}\right)} & =\KET{\psi\left(t_{0}\right)}
 \end{align*}
 
 \end_inset
@@ -3425,7 +3427,7 @@ The probabilistic interpretation of quantum mechanics (Born's rule)
 \end_inset
 
  is given by the normalized state 
-\begin_inset Formula $\ket{\psi\left(t\right)}$
+\begin_inset Formula $\KET{\psi\left(t\right)}$
 \end_inset
 
 , then the 
@@ -3444,14 +3446,54 @@ probability
 \begin_inset Formula 
 \begin{align*}
  & \text{discrete case} &  & \text{continuous case}\\
-P\left(a_{i},t\right) & =\abs{\braket{a_{i}}{\psi\left(t\right)}}^{2} & P\left(q,t\right) & =\abs{\braket q{\psi\left(t\right)}}^{2}\dd q\\
+P\left(a_{i},t\right) & =\abs{\BraKet{a_{i}|\psi\left(t\right)}}^{2} & P\left(q,t\right) & =\abs{\BraKet{q|\psi\left(t\right)}}^{2}\dd q
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{abclist}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+abc
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+ & \text{discrete case} &  & \text{continuous case}\\
 \sum_{i}P\left(a_{i},t\right) & =1 & \int P\left(q,t\right)\dd q & =1
 \end{align*}
 
 \end_inset
 
 
-\begin_inset Formula $\braket{a_{i}}{\psi\left(t\right)}$
+\begin_inset Formula $\BraKet{a_{i}|\psi\left(t\right)}$
 \end_inset
 
  is called 
@@ -3482,11 +3524,7 @@ probability Amplitude
 \begin_inset Formula $P\left(q,t\right)$
 \end_inset
 
- is the density of probability and 
-\begin_inset Formula $\abs{\braket q{\psi\left(t\right)}}^{2}$
-\end_inset
-
- is the 
+ is the density of probability and the 
 \family roman
 \series medium
 \shape up
@@ -3518,15 +3556,767 @@ probability to obtain an outcome between
 \uwave default
 \noun default
 \color inherit
+ is 
+\begin_inset Formula $\abs{\BraKet{q|\psi\left(t\right)}}^{2}$
+\end_inset
+
 .
 \begin_inset Newline newline
 \end_inset
 
-The expectation value is given by:
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+abc
+\end_layout
+
+\end_inset
+
+ The expectation value is given by:
 \begin_inset Formula 
 \begin{align*}
-\overline{A} & :=\sum_{i}a_{i}P\left(a_{i},t\right)=\sum_{i}a_{i}\abs{\braket{a_{i}}{\psi\left(t\right)}}^{2}=\sum_{i}a_{i}\braket{a_{i}}{\psi\left(t\right)}\cdot\braket{a_{i}}{\psi\left(t\right)}^{*}=\\
- & =\sum_{i}a_{i}\braket{\psi\left(t\right)}{a_{i}}\cdot\braket{a_{i}}{\psi\left(t\right)}=\bra{\psi\left(t\right)}\sum_{i}a_{i}\ket{a_{i}}\cdot\bra{a_{i}}\ket{\psi\left(t\right)}=\bra{\psi\left(t\right)}\hat{A}\ket{\psi\left(t\right)}=:\left\langle \hat{A}\right\rangle 
+\overline{A} & :=\sum_{i}a_{i}P\left(a_{i},t\right)=\sum_{i}a_{i}\abs{\BraKet{a_{i}|\psi\left(t\right)}}^{2}=\sum_{i}a_{i}\BraKet{a_{i}|\psi\left(t\right)}\cdot\BraKet{a_{i}|\psi\left(t\right)}^{*}=\\
+ & =\sum_{i}a_{i}\BraKet{\psi\left(t\right)|a_{i}}\cdot\BraKet{a_{i}|\psi\left(t\right)}=\BRA{\psi\left(t\right)}\left(\sum_{i}a_{i}\KET{a_{i}}\cdot\BRA{a_{i}}\right)\KET{\psi\left(t\right)}=\\
+ & =\BraKet{\psi\left(t\right)|\hat{A}|\psi\left(t\right)}=:\left\langle \hat{A}\right\rangle 
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%DATE: Do 26.4.2012
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\text{Var}\hat{A} & =\left\langle \hat{A}^{2}\right\rangle -\left(\left\langle \hat{A}\right\rangle \right)^{2}=\BraKet{\psi\left(t\right)|\hat{A}^{2}|\psi}-\BraKet{\psi\left(t\right)|\hat{A}|\psi\left(t\right)}^{2}=\\
+ & =\left\langle \left(\hat{A}-\hat{I}\left\langle \hat{A}\right\rangle \right)^{2}\right\rangle =\sum\left(a_{i}-\overline{a}_{i}\right)^{2}P\left(a_{i},t\right)=\left(\Delta\hat{A}\right)^{2}
+\end{align*}
+
+\end_inset
+
+The only case, one gets
+\begin_inset Formula 
+\begin{align*}
+\left\langle \left(\hat{A}-\left\langle \hat{A}\right\rangle \right)^{2}\right\rangle  & =0
+\end{align*}
+
+\end_inset
+
+is, if 
+\begin_inset Formula $\KET{\psi\left(t\right)}=\KET{a_{i}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[->] (-2,0) -- (5,0) node[right] {$a$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[->] (0,0) -- (0,3.5) node[above] {$P(a)$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+foreach 
+\backslash
+n/
+\backslash
+x in {1/-1.5,2/-1,3/0,4/0.6,5/1.3,6/2.5,7/4}
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\backslash
+draw (
+\backslash
+x,0.1) -- node[below]{$a_
+\backslash
+n$} (
+\backslash
+x,-0.1);
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[draw=blue,fill=blue!60!black] plot[ybar] coordinates{(-1.5,0.4) (-1,0.7)
+ (0,2) (0.6,2.5) (1.3,2.6) (2.5,1.2) (4,0.6)};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[dashed] (0.898,3.5) --  (0.898,-0.5) node[below]{$
+\backslash
+langle
+\backslash
+hat{A}
+\backslash
+rangle$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw (-0.364,3) +(0,0.2) -- +(0,-0.2) +(0,0) -- (2.160,3) +(0,0.2) -- +(0,-0.2);
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+node at (1.5,3.3) {$
+\backslash
+Delta 
+\backslash
+hat{A}$};
+\end_layout
+
+\begin_layout Plain Layout
+
+ 
+\backslash
+begin{scope}[xshift=185]
+\end_layout
+
+\begin_layout Plain Layout
+
+   
+\backslash
+draw[->] (0,0) -- (5,0) node[right] {$q$};
+\end_layout
+
+\begin_layout Plain Layout
+
+   
+\backslash
+draw[->] (0,0) -- (0,3.5) node[above] {$P(q)$};
+\end_layout
+
+\begin_layout Plain Layout
+
+   
+\backslash
+draw plot[smooth] coordinates{(0,0) (0.25,0.7) (0.5,0.3) (0.8,1.5) (1.1,2.9) (1.3,0.6)
+ (1.4,1) (1.5,0.5) (1.6,0.6) (1.7,0.4) (1.8,0.6) (2,0.15) (2.5,1.3) (2.75,2) (3,0.5) (3.5,0.3)
+ (4,0.7) (4.4,0.3) (4.7,0.1) (5,0)};
+\end_layout
+
+\begin_layout Plain Layout
+
+ 
+\backslash
+end{scope}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+abc
+\end_layout
+
+\end_inset
+
+ Consider the eigenstates of the Hamiltonian:
+\begin_inset Formula 
+\begin{align*}
+\hat{H}\KET{e_{n}} & =e_{n}\KET{e_{n}}
+\end{align*}
+
+\end_inset
+
+If at 
+\begin_inset Formula $t=0$
+\end_inset
+
+ the state is 
+\begin_inset Formula $\KET{e_{n}}$
+\end_inset
+
+, then the time evolution is very simple:
+\begin_inset Formula 
+\begin{align*}
+\KET{e_{n}\left(t\right)} & =e^{-\ii\omega_{n}t}\KET{e_{n}}\\
+\Rightarrow\quad\BraKet{e_{n}\left(t\right)|\hat{A}|e_{n}\left(t\right)} & =\BraKet{e_{n}|\hat{A}|e_{n}}\\
+\partial_{t}\left\langle \hat{A}\right\rangle  & =0
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+abc
+\end_layout
+
+\end_inset
+
+ Define 
+\begin_inset Formula $\KET{\eta}=N\left(\KET{\psi}+\KET{\phi}\right)$
+\end_inset
+
+.
+ What is the probability 
+\begin_inset Formula $P_{\eta}\left(a_{i}\right)$
+\end_inset
+
+?
+\begin_inset Formula 
+\begin{align*}
+\abs{\BraKet{a_{i}|\eta}}^{2} & =N^{2}\abs{\BraKet{a_{i}|\psi}+\BraKet{a_{i}|\phi}}^{2}=\\
+ & =N^{2}\left(\abs{\BraKet{a_{i}|\psi}}^{2}+\abs{\BraKet{a_{i}|\phi}}^{2}+2\text{Re}\left(\BraKet{a_{i}|\psi}\BraKet{a_{i}|\phi}^{*}\right)\right)=\\
+ & =N^{2}\left(P_{\psi}\left(a_{i}\right)+P_{\phi}\left(a_{i}\right)+\text{something}\right)
+\end{align*}
+
+\end_inset
+
+Therefore it is not enough to know the probabilities, one also has to know
+ the phase of the states.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{abclist}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+\begin_inset Quotes eld
+\end_inset
+
+Quantization
+\begin_inset Quotes erd
+\end_inset
+
+:
+\begin_inset Newline newline
+\end_inset
+
+Introducing the 
+\begin_inset Quotes eld
+\end_inset
+
+fundamental
+\begin_inset Quotes erd
+\end_inset
+
+ or basic observables
+\end_layout
+
+\begin_layout Subsection
+General approach
+\end_layout
+
+\begin_layout Standard
+Historically, it all started with the Hydrogen atom.
+ (In this system the Hilbert space 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+ is infinite-dimensional.) It is called 
+\begin_inset Quotes eld
+\end_inset
+
+canonical
+\begin_inset Quotes erd
+\end_inset
+
+ quantization.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{iiilist}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $\dim\mathcal{H}=\infty$
+\end_inset
+
+ means, there can be discrete as well as continuous eigenvalues.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ Every quantum mechanical observable is a function of two basic observables,
+ the position operator 
+\begin_inset Formula $\hat{q}_{\alpha}$
+\end_inset
+
+ and the momentum operator 
+\begin_inset Formula $\hat{p}_{\alpha}$
+\end_inset
+
+, satisfying:
+\begin_inset Formula 
+\begin{align*}
+\left[\hat{q}_{\alpha},\hat{p}_{\beta}\right] & =\ii\hbar\delta_{\alpha\beta}\hat{I} & \left[\hat{q}_{\alpha},\hat{q}_{\beta}\right] & =0=\left[\hat{p}_{\alpha},\hat{p}_{\beta}\right]
+\end{align*}
+
+\end_inset
+
+Therefore you can define an eigenbasis 
+\begin_inset Formula $\KET{\vec{q}}$
+\end_inset
+
+ with:
+\begin_inset Formula 
+\begin{align*}
+\hat{q}_{\alpha}\KET{\vec{q}} & =q_{\alpha}\KET{\vec{q}} & \hat{p}_{\alpha}\KET{\vec{p}} & =p_{\alpha}\KET{\vec{p}} & q_{\alpha},p_{\alpha} & \in\mathbb{R}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\BraKet{\vec{q}|\vec{q}\,'} & =\delta\left(\vec{q}-\vec{q}\,'\right) & \BraKet{\vec{p}|\vec{p}\,'} & =\delta\left(\vec{p}-\vec{p}\,'\right)
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ The Hamiltonian operator is given in terms of the classical Hamiltonian
+\begin_inset Formula 
+\begin{align*}
+H\left(\vec{q},\vec{p}\right) & =\left(\frac{1}{2m}\sum_{\alpha}p_{\alpha}^{2}\right)+V\left(\vec{q}\right)
+\end{align*}
+
+\end_inset
+
+as:
+\begin_inset Formula 
+\begin{align*}
+\hat{H} & =H\left(\hat{q}_{\alpha},\hat{p}_{\alpha}\right)=\left(\frac{1}{2m}\sum_{\alpha}\hat{p}_{\alpha}^{2}\right)+V\left(\hat{q}_{\alpha}\right)
+\end{align*}
+
+\end_inset
+
+ This works 
+\noun on
+only
+\noun default
+ in Cartesian coordinates! In other coordinates the product 
+\begin_inset Formula $pq$
+\end_inset
+
+ occurs in 
+\begin_inset Formula $H$
+\end_inset
+
+, but how to quantize 
+\begin_inset Formula $qp$
+\end_inset
+
+? The operators do not commute: 
+\begin_inset Formula $\hat{q}\hat{p}\not=\hat{p}\hat{q}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For a magnetic field with vector potential 
+\begin_inset Formula $\vec{A}\left(\vec{q}\right)$
+\end_inset
+
+ the Hamiltonian is
+\begin_inset Formula 
+\begin{align*}
+H & =\frac{1}{2m}\left(\vec{p}+\frac{e}{c}\vec{A}\left(\vec{q}\right)\right)^{2}
+\end{align*}
+
+\end_inset
+
+and also depends on products of 
+\begin_inset Formula $\vec{p}$
+\end_inset
+
+ and 
+\begin_inset Formula $\vec{q}$
+\end_inset
+
+.
+\begin_inset Formula 
+\begin{align*}
+\hat{H} & =\sum_{n}e_{n}\KET{e_{n}}\BRA{e_{n}}+\int_{\Omega}e\left(\kappa\right)\KET{e\left(\kappa\right)}\BRA{e\left(\kappa\right)}\dd k
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\BraKet{e_{n}|e_{n'}} & =\delta_{n,n'} &  & \text{bounded}\\
+\BraKet{e\left(\kappa\right)|e\left(\kappa'\right)} & =\delta\left(\kappa-\kappa'\right) &  & \text{scattering}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A typical effective potential is:
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}[domain=0.5:4,samples=40,xscale=2]
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[->] (-0.2,0) -- (4.2,0) node[right] {$q$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[->] (0,-2.2) -- (0,4.2) node[above] {$V_{
+\backslash
+text{eff}}(q)$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw (-0.1,2) node[left]{$E_{
+\backslash
+text{scattering}}$} -- (4,2);
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw (-0.1,-0.5) node[left]{$E_{
+\backslash
+text{bounded}}$} -- (4,-0.5);
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[smooth] plot (
+\backslash
+x,{(1/
+\backslash
+x^2-3)/
+\backslash
+x^2});
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[very thick] (0.595,-0.5) -- (2.376,-0.5);
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[dashed, very thick] (0.595,-0.5) -- (0.595,0) (2.376,-0.5) -- (2.376,0);
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[very thick] (0.529883,2) -- (4,2);
+\end_layout
+
+\begin_layout Plain Layout
+
+%  
+\backslash
+draw[dashed, very thick] (0.529883,2) -- (0.595,0);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ The representations of a state 
+\begin_inset Formula $\ket\psi$
+\end_inset
+
+ in the position or momentum eigenstates are called 
+\begin_inset Quotes eld
+\end_inset
+
+wavefunctions
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This means:
+\begin_inset Formula 
+\begin{align*}
+\KET{\psi} & =\int\underbrace{\BraKet{\vec{q}|\psi}}_{=\psi\left(\vec{q}\right)}\KET{\vec{q}}\dd\vec{q} & \KET{\psi} & =\int\underbrace{\BraKet{\vec{p}|\psi}}_{=\tilde{\psi}\left(\vec{p}\right)}\KET{\vec{p}}\dd\vec{p}
+\end{align*}
+
+\end_inset
+
+Born's rule says, that 
+\begin_inset Formula $\abs{\psi\left(\vec{q}\right)}^{2}\dd\vec{q}$
+\end_inset
+
+ is the probability to find the particle between 
+\begin_inset Formula $\vec{q}$
+\end_inset
+
+ and 
+\begin_inset Formula $\vec{q}+\left(\dd q_{1},\dd q_{2},\ldots\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $\abs{\tilde{\psi}\left(\vec{p}\right)}^{2}\dd\vec{p}$
+\end_inset
+
+ is the probability to find the particle between 
+\begin_inset Formula $\vec{p}$
+\end_inset
+
+ and 
+\begin_inset Formula $\vec{p}+\left(\dd p_{1},\dd p_{2},\ldots\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{iiilist}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Algebraic properties of 
+\begin_inset Formula $\hat{q}$
+\end_inset
+
+ and 
+\begin_inset Formula $\hat{p}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Consider the following commutators:
+\begin_inset Formula 
+\begin{align*}
+\left[\hat{q}_{\alpha},\hat{p}_{\beta}^{2}\right] & =\hat{p}_{\beta}\left[\hat{q}_{\alpha},\hat{p}_{\beta}\right]+\left[\hat{q}_{\alpha},\hat{p}_{\beta}\right]\hat{p}_{\beta}=2\ii\hbar\delta_{\alpha\beta}\hat{p}_{\beta}\\
+\left[\hat{q}_{\alpha},\hat{p}_{\beta}^{3}\right] & =\hat{p}_{\beta}^{2}\left[\hat{q}_{\alpha},\hat{p}_{\beta}\right]+\hat{p}_{\beta}\left[\hat{q}_{\alpha},\hat{p}_{\beta}\right]\hat{p}_{\beta}+\left[\hat{q}_{\alpha},\hat{p}_{\beta}\right]\hat{p}_{\beta}^{2}=3\ii\hbar\delta_{\alpha\beta}\hat{p}_{\beta}^{2}\\
+\vdots\ \ \\
+\left[\hat{q}_{\alpha},\hat{p}_{\beta}^{n}\right] & =\sum_{k=1}^{n}\hat{p}_{\beta}^{n-k}\left[\hat{q}_{\alpha},\hat{p}_{\beta}\right]\hat{p}_{\beta}^{k-1}=n\ii\hbar\delta_{\alpha\beta}\hat{p}_{\beta}^{n-1}
+\end{align*}
+
+\end_inset
+
+Since every analytic function can be represented by its Taylor series, one
+ gets:
+\begin_inset Formula 
+\begin{align*}
+\left[\hat{q}_{\alpha},f\left(\hat{p}_{\beta}\right)\right] & =\ii\hbar\delta_{\alpha\beta}\partial_{x}f\left(x\right)\big|_{x=\hat{p}_{\beta}}=:\ii\hbar\delta_{\alpha\beta}\partial_{\hat{p}_{\beta}}f\left(\hat{p}_{\beta}\right)\\
+\left[\hat{p}_{\alpha},f\left(\hat{q}_{\beta}\right)\right] & =-\ii\hbar\delta_{\alpha\beta}\partial_{\hat{q}_{\beta}}f\left(\hat{q}_{\beta}\right)
+\end{align*}
+
+\end_inset
+
+One can show:
+\begin_inset Formula 
+\begin{align*}
+\hat{q}_{\alpha}e^{-\frac{\ii}{\hbar}\hat{p}_{\alpha}q_{0}}\KET{\vec{q}} & =\left(q_{\alpha}+q_{0}\right)\KET{\vec{q}+q_{0}\vec{n}_{\alpha}}
+\end{align*}
+
+\end_inset
+
+This follows, because 
+\begin_inset Formula $e^{-\frac{\ii}{\hbar}\hat{p}_{\alpha}q_{0}}\KET{\vec{q}}$
+\end_inset
+
+ is an eigenstate of 
+\begin_inset Formula $\hat{q}_{\alpha}$
+\end_inset
+
+ with eigenvalue 
+\begin_inset Formula $q_{\alpha}+q_{0}$
+\end_inset
+
+ and therefore:
+\begin_inset Formula 
+\begin{align*}
+e^{-\frac{\ii}{\hbar}\hat{p}_{\alpha}q_{0}}\KET{\vec{q}} & =\KET{\vec{q}+q_{0}\vec{n}_{\alpha}}
 \end{align*}
 
 \end_inset
