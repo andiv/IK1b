@@ -4197,18 +4197,11 @@ iii
 \end_inset
 
  in the position or momentum eigenstates are called 
-\begin_inset Quotes eld
-\end_inset
-
+\noun on
 wavefunctions
-\begin_inset Quotes erd
-\end_inset
-
+\noun default
 .
-\end_layout
-
-\begin_layout Standard
-This means:
+ This means:
 \begin_inset Formula 
 \begin{align*}
 \KET{\psi} & =\int\underbrace{\BraKet{\vec{q}|\psi}}_{=\psi\left(\vec{q}\right)}\KET{\vec{q}}\dd\vec{q} & \KET{\psi} & =\int\underbrace{\BraKet{\vec{p}|\psi}}_{=\tilde{\psi}\left(\vec{p}\right)}\KET{\vec{p}}\dd\vec{p}
@@ -4296,27 +4289,385 @@ Since every analytic function can be represented by its Taylor series, one
 One can show:
 \begin_inset Formula 
 \begin{align*}
-\hat{q}_{\alpha}e^{-\frac{\ii}{\hbar}\hat{p}_{\alpha}q_{0}}\KET{\vec{q}} & =\left(q_{\alpha}+q_{0}\right)\KET{\vec{q}+q_{0}\vec{n}_{\alpha}}
+\hat{q}e^{-\frac{\ii}{\hbar}\hat{p}q_{0}}\KET q & =\left(q+q_{0}\right)\KET{q+q_{0}}
 \end{align*}
 
 \end_inset
 
 This follows, because 
-\begin_inset Formula $e^{-\frac{\ii}{\hbar}\hat{p}_{\alpha}q_{0}}\KET{\vec{q}}$
+\begin_inset Formula $e^{-\frac{\ii}{\hbar}\hat{p}q_{0}}\KET q$
 \end_inset
 
  is an eigenstate of 
-\begin_inset Formula $\hat{q}_{\alpha}$
+\begin_inset Formula $\hat{q}$
 \end_inset
 
  with eigenvalue 
-\begin_inset Formula $q_{\alpha}+q_{0}$
+\begin_inset Formula $q+q_{0}$
 \end_inset
 
  and therefore:
 \begin_inset Formula 
 \begin{align*}
-e^{-\frac{\ii}{\hbar}\hat{p}_{\alpha}q_{0}}\KET{\vec{q}} & =\KET{\vec{q}+q_{0}\vec{n}_{\alpha}}
+e^{-\frac{\ii}{\hbar}\hat{p}q_{0}}\KET q & =\KET{q+q_{0}}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%DATE: Do 3.5.2012
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+One can also show:
+\begin_inset Formula 
+\begin{align*}
+e^{\frac{\ii}{\hbar}\hat{q}p_{0}}\KET p & =\KET{p+p_{0}}
+\end{align*}
+
+\end_inset
+
+This is similar to:
+\begin_inset Formula 
+\begin{align*}
+e^{-\frac{\ii}{\hbar}\hat{H}t}\KET{\psi\left(t_{0}\right)} & =\KET{\psi\left(t_{0}+t\right)}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+The Schrödinger equation in position and momentum representation
+\end_layout
+
+\begin_layout Standard
+Consider the Hamiltonian:
+\begin_inset Formula 
+\begin{align*}
+\hat{H} & =\frac{1}{2m}\hat{p}^{2}+V\left(\hat{q}\right)
+\end{align*}
+
+\end_inset
+
+I want to 
+\begin_inset Quotes eld
+\end_inset
+
+represent
+\begin_inset Quotes erd
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+\hat{H}\KET{e_{n}} & =e_{n}\KET{e_{n}}\\
+\hat{H}\KET e & =e\KET e
+\end{align*}
+
+\end_inset
+
+For position representation, we apply 
+\begin_inset Formula $\BRA q$
+\end_inset
+
+ to the equation, use the definitions 
+\begin_inset Formula $\psi_{n}\left(q\right):=\BraKet{q|e_{n}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\tilde{\psi}_{n}\left(p\right):=\BraKet{p|e_{n}}$
+\end_inset
+
+, and multiply with the unit operator 
+\begin_inset Formula $\hat{I}=\int\KET p\BRA p\dd p$
+\end_inset
+
+ to get:
+\begin_inset Formula 
+\begin{align*}
+\frac{1}{2m}\BraKet{q|\hat{p}^{2}\cdot\hat{I}|e_{n}}+V\left(q\right)\BraKet{q|e_{n}} & =e_{n}\BraKet{q|e_{n}}\\
+\frac{1}{2m}\int p^{2}\BraKet{q|p}\tilde{\psi}_{n}\left(p\right)\dd p+V\left(q\right)\psi_{n}\left(q\right) & =e_{n}\psi_{n}\left(q\right)
+\end{align*}
+
+\end_inset
+
+In general one gets:
+\begin_inset Formula 
+\begin{align*}
+\BraKet{q|f\left(\hat{p}\right)|\psi} & =f\left(-\hbar\partial_{q}\right)\psi\left(q\right)
+\end{align*}
+
+\end_inset
+
+The recipe is:
+\begin_inset Formula 
+\begin{align*}
+\hat{p} & \mapsto-\ii\hbar\partial_{q} &  & \text{one dimension}\\
+\hat{p} & \mapsto-\ii\hbar\vec{\nabla} &  & \text{three dimensions}
+\end{align*}
+
+\end_inset
+
+In three dimensions this is:
+\begin_inset Formula 
+\begin{align*}
+\text{discrete case} &  & \text{continuous case}\\
+\left(-\frac{\hbar^{2}}{2m}\nabla^{2}+V\left(\vec{q}\right)\right)\psi_{n}\left(\vec{q}\right) & =e_{n}\psi_{n}\left(\vec{q}\right) & \left(-\frac{\hbar^{2}}{2m}\nabla^{2}+V\left(\vec{q}\right)\right)\psi_{k}\left(\vec{q}\right) & =e\left(k\right)\psi_{k}\left(\vec{q}\right)
+\end{align*}
+
+\end_inset
+
+The state is only in the discrete case normalizable:
+\begin_inset Formula 
+\begin{align*}
+\BraKet{e_{n},e_{n}}=\int\abs{\psi_{n}\left(\vec{q}\right)}^{2}\dd\vec{q} & <\infty & \BraKet{e\left(k\right),e\left(k\right)}=\int\abs{\psi_{k}\left(\vec{q}\right)}^{2}\dd\vec{q} & =\infty
+\end{align*}
+
+\end_inset
+
+Time evolution:
+\begin_inset Formula 
+\begin{align*}
+\left(-\frac{\hbar^{2}}{2m}\nabla^{2}+V\left(\vec{q}\right)\right)\hat{U}\left(\vec{q},\vec{q}',t\right) & =\ii\hbar\partial_{t}\hat{U}\left(\vec{q},\vec{q}',t\right) & \hat{U}\left(\vec{q},\vec{q}',t=0\right) & =\delta\left(\vec{q}-\vec{q}'\right)
+\end{align*}
+
+\end_inset
+
+It is much simpler to solve the Schrödinger equation for one state:
+\begin_inset Formula 
+\begin{align*}
+\left(-\frac{\hbar^{2}}{2m}\nabla^{2}+V\left(\vec{q}\right)\right)\psi\left(\vec{q},t\right) & =\ii\hbar\partial_{t}\psi\left(\vec{q},t\right) & \psi\left(\vec{q},t=0\right) & =\psi_{0}\left(\vec{q}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+The Heisenberg and the Schrödinger 
+\begin_inset Quotes eld
+\end_inset
+
+pictures
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Consider:
+\begin_inset Formula 
+\begin{align*}
+\left\langle \hat{A}\right\rangle _{t} & :=\BraKet{\psi\left(t\right)|\hat{A}|\psi\left(t\right)}\\
+\KET{\psi\left(t\right)} & =\hat{U}\left(t,t_{0}\right)\KET{\psi\left(t_{0}\right)}
+\end{align*}
+
+\end_inset
+
+This quantity admits a two-folded interpretation:
+\begin_inset Formula 
+\begin{align*}
+\BraKet{\hat{A}}_{t} & =\left(\BRA{\psi\left(t_{0}\right)}\hat{U}\left(t,t_{0}\right)^{\dagger}\right)\hat{A}\left(\hat{U}\left(t,t_{0}\right)\KET{\psi\left(t_{0}\right)}\right) &  & \text{the state evolves in time (Schrödinger)}\\
+ & =\BRA{\psi\left(t_{0}\right)}\underbrace{\left(\hat{U}\left(t,t_{0}\right)^{\dagger}\hat{A}\hat{U}\left(t,t_{0}\right)\right)}_{=:\hat{A}_{H}\left(t,t_{0}\right)}\KET{\psi\left(t_{0}\right)} &  & \text{the operator evolves in time (Heisenberg)}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula $\hat{A}_{H}\left(t,t_{0}\right)$
+\end_inset
+
+ is the 
+\noun on
+Heisenberg operator
+\noun default
+, that is the operator 
+\begin_inset Formula $\hat{A}$
+\end_inset
+
+ in the Heisenberg representation.
+ If 
+\begin_inset Formula $\hat{A}=\hat{A}^{\dagger}$
+\end_inset
+
+, the also 
+\begin_inset Formula $\hat{A}_{H}$
+\end_inset
+
+ is Hermitian.
+\begin_inset Formula 
+\begin{align*}
+\hat{A}_{H}\left(t=t_{0},t_{0}\right) & =\hat{A}
+\end{align*}
+
+\end_inset
+
+An equation of motion for 
+\begin_inset Formula $\hat{A}$
+\end_inset
+
+ is easy to derive:
+\begin_inset Formula 
+\begin{align*}
+\partial_{t}\hat{A}_{H}\left(t,t_{0}\right) & =\partial_{t}\left(\hat{U}\left(t,t_{0}\right)^{\dagger}\hat{A}\left(t\right)\hat{U}\left(t,t_{0}\right)\right)=\partial_{t}\left(\hat{U}^{\dagger}\right)\hat{A}\hat{U}+\hat{U}^{\dagger}\partial_{t}\left(\hat{A}\right)\hat{U}+\hat{U}^{\dagger}\hat{A}\partial_{t}\left(\hat{U}\right)=\\
+ & \stackrel{\hat{H}\hat{U}=\ii\hbar\partial_{t}\hat{U}}{=}\left(-\frac{\ii}{\hbar}\hat{H}\hat{U}\right)^{\dagger}\hat{A}\hat{U}+\hat{U}^{\dagger}\left(\partial_{t}\hat{A}\right)\hat{U}+\hat{U}^{\dagger}\hat{A}\left(-\frac{\ii}{\hbar}\hat{H}\hat{U}\right)=\\
+ & \stackrel{\hat{U}\hat{U}^{\dagger}}{=}-\frac{\ii}{\hbar}\left[\hat{A}_{H}\left(t,t_{0}\right),\hat{H}_{H}\left(t,t_{0}\right)\right]+\left(\partial_{t}\hat{A}\left(t\right)\right)_{H}
+\end{align*}
+
+\end_inset
+
+Consider for example 
+\begin_inset Formula $\partial_{t}\hat{H}=0$
+\end_inset
+
+, 
+\begin_inset Formula $\hat{A}_{1}=\hat{q}$
+\end_inset
+
+ and 
+\begin_inset Formula $\hat{A}_{2}=\hat{p}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+\frac{\dd}{\dd t}\hat{q}_{H} & =\frac{1}{m}\hat{p}_{H} & \frac{\dd}{\dd t}\hat{p}_{H} & =-\partial_{q}V\left(q\right)\big|_{q=\hat{q}_{H}}
+\end{align*}
+
+\end_inset
+
+This leads to the Ehrenfest theorem:
+\begin_inset Formula 
+\begin{align*}
+m\frac{\dd^{2}}{\dd t^{2}}\hat{q}_{H}\left(t\right) & =-\partial_{\hat{q}_{H}}V\left(\hat{q}_{H}\right)\\
+\hat{q}_{H}\left(t=t_{0}\right) & =\hat{q}\\
+\hat{p}_{H}\left(t=t_{0}\right) & =\hat{p}
+\end{align*}
+
+\end_inset
+
+For 
+\begin_inset Formula $\hat{q}_{H}$
+\end_inset
+
+ and 
+\begin_inset Formula $\hat{p}_{H}$
+\end_inset
+
+ and the usual Hamiltonian 
+\begin_inset Formula ${\displaystyle \hat{H}=\frac{1}{2m}\hat{p}^{2}+V\left(\hat{q},t\right)}$
+\end_inset
+
+ they satisfy 
+\begin_inset Quotes eld
+\end_inset
+
+Newton's
+\begin_inset Quotes erd
+\end_inset
+
+ equations.
+ Take expectation values 
+\begin_inset Formula $\BraKet{\psi\left(t_{0}\right)|\ldots|\psi\left(t_{0}\right)}$
+\end_inset
+
+.
+\begin_inset Formula 
+\begin{align*}
+m\frac{\dd^{2}}{\dd t^{2}}\left\langle \hat{q}\right\rangle _{t} & =-\BraKet{\psi\left(t_{0}\right)|\partial_{\hat{q}_{H}}V\left(\hat{q}_{H}\right)|\psi\left(t_{0}\right)}\stackrel{\text{in general}}{\not=}-\partial_{\left\langle \hat{q}\right\rangle _{t}}V\left(\left\langle \hat{q}\right\rangle _{t}\right)
+\end{align*}
+
+\end_inset
+
+But for 
+\begin_inset Formula $V\left(\hat{q},t\right)=f_{1}\left(t\right)\hat{q}^{2}+f_{2}\left(t\right)\hat{q}+f_{3}\left(t\right)$
+\end_inset
+
+ the partial derivative 
+\begin_inset Formula $\partial_{\hat{q}_{H}}V\left(\hat{q}_{H}\right)$
+\end_inset
+
+ is linear in 
+\begin_inset Formula $\hat{q}_{H}$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $\left\langle \hat{q}\right\rangle _{t}$
+\end_inset
+
+ describes the classical trajectory with the initial conditions 
+\begin_inset Formula $\BraKet{\psi\left(t_{0}\right)|\hat{q}|\psi\left(t_{0}\right)}$
+\end_inset
+
+ and 
+\begin_inset Formula $\BraKet{\psi\left(t_{0}\right)|\hat{p}|\psi\left(t_{0}\right)}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Comment: The best compromise to do quantum mechanics in a way, that looks
+ similar (at least for short times) to classical mechanics is 
+\noun on
+Gaussian
+\noun default
+ wavepacket.
+\end_layout
+
+\begin_layout Standard
+A wavepacket is a superposition:
+\begin_inset Formula 
+\begin{align*}
+\KET{\psi} & =\int\tilde{\psi}\left(p\right)\KET p\dd p
+\end{align*}
+
+\end_inset
+
+A Gaussian wavepacket is:
+\begin_inset Formula 
+\begin{align*}
+\KET{\psi_{\left(q_{0},p_{0}\right)}} & =\int\psi_{\left(q_{0},p_{0}\right)}\left(q\right)\KET q\dd q\\
+ & =\int\tilde{\psi}_{\left(q_{0},p_{0}\right)}\left(p\right)\KET p\dd p
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align}
+\psi_{\left(q_{0},p_{0}\right)}\left(q\right) & =\frac{1}{\sqrt[4]{2\pi}\sigma}\exp\left(-\frac{1}{4}\frac{\left(q-q_{0}\right)^{2}}{\sigma^{2}}\right)\exp\left(-\frac{\ii}{\hbar}qp_{0}\right)
+\end{align}
+
+\end_inset
+
+For this one gets:
+\begin_inset Formula 
+\begin{align*}
+\left(\Delta\hat{q}\right)^{2}\left(\Delta\hat{p}\right)^{2} & =\frac{\hbar^{2}}{4}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\BraKet{\psi_{\left(q_{0},p_{0}\right)}|\hat{q}|\psi_{\left(q_{0},p_{0}\right)}} & =q_{0}\\
+\BraKet{\psi_{\left(q_{0},p_{0}\right)}|\hat{p}|\psi_{\left(q_{0},p_{0}\right)}} & =p_{0}
 \end{align*}
 
 \end_inset
@@ -4325,7 +4676,391 @@ e^{-\frac{\ii}{\hbar}\hat{p}_{\alpha}q_{0}}\KET{\vec{q}} & =\KET{\vec{q}+q_{0}\v
 \end_layout
 
 \begin_layout Chapter
-„Simple“ applications
+Basic applications
+\end_layout
+
+\begin_layout Section
+Boxes
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[->] (-1.2,0) -- (4.2,0) node[right] {$q$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[->] (0,-0.2) -- (0,3.5) node[left]{$V=
+\backslash
+infty$} node[above] {$V(q)$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw (0,0) +(0,0.2) -- +(0,-0.2) node[below] {$0$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw (3,0) +(0,0.2) -- +(0,-0.2) node[below] {$L$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw (3,0) -- (3,3.5) node[right]{$V=
+\backslash
+infty$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+foreach 
+\backslash
+y in {0,0.5,...,2}
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\backslash
+draw (3,
+\backslash
+y) -- +(1,1) (0,
+\backslash
+y) -- +(-1,1);
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw (3.5,0) -- (4,0.5);
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw (-0.5,0) -- (-1,0.5);
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw (3,2.5) -- (3.5,3);
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw (0,2.5) -- (-0.5,3);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The normalized eigenstates are:
+\begin_inset Formula 
+\begin{align*}
+\psi_{n}\left(q\right) & =\sqrt{\frac{2}{L}}\sin\left(\frac{n\pi}{L}q\right)\\
+e_{n} & =n^{2}e_{0}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Square well
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[->] (-4.7,0) -- (4.7,0) node[right] {$q$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[->] (0,-0.2) -- (0,3.5) node[above] {$V(q)$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw (0,0) +(0,0.2) -- +(0,-0.2) node[below] {$0$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw (3,0) +(0,0.2) -- +(0,-0.2) node[below] {$
+\backslash
+frac{L}{2}$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw (-3,0) +(0,0.2) -- +(0,-0.2) node[below] {$-
+\backslash
+frac{L}{2}$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw (0,2) + (0.2,0) -- +(-0.2,0) node[left] {$V_0$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw (3,0) -- (3,2)
+\end_layout
+
+\begin_layout Plain Layout
+
+        (-3,0) -- (-3,2)
+\end_layout
+
+\begin_layout Plain Layout
+
+        (-4.7,2) -- (-3,2)
+\end_layout
+
+\begin_layout Plain Layout
+
+        (3,2) -- (4.7,2);
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+path (-4,1)node{I} (0.5,1) node{II} (4,1) node{III};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{iiilist}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ Energy 
+\begin_inset Formula $E<V_{0}$
+\end_inset
+
+ smaller than potential wall, leads to a bound state.
+\end_layout
+
+\begin_layout Standard
+Write the equation:
+\begin_inset Formula 
+\begin{align*}
+\left(-\frac{\hbar^{2}}{2m}\partial_{q}^{2}+V\left(q\right)\right)\psi\left(q\right) & =E\psi\left(q\right)\\
+\partial_{q}^{2}\psi\left(q\right) & =-k\left(E\right)^{2}\psi\left(q\right)\\
+k\left(E\right) & =+\sqrt{\frac{2m}{\hbar^{2}}\left(E-V\left(q\right)\right)}
+\end{align*}
+
+\end_inset
+
+In the three regions I, II and III one gets:
+\begin_inset Formula 
+\begin{align*}
+k_{\text{I}}\left(E\right) & =\ii\abs{k_{\text{I}}\left(E\right)}\\
+k_{\text{II}}\left(E\right) & =\abs{k_{\text{II}}\left(E\right)}\\
+k_{\text{III}}\left(E\right) & =\ii\abs{k_{\text{III}}\left(E\right)}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ Write the general solution:
+\begin_inset Formula 
+\begin{align*}
+\psi_{\text{I}\left(q\right)} & =A_{\text{I}}e^{\abs{k_{\text{I}}\left(E\right)}q}+B_{\text{I}}e^{-\abs{k_{\text{I}}\left(E\right)}q}\\
+\psi_{\text{II}\left(q\right)} & =A_{\text{II}}e^{\ii\abs{k_{\text{II}}\left(E\right)}q}+B_{\text{II}}e^{-\ii\abs{k_{\text{II}}\left(E\right)}q}\\
+\psi_{\text{III}\left(q\right)} & =A_{\text{III}}e^{\abs{k_{\text{I}}\left(E\right)}q}+B_{\text{III}}e^{-\abs{k_{\text{II}}\left(E\right)}q}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ Normalization: 
+\begin_inset Formula $B_{\text{I}}=A_{\text{III}}=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Continuity: For a finite potential 
+\begin_inset Formula $\psi$
+\end_inset
+
+ and 
+\begin_inset Formula $\partial_{q}\psi'$
+\end_inset
+
+ are continuous.
+\begin_inset Formula 
+\begin{align*}
+\psi_{\text{I}}\left(-\frac{L}{2}\right) & =\psi_{\text{II}}\left(-\frac{L}{2}\right) & \partial_{q}\psi_{\text{I}}\left(-\frac{L}{2}\right) & =\partial_{q}\psi_{\text{II}}\left(-\frac{L}{2}\right)\\
+\psi_{\text{II}}\left(\frac{L}{2}\right) & =\psi_{\text{III}}\left(\frac{L}{2}\right) & \partial_{q}\psi_{\text{II}}\left(\frac{L}{2}\right) & =\partial_{q}\psi_{\text{III}}\left(\frac{L}{2}\right)
+\end{align*}
+
+\end_inset
+
+Now we have four equations and four variables, but one expects infinitely
+ many solutions.
+\begin_inset Formula 
+\begin{align*}
+\mathbb{M}\left(\begin{array}{c}
+A_{\text{I}}\\
+A_{\text{II}}\\
+B_{\text{II}}\\
+B_{\text{III}}
+\end{array}\right) & =0 & \det\mathbb{M}\left(E\right) & \stackrel{!}{=}0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{iiilist}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Chapter
