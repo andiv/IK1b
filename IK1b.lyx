@@ -4,7 +4,7 @@
 \begin_header
 \textclass report
 \begin_preamble
-\usepackage{tikz}
+\usepackage{tikz,pgfplots}
 %\usepackage{tikz-3dplot}
 \usetikzlibrary{matrix,arrows,calc,decorations.pathmorphing,snakes}
 \usepackage{latexsym,stmaryrd,stackrel,array,tabularx,multirow,icomma,braket,polynom,cancel}
@@ -234,7 +234,7 @@ frac{km}{h}}$
 
 \begin_layout Standard
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Vorlage: Kommutatives Diagramm
@@ -362,6 +362,116 @@ x)}) node[right] {$f(x) =
 frac{1}{20} 
 \backslash
 mathrm e^x$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Plot mit pgfplots
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+ 
+\backslash
+begin{axis}[width=13cm, axis x line=middle, axis y line=middle, xtick={0},
+ ytick={0}, xlabel=$q$,domain=-6:6,samples=300]
+\end_layout
+
+\begin_layout Plain Layout
+
+%  
+\backslash
+addplot[green,mark=none] {(8*x^3-12*x)*exp(-x^2/2)*0.5};
+\end_layout
+
+\begin_layout Plain Layout
+
+%  
+\backslash
+addlegendentry{$
+\backslash
+psi_3 (q)$}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+addplot[red,mark=none] {x^2*0.08};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+addlegendentry{$V(q)$}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+addplot[blue,mark=none] {(0.256*x^8-3.584*x^6+13.440*x^4-13.440*x^2+1.680)*exp(-x^2/2
+)};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+addlegendentry{$
+\backslash
+psi_8 (q)$}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot[orange,mark=none] {((0.256*x^8-3.584*x^6+13.440*x^4-13.440*x^2+1.680)*exp(-x^
+2/2))^2*0.5};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+addlegendentry{$
+\backslash
+abs{
+\backslash
+psi_8 (q)}^2$}
+\end_layout
+
+\begin_layout Plain Layout
+
+ 
+\backslash
+end{axis}
 \end_layout
 
 \begin_layout Plain Layout
@@ -5057,6 +5167,730 @@ status open
 \backslash
 end{iiilist}
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%DATE: Di 8.5.12
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+The harmonic oscillator (in one dimension)
+\end_layout
+
+\begin_layout Standard
+The potential is:
+\begin_inset Formula 
+\begin{align*}
+V\left(\hat{q}\right) & =\frac{m\omega_{0}^{2}}{2}\hat{q}^{2}
+\end{align*}
+
+\end_inset
+
+For all energies 
+\begin_inset Formula $e_{n}\in\mathbb{R}_{\ge0}$
+\end_inset
+
+ we have:
+\begin_inset Formula 
+\begin{align*}
+\hat{H}\KET{e_{n}} & =e_{n}\KET{e_{n}}\\
+\BraKet{e_{n}|e_{n}} & =1
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{iiilist}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ The Schrödinger equation is:
+\begin_inset Formula 
+\begin{align*}
+\left(\mins\frac{\hbar^{2}}{2m}\partial_{q}^{2}+\frac{m\omega_{0}^{2}}{2}q^{2}\right)\psi_{n}\left(q\right) & =e_{n}\psi_{n}\left(q\right) & \psi\left(q\to\pm\infty\right) & =0
+\end{align*}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ Use dimensionless variables:
+\begin_inset Formula 
+\begin{align*}
+q & =\alpha x & \phi\left(x\right) & :=\psi_{n}\left(\alpha x\right)
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\left(\mins\frac{\hbar^{2}}{2m}\frac{1}{\alpha^{2}}\partial_{q}^{2}+\frac{m\omega_{0}^{2}}{2}\alpha^{2}q^{2}\right)\phi\left(q\right) & =e_{n}\phi\left(x\right)\\
+\left(\partial_{x}^{2}-\frac{m^{2}\omega_{0}^{2}}{\hbar^{2}}\alpha^{4}x^{2}\right)\phi\left(q\right) & =\mins\frac{2m}{\hbar^{2}}\alpha^{2}e_{n}\phi\left(x\right)
+\end{align*}
+
+\end_inset
+
+Choose:
+\begin_inset Formula 
+\begin{align*}
+\alpha & :=\sqrt{\frac{\hbar}{m\omega_{0}}} & \lambda & :=\frac{2e_{n}}{\hbar\omega_{0}}
+\end{align*}
+
+\end_inset
+
+Then the problem reduces to:
+\begin_inset Formula 
+\begin{align*}
+\fbox{\ensuremath{\left(\partial_{x}^{2}+\left(\lambda-x^{2}\right)\right)\phi\left(x\right)=0\qquad\qquad}\psi\left(x\to\pm\infty\right)=0}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ Check the asymptotic behavior, that is, when 
+\begin_inset Formula $x$
+\end_inset
+
+ goes to 
+\begin_inset Formula $\pm\infty$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+\phi\left(x\right) & \approx\exp\left(\mins\frac{1}{2}x^{2}\right)
+\end{align*}
+
+\end_inset
+
+Assume a solution:
+\begin_inset Formula 
+\begin{align*}
+\phi\left(x\right) & =u\left(x\right)\exp\left(\mins\frac{1}{2}x^{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ Then we get for 
+\begin_inset Formula $u\left(x\right)$
+\end_inset
+
+ the differential equation:
+\begin_inset Formula 
+\begin{align*}
+\left(\partial_{x}^{2}-2x\partial_{x}+\left(\lambda-1\right)\right)u\left(x\right) & =0
+\end{align*}
+
+\end_inset
+
+Solve this with a power series, by assuming, that 
+\begin_inset Formula $u\left(x\right)$
+\end_inset
+
+ is analytic:
+\begin_inset Formula 
+\begin{align*}
+u\left(x\right) & =\sum_{n=0}^{\infty}a_{n}x^{n}
+\end{align*}
+
+\end_inset
+
+This leads to the „recursion relation“:
+\begin_inset Formula 
+\begin{align*}
+a_{n+2} & =\frac{\left(2n+1-\lambda\right)}{\left(n+1\right)\left(n+2\right)}a_{n}
+\end{align*}
+
+\end_inset
+
+Or equivalently:
+\begin_inset Formula 
+\begin{align*}
+a_{n-2} & =\frac{\left(n-1\right)n}{\left(2n-3-\lambda\right)}a_{n}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ Check again the asymptotic behavior, to get an idea, how 
+\begin_inset Formula $u\left(x\right)$
+\end_inset
+
+ looks like, when 
+\begin_inset Formula $n\to\infty$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+\frac{a_{n+2}}{a_{n}} & \xrightarrow{n\gg1}\frac{2}{n}
+\end{align*}
+
+\end_inset
+
+But we have
+\begin_inset Formula 
+\begin{align*}
+\exp\left(\mins\frac{x^{2}}{2}\right) & =\sum_{n=0}^{\infty}\underbrace{\frac{1}{n!}\left(\mins\frac{1}{2}\right)^{n}}_{=:c_{n}}x^{2n}=\sum_{n=0}^{\infty}c_{n}x^{2n}
+\end{align*}
+
+\end_inset
+
+with:
+\begin_inset Formula 
+\begin{align*}
+\frac{c_{n+1}}{c_{n}}=\frac{n!}{\left(n+1\right)!}\cdot\left(\mins\frac{1}{2}\right)^{n+1}\cdot\left(\mins2\right)^{n}=\frac{\mins1}{2\left(n+1\right)} & \xrightarrow{n\gg1}\mins\frac{1}{2n}
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $u\left(x\to\infty\right)$
+\end_inset
+
+ grows 
+\noun on
+faster than
+\noun default
+ 
+\begin_inset Formula $\exp\left(\frac{1}{2}x^{2}\right)$
+\end_inset
+
+ and therefore:
+\begin_inset Formula 
+\begin{align*}
+\exp\left(\mins\frac{1}{2}x^{2}\right)u\left(x\right) & \to\infty
+\end{align*}
+
+\end_inset
+
+If the series does not stop, 
+\begin_inset Formula $\phi\left(x\right)$
+\end_inset
+
+ is 
+\emph on
+not
+\emph default
+ normalizable.
+\end_layout
+
+\begin_layout Standard
+So there has to exist a „
+\begin_inset Formula $n^{*}$
+\end_inset
+
+“ such that:
+\begin_inset Formula 
+\begin{align*}
+2n^{*}+1-\lambda & =0\\
+\lambda & =2n^{*}+1\\
+e_{n} & =\hbar\omega_{0}\left(n^{*}+\frac{1}{2}\right)
+\end{align*}
+
+\end_inset
+
+This gives:
+\begin_inset Formula 
+\begin{align*}
+\psi_{n}\left(q\right) & =N_{n}\exp\left(\mins\frac{1}{2}\left(\frac{q}{\alpha}\right)^{2}\right)H_{n}\left(\frac{q}{\alpha}\right)
+\end{align*}
+
+\end_inset
+
+The polynomials 
+\begin_inset Formula $H_{n}\left(x\right)$
+\end_inset
+
+ are called the 
+\noun on
+Hermite polynomials
+\noun default
+ and are explicitly:
+\begin_inset Formula 
+\begin{align*}
+H_{n}\left(x\right) & =\left(-1\right)^{n}\sum_{k_{1}+2k_{2}=n}\frac{n!}{k_{1}!\cdot k_{2}!}\left(-1\right)^{k_{1}+k_{2}}\left(2x\right)^{k_{1}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $N_{n}$
+\end_inset
+
+ is fixed by:
+\begin_inset Formula 
+\begin{align*}
+\int_{-\infty}^{\infty}\abs{\psi_{n}\left(q\right)}^{2}\dd q & =1
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{iiilist}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This looks like:
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+ 
+\backslash
+begin{axis}[width=13cm, axis x line=middle, axis y line=middle, xtick={0},
+ ytick={0}, xlabel=$q$,domain=-6:6,samples=300]
+\end_layout
+
+\begin_layout Plain Layout
+
+%  
+\backslash
+addplot[green,mark=none] {(8*x^3-12*x)*exp(-x^2/2)*0.5};
+\end_layout
+
+\begin_layout Plain Layout
+
+%  
+\backslash
+addlegendentry{$
+\backslash
+psi_3 (q)$}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+addplot[red,mark=none] {x^2*0.08};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+addlegendentry{$V(q)$}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+addplot[blue,mark=none] {(0.256*x^8-3.584*x^6+13.440*x^4-13.440*x^2+1.680)*exp(-x^2/2
+)};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+addlegendentry{$
+\backslash
+psi_8 (q)$}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot[orange,mark=none] {((0.256*x^8-3.584*x^6+13.440*x^4-13.440*x^2+1.680)*exp(-x^
+2/2))^2*0.5};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+addlegendentry{$
+\backslash
+abs{
+\backslash
+psi_8 (q)}^2$}
+\end_layout
+
+\begin_layout Plain Layout
+
+ 
+\backslash
+end{axis}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then came Dirac:
+\end_layout
+
+\begin_layout Subsection
+The number representation
+\end_layout
+
+\begin_layout Standard
+Introduce two operators:
+\begin_inset Formula 
+\begin{align*}
+ & \text{„destruction“} &  & \text{„creation“}\\
+\hat{a} & =\sqrt{\frac{m\omega_{0}}{2\hbar}}\left(\hat{q}+\frac{\ii}{m\omega_{0}}\hat{p}\right) & \hat{a}^{\dagger} & =\sqrt{\frac{m\omega_{0}}{2\hbar}}\left(\hat{q}-\frac{\ii}{m\omega_{0}}\hat{p}\right)
+\end{align*}
+
+\end_inset
+
+It is easy to calculate:
+\begin_inset Formula 
+\begin{align*}
+\left[\hat{a},\hat{a}^{\dagger}\right] & =1
+\end{align*}
+
+\end_inset
+
+Introduce the „number“ operator:
+\begin_inset Formula 
+\begin{align*}
+\hat{n} & :=\hat{a}^{\dagger}\hat{a}
+\end{align*}
+
+\end_inset
+
+Then we can find easily:
+\begin_inset Formula 
+\begin{align*}
+\hat{H} & =\frac{1}{2m}\hat{p}^{2}+\frac{m\omega_{0}^{2}}{2}\hat{q}^{2}=\hbar\omega_{0}\left(\hat{n}+\frac{1}{2}\right)
+\end{align*}
+
+\end_inset
+
+Therefore the eigenstates of 
+\begin_inset Formula $\hat{n}$
+\end_inset
+
+ are automatically the eigenstates of 
+\begin_inset Formula $\hat{H}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+It also satisfies:
+\begin_inset Formula 
+\begin{align*}
+\left[\hat{n},\hat{a}\right] & =\mins\hat{a} & \left[\hat{n},\hat{a}^{\dagger}\right] & =\hat{a}^{\dagger}
+\end{align*}
+
+\end_inset
+
+We want to find 
+\begin_inset Formula $\KET{\sigma}$
+\end_inset
+
+ such that:
+\begin_inset Formula 
+\begin{align*}
+\hat{n}\KET{\sigma} & =\sigma\KET{\sigma}
+\end{align*}
+
+\end_inset
+
+We note:
+\begin_inset Formula 
+\begin{align*}
+\hat{n}\left(\hat{a}\KET{\sigma}\right) & =\left(\hat{n}\hat{a}\right)\KET{\sigma}=\left(\hat{a}\hat{n}-\left[\hat{a},\hat{n}\right]\right)\KET{\sigma}=\left(\hat{a}\hat{n}-\hat{a}\right)\KET{\sigma}=\left(\sigma-1\right)\KET{\sigma}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula $\hat{a}\KET{\sigma}$
+\end_inset
+
+ is an eigenstate of 
+\begin_inset Formula $\hat{n}$
+\end_inset
+
+ with eigenvalue 
+\begin_inset Formula $\sigma-1$
+\end_inset
+
+, so we get:
+\begin_inset Formula 
+\begin{align*}
+\hat{a}\KET{\sigma} & =N_{\sigma}\KET{\sigma-1}
+\end{align*}
+
+\end_inset
+
+From 
+\begin_inset Formula $\BraKet{\sigma|\sigma}=\BraKet{\sigma-1|\sigma-1}=1$
+\end_inset
+
+ follows:
+\begin_inset Formula 
+\begin{align*}
+\fbox{\ensuremath{\hat{a}\KET{\sigma}=\sqrt{\sigma}\KET{\sigma-1}}}
+\end{align*}
+
+\end_inset
+
+Analogously we have:
+\begin_inset Formula 
+\begin{align*}
+\fbox{\ensuremath{\hat{a}^{\dagger}\KET{\sigma}=\sqrt{\sigma+1}\KET{\sigma+1}}}
+\end{align*}
+
+\end_inset
+
+Take a 
+\begin_inset Formula $\sigma>0$
+\end_inset
+
+ and apply 
+\begin_inset Formula $\hat{a}$
+\end_inset
+
+ to 
+\begin_inset Formula $\KET{\sigma}$
+\end_inset
+
+ many times to get, that 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ must be an integer, because otherwise the normalization constant 
+\begin_inset Formula $\sqrt{\sigma}$
+\end_inset
+
+ would be imaginary.
+\end_layout
+
+\begin_layout Standard
+There is a special state 
+\begin_inset Formula $\KET 0$
+\end_inset
+
+, the „vacuum“.
+\end_layout
+
+\begin_layout Standard
+Let us call the states 
+\begin_inset Formula $\KET n$
+\end_inset
+
+ for 
+\begin_inset Formula $n\in\mathbb{N}_{0}$
+\end_inset
+
+.
+\begin_inset Formula 
+\begin{align*}
+\hat{n}\KET n & =n\KET n & \hat{a}\KET n & =\sqrt{n}\KET{n-1} & \hat{a}^{\dagger}\KET n & =\sqrt{n+1}\KET{n+1}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\hat{H}\KET n & =e_{n}\KET n & e_{n} & =\hbar\omega_{0}\left(n+\frac{1}{2}\right)
+\end{align*}
+
+\end_inset
+
+If we know 
+\begin_inset Formula $\KET 0$
+\end_inset
+
+, we can construct an arbitrary 
+\begin_inset Formula $\KET n$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+\KET n & =\frac{1}{\sqrt{n!}}\left(\hat{a}^{\dagger}\right)^{n}\KET 0
+\end{align*}
+
+\end_inset
+
+To calculate 
+\begin_inset Formula $\BraKet{q|0}$
+\end_inset
+
+ we use 
+\begin_inset Formula $\hat{a}\KET 0=0$
+\end_inset
+
+ and represent.
+\begin_inset Formula 
+\begin{align*}
+\BraKet{q|\hat{a}|0} & =0\\
+\BraKet{q|\hat{q}+\frac{\ii}{m\omega_{0}}\hat{p}|0} & =0\\
+\left(q+\frac{\ii}{m\omega_{0}}\left(\mins\ii\hbar\partial_{q}\right)\right)\psi_{0}\left(q\right) & =0\\
+\left(\frac{\hbar}{m\omega_{0}}\partial_{q}+q\right)\psi_{0}\left(q\right) & =0\\
+\psi_{0}\left(q\right) & =N_{0}\exp\left(\mins\frac{1}{2}\left(\frac{q}{\alpha}\right)^{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula $N_{0}$
+\end_inset
+
+ is fixed by normalization:
+\begin_inset Formula 
+\begin{align*}
+\int_{-\infty}^{\infty}\abs{\psi_{0}\left(q\right)}^{2}\dd q & =1
+\end{align*}
+
+\end_inset
+
+For example 
+\begin_inset Formula $\psi_{1}\left(q\right)$
+\end_inset
+
+ is given by:
+\begin_inset Formula 
+\begin{align*}
+\psi_{1}\left(q\right) & =\BraKet{q|1}=\BraKet{q|\hat{a}^{\dagger}|0}=\sqrt{\frac{m\omega_{0}}{2\hbar}}\left(q-\frac{\ii}{m\omega_{0}}\left(-\ii\hbar\partial_{q}\right)\right)\psi_{0}\left(q\right)=\\
+ & =N_{0}\sqrt{\frac{m\omega_{0}}{2\hbar}}\left(q-\frac{\hbar}{m\omega_{0}}\partial_{q}\right)\exp\left(\mins\frac{1}{2}\left(\frac{q}{\alpha}\right)^{2}\right)=\\
+ & =N_{1}\exp\left(\mins\frac{1}{2}\left(\frac{q}{\alpha}\right)^{2}\right)\cdot H_{1}\left(\frac{q}{\alpha}\right)
+\end{align*}
 
 \end_inset
 

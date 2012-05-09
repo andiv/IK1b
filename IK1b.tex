@@ -1,4 +1,4 @@
-%% LyX 2.0.2 created this file.  For more info, see http://www.lyx.org/.
+%% LyX 2.0.3 created this file.  For more info, see http://www.lyx.org/.
 %% Do not edit unless you really know what you are doing.
 \documentclass[11pt,english]{report}
 \usepackage[T1]{fontenc}
@@ -34,7 +34,7 @@
 
 \@ifundefined{date}{}{\date{}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
-\usepackage{tikz}
+\usepackage{tikz,pgfplots}
 %\usepackage{tikz-3dplot}
 \usetikzlibrary{matrix,arrows,calc,decorations.pathmorphing,snakes}
 \usepackage{latexsym,stmaryrd,stackrel,array,tabularx,multirow,icomma,braket,polynom,cancel}
@@ -1356,6 +1356,223 @@ B_{\text{III}}
 
 
 \end{iiilist}
+
+%DATE: Di 8.5.12
+
+
+\section{The harmonic oscillator (in one dimension)}
+
+The potential is:
+\begin{align*}
+V\left(\hat{q}\right) & =\frac{m\omega_{0}^{2}}{2}\hat{q}^{2}
+\end{align*}
+For all energies $e_{n}\in\mathbb{R}_{\ge0}$ we have:
+\begin{align*}
+\hat{H}\KET{e_{n}} & =e_{n}\KET{e_{n}}\\
+\BraKet{e_{n}|e_{n}} & =1
+\end{align*}
+\begin{iiilist}
+
+\iii The Schrödinger equation is:
+\begin{align*}
+\left(\mins\frac{\hbar^{2}}{2m}\partial_{q}^{2}+\frac{m\omega_{0}^{2}}{2}q^{2}\right)\psi_{n}\left(q\right) & =e_{n}\psi_{n}\left(q\right) & \psi\left(q\to\pm\infty\right) & =0
+\end{align*}
+\iii Use dimensionless variables:
+\begin{align*}
+q & =\alpha x & \phi\left(x\right) & :=\psi_{n}\left(\alpha x\right)
+\end{align*}
+\begin{align*}
+\left(\mins\frac{\hbar^{2}}{2m}\frac{1}{\alpha^{2}}\partial_{q}^{2}+\frac{m\omega_{0}^{2}}{2}\alpha^{2}q^{2}\right)\phi\left(q\right) & =e_{n}\phi\left(x\right)\\
+\left(\partial_{x}^{2}-\frac{m^{2}\omega_{0}^{2}}{\hbar^{2}}\alpha^{4}x^{2}\right)\phi\left(q\right) & =\mins\frac{2m}{\hbar^{2}}\alpha^{2}e_{n}\phi\left(x\right)
+\end{align*}
+Choose:
+\begin{align*}
+\alpha & :=\sqrt{\frac{\hbar}{m\omega_{0}}} & \lambda & :=\frac{2e_{n}}{\hbar\omega_{0}}
+\end{align*}
+Then the problem reduces to:
+\begin{align*}
+\fbox{\ensuremath{\left(\partial_{x}^{2}+\left(\lambda-x^{2}\right)\right)\phi\left(x\right)=0\qquad\qquad}\ensuremath{\psi\left(x\to\pm\infty\right)}=0}
+\end{align*}
+
+
+\iii Check the asymptotic behavior, that is, when $x$ goes to $\pm\infty$:
+\begin{align*}
+\phi\left(x\right) & \approx\exp\left(\mins\frac{1}{2}x^{2}\right)
+\end{align*}
+Assume a solution:
+\begin{align*}
+\phi\left(x\right) & =u\left(x\right)\exp\left(\mins\frac{1}{2}x^{2}\right)
+\end{align*}
+
+
+\iii Then we get for $u\left(x\right)$ the differential equation:
+\begin{align*}
+\left(\partial_{x}^{2}-2x\partial_{x}+\left(\lambda-1\right)\right)u\left(x\right) & =0
+\end{align*}
+Solve this with a power series, by assuming, that $u\left(x\right)$
+is analytic:
+\begin{align*}
+u\left(x\right) & =\sum_{n=0}^{\infty}a_{n}x^{n}
+\end{align*}
+This leads to the \quotedblbase{}recursion relation\textquotedblleft{}:
+\begin{align*}
+a_{n+2} & =\frac{\left(2n+1-\lambda\right)}{\left(n+1\right)\left(n+2\right)}a_{n}
+\end{align*}
+Or equivalently:
+\begin{align*}
+a_{n-2} & =\frac{\left(n-1\right)n}{\left(2n-3-\lambda\right)}a_{n}
+\end{align*}
+
+
+\iii Check again the asymptotic behavior, to get an idea, how $u\left(x\right)$
+looks like, when $n\to\infty$:
+\begin{align*}
+\frac{a_{n+2}}{a_{n}} & \xrightarrow{n\gg1}\frac{2}{n}
+\end{align*}
+But we have
+\begin{align*}
+\exp\left(\mins\frac{x^{2}}{2}\right) & =\sum_{n=0}^{\infty}\underbrace{\frac{1}{n!}\left(\mins\frac{1}{2}\right)^{n}}_{=:c_{n}}x^{2n}=\sum_{n=0}^{\infty}c_{n}x^{2n}
+\end{align*}
+with:
+\begin{align*}
+\frac{c_{n+1}}{c_{n}}=\frac{n!}{\left(n+1\right)!}\cdot\left(\mins\frac{1}{2}\right)^{n+1}\cdot\left(\mins2\right)^{n}=\frac{\mins1}{2\left(n+1\right)} & \xrightarrow{n\gg1}\mins\frac{1}{2n}
+\end{align*}
+Therefore $u\left(x\to\infty\right)$ grows \noun{faster than} $\exp\left(\frac{1}{2}x^{2}\right)$
+and therefore:
+\begin{align*}
+\exp\left(\mins\frac{1}{2}x^{2}\right)u\left(x\right) & \to\infty
+\end{align*}
+If the series does not stop, $\phi\left(x\right)$ is \emph{not} normalizable.
+
+So there has to exist a \quotedblbase{}$n^{*}$\textquotedblleft{}
+such that:
+\begin{align*}
+2n^{*}+1-\lambda & =0\\
+\lambda & =2n^{*}+1\\
+e_{n} & =\hbar\omega_{0}\left(n^{*}+\frac{1}{2}\right)
+\end{align*}
+This gives:
+\begin{align*}
+\psi_{n}\left(q\right) & =N_{n}\exp\left(\mins\frac{1}{2}\left(\frac{q}{\alpha}\right)^{2}\right)H_{n}\left(\frac{q}{\alpha}\right)
+\end{align*}
+The polynomials $H_{n}\left(x\right)$ are called the \noun{Hermite
+polynomials} and are explicitly:
+\begin{align*}
+H_{n}\left(x\right) & =\left(-1\right)^{n}\sum_{k_{1}+2k_{2}=n}\frac{n!}{k_{1}!\cdot k_{2}!}\left(-1\right)^{k_{1}+k_{2}}\left(2x\right)^{k_{1}}
+\end{align*}
+
+
+$N_{n}$ is fixed by:
+\begin{align*}
+\int_{-\infty}^{\infty}\abs{\psi_{n}\left(q\right)}^{2}\dd q & =1
+\end{align*}
+
+
+\end{iiilist}
+
+This looks like:
+
+\noindent \begin{center}
+\begin{tikzpicture}
+ \begin{axis}[width=13cm, axis x line=middle, axis y line=middle, xtick={0}, ytick={0}, xlabel=$q$,domain=-6:6,samples=300]
+%  \addplot[green,mark=none] {(8*x^3-12*x)*exp(-x^2/2)*0.5};
+%  \addlegendentry{$\psi_3 (q)$}
+  \addplot[red,mark=none] {x^2*0.08};
+  \addlegendentry{$V(q)$}
+  \addplot[blue,mark=none] {(0.256*x^8-3.584*x^6+13.440*x^4-13.440*x^2+1.680)*exp(-x^2/2)};
+  \addlegendentry{$\psi_8 (q)$}
+\addplot[orange,mark=none] {((0.256*x^8-3.584*x^6+13.440*x^4-13.440*x^2+1.680)*exp(-x^2/2))^2*0.5};
+  \addlegendentry{$\abs{\psi_8 (q)}^2$}
+ \end{axis}
+\end{tikzpicture} 
+\par\end{center}
+
+Then came Dirac:
+
+
+\subsection{The number representation}
+
+Introduce two operators:
+\begin{align*}
+ & \text{\quotedblbase destruction\textquotedblleft} &  & \text{\quotedblbase creation\textquotedblleft}\\
+\hat{a} & =\sqrt{\frac{m\omega_{0}}{2\hbar}}\left(\hat{q}+\frac{\ii}{m\omega_{0}}\hat{p}\right) & \hat{a}^{\dagger} & =\sqrt{\frac{m\omega_{0}}{2\hbar}}\left(\hat{q}-\frac{\ii}{m\omega_{0}}\hat{p}\right)
+\end{align*}
+It is easy to calculate:
+\begin{align*}
+\left[\hat{a},\hat{a}^{\dagger}\right] & =1
+\end{align*}
+Introduce the \quotedblbase{}number\textquotedblleft{} operator:
+\begin{align*}
+\hat{n} & :=\hat{a}^{\dagger}\hat{a}
+\end{align*}
+Then we can find easily:
+\begin{align*}
+\hat{H} & =\frac{1}{2m}\hat{p}^{2}+\frac{m\omega_{0}^{2}}{2}\hat{q}^{2}=\hbar\omega_{0}\left(\hat{n}+\frac{1}{2}\right)
+\end{align*}
+Therefore the eigenstates of $\hat{n}$ are automatically the eigenstates
+of $\hat{H}$.
+
+It also satisfies:
+\begin{align*}
+\left[\hat{n},\hat{a}\right] & =\mins\hat{a} & \left[\hat{n},\hat{a}^{\dagger}\right] & =\hat{a}^{\dagger}
+\end{align*}
+We want to find $\KET{\sigma}$ such that:
+\begin{align*}
+\hat{n}\KET{\sigma} & =\sigma\KET{\sigma}
+\end{align*}
+We note:
+\begin{align*}
+\hat{n}\left(\hat{a}\KET{\sigma}\right) & =\left(\hat{n}\hat{a}\right)\KET{\sigma}=\left(\hat{a}\hat{n}-\left[\hat{a},\hat{n}\right]\right)\KET{\sigma}=\left(\hat{a}\hat{n}-\hat{a}\right)\KET{\sigma}=\left(\sigma-1\right)\KET{\sigma}
+\end{align*}
+$\hat{a}\KET{\sigma}$ is an eigenstate of $\hat{n}$ with eigenvalue
+$\sigma-1$, so we get:
+\begin{align*}
+\hat{a}\KET{\sigma} & =N_{\sigma}\KET{\sigma-1}
+\end{align*}
+From $\BraKet{\sigma|\sigma}=\BraKet{\sigma-1|\sigma-1}=1$ follows:
+\begin{align*}
+\fbox{\ensuremath{\hat{a}\KET{\sigma}=\sqrt{\sigma}\KET{\sigma-1}}}
+\end{align*}
+Analogously we have:
+\begin{align*}
+\fbox{\ensuremath{\hat{a}^{\dagger}\KET{\sigma}=\sqrt{\sigma+1}\KET{\sigma+1}}}
+\end{align*}
+Take a $\sigma>0$ and apply $\hat{a}$ to $\KET{\sigma}$ many times
+to get, that $\sigma$ must be an integer, because otherwise the normalization
+constant $\sqrt{\sigma}$ would be imaginary.
+
+There is a special state $\KET 0$, the \quotedblbase{}vacuum\textquotedblleft{}.
+
+Let us call the states $\KET n$ for $n\in\mathbb{N}_{0}$.
+\begin{align*}
+\hat{n}\KET n & =n\KET n & \hat{a}\KET n & =\sqrt{n}\KET{n-1} & \hat{a}^{\dagger}\KET n & =\sqrt{n+1}\KET{n+1}
+\end{align*}
+\begin{align*}
+\hat{H}\KET n & =e_{n}\KET n & e_{n} & =\hbar\omega_{0}\left(n+\frac{1}{2}\right)
+\end{align*}
+If we know $\KET 0$, we can construct an arbitrary $\KET n$:
+\begin{align*}
+\KET n & =\frac{1}{\sqrt{n!}}\left(\hat{a}^{\dagger}\right)^{n}\KET 0
+\end{align*}
+To calculate $\BraKet{q|0}$ we use $\hat{a}\KET 0=0$ and represent.
+\begin{align*}
+\BraKet{q|\hat{a}|0} & =0\\
+\BraKet{q|\hat{q}+\frac{\ii}{m\omega_{0}}\hat{p}|0} & =0\\
+\left(q+\frac{\ii}{m\omega_{0}}\left(\mins\ii\hbar\partial_{q}\right)\right)\psi_{0}\left(q\right) & =0\\
+\left(\frac{\hbar}{m\omega_{0}}\partial_{q}+q\right)\psi_{0}\left(q\right) & =0\\
+\psi_{0}\left(q\right) & =N_{0}\exp\left(\mins\frac{1}{2}\left(\frac{q}{\alpha}\right)^{2}\right)
+\end{align*}
+$N_{0}$ is fixed by normalization:
+\begin{align*}
+\int_{-\infty}^{\infty}\abs{\psi_{0}\left(q\right)}^{2}\dd q & =1
+\end{align*}
+For example $\psi_{1}\left(q\right)$ is given by:
+\begin{align*}
+\psi_{1}\left(q\right) & =\BraKet{q|1}=\BraKet{q|\hat{a}^{\dagger}|0}=\sqrt{\frac{m\omega_{0}}{2\hbar}}\left(q-\frac{\ii}{m\omega_{0}}\left(-\ii\hbar\partial_{q}\right)\right)\psi_{0}\left(q\right)=\\
+ & =N_{0}\sqrt{\frac{m\omega_{0}}{2\hbar}}\left(q-\frac{\hbar}{m\omega_{0}}\partial_{q}\right)\exp\left(\mins\frac{1}{2}\left(\frac{q}{\alpha}\right)^{2}\right)=\\
+ & =N_{1}\exp\left(\mins\frac{1}{2}\left(\frac{q}{\alpha}\right)^{2}\right)\cdot H_{1}\left(\frac{q}{\alpha}\right)
+\end{align*}
+
 
 
 \chapter[Symmetries in quantum mechanics]{Symmetries in quantum mechanics (Angular momentum)}
