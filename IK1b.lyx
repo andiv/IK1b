@@ -147,9 +147,9 @@
 \paperfontsize 11
 \spacing single
 \use_hyperref true
-\pdf_title "Algebra"
+\pdf_title "Theoretical quantum mechanics"
 \pdf_author "Andreas Völklein"
-\pdf_keywords "Algebra, Mathematik"
+\pdf_keywords "Theoretical quantum mechanics, Physics"
 \pdf_bookmarks true
 \pdf_bookmarksnumbered true
 \pdf_bookmarksopen false
@@ -5895,6 +5895,590 @@ For example
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%DATE: Do 10.5.12
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+The dynamics of the harmonic oscillator
+\end_layout
+
+\begin_layout Standard
+The Hamiltonian is:
+\begin_inset Formula 
+\begin{align*}
+\hat{H} & =\frac{1}{2m}\hat{p}^{2}+\frac{m\omega_{0}^{2}}{2}\hat{q}^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In principal we need:
+\begin_inset Formula 
+\begin{align*}
+\hat{U}\left(t\right) & :=\exp\left(\mins\frac{\ii}{\hbar}\hat{H}t\right)=\exp\left(\mins\frac{\ii}{\hbar}\left(\frac{1}{2m}\hat{p}^{2}+\frac{m\omega_{0}^{2}}{2}\hat{q}^{2}\right)t\right)
+\end{align*}
+
+\end_inset
+
+Let's calculate in the position representation:
+\begin_inset Formula 
+\begin{align*}
+\BraKet{q|\hat{U}\left(t\right)|q'} & =:U\left(q,q',t\right)
+\end{align*}
+
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+Remember, what 
+\begin_inset Formula $\hat{U}$
+\end_inset
+
+ does:
+\begin_inset Formula 
+\begin{align*}
+\KET{\psi\left(t\right)} & =\hat{U}\left(t\right)\KET{\psi\left(0\right)}
+\end{align*}
+
+\end_inset
+
+In position representation this is:
+\begin_inset Formula 
+\begin{align*}
+\psi\left(q,t\right) & =\int U\left(q,q',t\right)\psi\left(q',0\right)\dd q'
+\end{align*}
+
+\end_inset
+
+In some books the notation for 
+\begin_inset Formula $U\left(q,q',t\right)$
+\end_inset
+
+ is 
+\begin_inset Formula $K\left(q,q',t\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+U\left(q,q',t\right) & =\sum_{n}\exp\left(\mins\frac{\ii}{\hbar}e_{n}t\right)\BraKet{q|n}\BraKet{n|q'}=\\
+ & =\sum_{n}\exp\left(\mins\ii\omega_{0}\left(n+\frac{1}{2}\right)t\right)N_{n}\exp\left(\mins\frac{1}{2}\left(\frac{q}{\alpha}\right)^{2}\right)H_{n}\left(\frac{q}{\alpha}\right)\cdot\\
+ & \qquad\qquad\cdot\left(N_{n}\exp\left(-\frac{1}{2}\left(\frac{q'}{\alpha}\right)^{2}\right)H_{n}\left(\frac{q'}{\alpha}\right)\right)^{*}=\\
+ & =\sum_{n}\exp\left(\mins\ii\omega_{0}\left(n+\frac{1}{2}\right)t\right)N_{n}^{2}\exp\left(\mins\frac{q^{2}+q'{}^{2}}{2\alpha^{2}}\right)H_{n}\left(\frac{q}{\alpha}\right)H_{n}\left(\frac{q'}{\alpha}\right)=\\
+ & =\sqrt{\frac{m\omega_{0}}{2\pi\ii\hbar\sin\left(\omega_{0}t\right)}}\cdot\exp\left(\frac{\ii}{\hbar}\left(\frac{m\omega_{0}}{2\sin\left(\omega_{0}t\right)}\right)\left(q^{2}+q'{}^{2}\right)\cos\left(\omega_{0}t\right)-2qq'\right)
+\end{align*}
+
+\end_inset
+
+To check this, consider the limes 
+\begin_inset Formula $\omega_{0}\to0$
+\end_inset
+
+, for which we get the free particle:
+\begin_inset Formula 
+\begin{align*}
+U\left(q,q',t\right) & \xrightarrow{\omega_{0}\to0}\sqrt{\frac{m}{2\pi\ii\hbar t}}\cdot\exp\left(\frac{\ii}{\hbar}\frac{m}{2t}\left(q-q'\right)^{2}\right)
+\end{align*}
+
+\end_inset
+
+Let's try the Heisenberg picture:
+\begin_inset Formula 
+\begin{align*}
+\frac{\dd}{\dd t}\hat{q}_{H}\left(t\right) & =\frac{\ii}{\hbar}\left[H\left(\hat{q}_{H},\hat{p}_{H}\right),\hat{q}_{H}\right]=\frac{1}{m}\hat{p}_{H}\\
+\frac{\dd}{\dd t}\hat{p}_{H}\left(t\right) & =\frac{\ii}{\hbar}\left[H\left(\hat{q}_{H},\hat{p}_{H}\right),\hat{p}_{H}\right]=-m\omega_{0}\hat{q}_{H}
+\end{align*}
+
+\end_inset
+
+The initial conditions are:
+\begin_inset Formula 
+\begin{align*}
+\hat{q}_{H}\left(t=0\right) & =\hat{q}\\
+\hat{p}_{H}\left(t=0\right) & =\hat{p}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Remember the definition of an operator in the Heisenberg picture:
+\begin_inset Formula 
+\begin{align*}
+\hat{q}_{H} & =\exp\left(\frac{\ii}{\hbar}\hat{H}t\right)\hat{q}\exp\left(\mins\frac{\ii}{\hbar}\hat{H}t\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now we define the 
+\noun on
+nested commutator
+\noun default
+ as
+\begin_inset Formula 
+\begin{align*}
+\left[\hat{B},\hat{A}\right]^{\left(0\right)} & :=\hat{A}\\
+\left[\hat{B},\hat{A}\right]^{\left(n+1\right)} & :=\left[\hat{B},\left[\hat{B},\hat{A}\right]^{\left(n\right)}\right]
+\end{align*}
+
+\end_inset
+
+and use the operator identity for 
+\begin_inset Formula $\lambda\in\mathbb{C}$
+\end_inset
+
+ and arbitrary operators 
+\begin_inset Formula $\hat{A},\hat{B}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+\exp\left(\ii\lambda\hat{B}\right)\hat{A}\exp\left(\mins\ii\lambda\hat{B}\right) & =\sum_{n=0}^{\infty}\frac{\left(\ii\lambda\right)^{n}}{n!}\left[\hat{B},\hat{A}\right]^{\left(n\right)}\\
+ & \approx\hat{A}+\ii\lambda\left[\hat{B},\hat{A}\right]+\frac{\left(\ii\lambda\right)^{2}}{2!}\left[\hat{B},\left[\hat{B},\hat{A}\right]\right]
+\end{align*}
+
+\end_inset
+
+If 
+\begin_inset Formula $\left[\hat{A},\hat{B}\right]=0$
+\end_inset
+
+, we get just 
+\begin_inset Formula $\hat{A}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $\left[\hat{A},\left[\hat{A},\hat{B}\right]\right]=\left[\hat{B},\left[\hat{A},\hat{B}\right]\right]=0$
+\end_inset
+
+, we get 
+\begin_inset Formula $\hat{A}+\ii\lambda\left[\hat{B},\hat{A}\right]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Now we come back to the problem at hand:
+\begin_inset Formula 
+\begin{align*}
+\lambda & =\frac{t}{\hbar} & \hat{B} & =\hat{H} & \hat{A} & =\hat{q}
+\end{align*}
+
+\end_inset
+
+We now:
+\begin_inset Formula 
+\begin{align*}
+\left[\hat{H},\hat{q}\right] & =\frac{1}{2m}\left[\hat{p}^{2},\hat{q}\right]+\underbrace{\left[V\left(\hat{q}\right),\hat{q}\right]}_{=0}=\frac{1}{2m}\left(\hat{p}\left[\hat{p},\hat{q}\right]+\left[\hat{p},\hat{q}\right]\hat{p}\right)=\mins\frac{\ii\hbar}{m}\hat{p}\\
+\left[\hat{H},\hat{p}\right] & =\underbrace{\frac{1}{2m}\left[\hat{p}^{2},\hat{p}\right]}_{=0}+\frac{m\omega_{0}^{2}}{2}\left[\hat{q}^{2},\hat{p}\right]=\ii\hbar m\omega_{0}^{2}\hat{q}
+\end{align*}
+
+\end_inset
+
+Together this inductively gives:
+\begin_inset Formula 
+\begin{align*}
+\hat{q}_{H}\left(t\right) & =\hat{q}\cos\left(\omega_{0}t\right)+\frac{1}{m\omega_{0}}\hat{p}\sin\left(\omega_{0}t\right)\\
+\hat{p}_{H}\left(t\right) & =m\omega_{0}\hat{q}\sin\left(\omega_{0}t\right)+\hat{p}\cos\left(\omega_{0}t\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+The tunneling effect
+\end_layout
+
+\begin_layout Standard
+Look at the potential:
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[->] (-5.2,0) -- (5.2,0) node[right] {$q$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[->] (0,-0.2) -- (0,3.5) node[above] {$V(q)$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw (0,0) +(0,0.2) -- +(0,-0.2) node[below] {$0$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw (2,0) +(0,0.2) -- +(0,-0.2) node[below] {$
+\backslash
+frac{d}{2}$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw (-2,0) +(0,0.2) -- +(0,-0.2) node[below] {$-
+\backslash
+frac{d}{2}$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw (0,2) + (0.2,0) -- +(-0.2,0) node[above left] {$V_0$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw (2,0) -- (2,2) -- (-2,2) -- (-2,0);
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+path (-2.5,1)node{I} (0.5,1) node{II} (2.5,1) node{III};
+\end_layout
+
+\begin_layout Plain Layout
+
+  %Wellenpfeile
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[->] (-5,1.5) -- node[above]{$A_
+\backslash
+text{I} e^{
+\backslash
+ii kq}$} (-3,1.5);
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[->] (-3,0.5) -- node[above]{$R e^{
+\backslash
+mins 
+\backslash
+ii kq}$} (-5,0.5);
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[->] (3,1) -- node[above]{$T e^{ 
+\backslash
+ii kq}$} (5,1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The problem is unbounded and therefore the spectrum is continuous and every
+ energy 
+\begin_inset Formula $E\in\mathbb{R}_{>0}$
+\end_inset
+
+ is allowed.
+\end_layout
+
+\begin_layout Standard
+Imagine that we inject the particle from the left with a certain energy
+ 
+\begin_inset Formula $E$
+\end_inset
+
+.
+\begin_inset Formula 
+\begin{align*}
+k & :=\frac{\sqrt{2mE}}{\hbar} & k_{V} & :=\frac{\sqrt{2m\left(V_{0}-E\right)}}{\hbar}
+\end{align*}
+
+\end_inset
+
+The goal is to find 
+\begin_inset Formula $R$
+\end_inset
+
+ and 
+\begin_inset Formula $T$
+\end_inset
+
+ as functions of the Energy 
+\begin_inset Formula $E$
+\end_inset
+
+, the height 
+\begin_inset Formula $V_{0}$
+\end_inset
+
+ and width 
+\begin_inset Formula $d$
+\end_inset
+
+ of the potential.
+\end_layout
+
+\begin_layout Standard
+Business as usual:
+\end_layout
+
+\begin_layout Standard
+The boundary condition is, that 
+\begin_inset Formula $A_{\text{I}}$
+\end_inset
+
+ is know and the coefficient of 
+\begin_inset Formula $e^{\mins\ii kq}$
+\end_inset
+
+ in the region III is zero.
+ We consider only 
+\begin_inset Formula $E<V_{0}$
+\end_inset
+
+.
+\begin_inset Formula 
+\begin{align*}
+\psi_{\text{I}}\left(q\right) & =A_{\text{I}}e^{\ii kq}+Re^{-\ii kq}\\
+\psi_{\text{II}}\left(q\right) & =A_{\text{II}}e^{k_{V}q}+B_{\text{II}}e^{-k_{V}q}\\
+\psi_{\text{III}}\left(q\right) & =Te^{\ii kq}
+\end{align*}
+
+\end_inset
+
+We have the four variables 
+\begin_inset Formula $R,T,A_{\text{II}}$
+\end_inset
+
+ and 
+\begin_inset Formula $B_{\text{II}}$
+\end_inset
+
+.
+ Know we impose the matching conditions:
+\begin_inset Formula 
+\begin{align*}
+\psi_{\text{I}}\left(\mins\frac{d}{2}\right) & =\psi_{\text{II}}\left(\mins\frac{d}{2}\right) & \psi_{\text{I}}'\left(\mins\frac{d}{2}\right) & =\psi_{\text{II}}'\left(\mins\frac{d}{2}\right)\\
+\psi_{\text{I}}\left(\frac{d}{2}\right) & =\psi_{\text{II}}\left(\frac{d}{2}\right) & \psi_{\text{I}}'\left(\frac{d}{2}\right) & =\psi_{\text{II}}'\left(\frac{d}{2}\right)
+\end{align*}
+
+\end_inset
+
+This system looks like:
+\begin_inset Formula 
+\begin{align*}
+\mathbb{M}\cdot\left(\begin{array}{c}
+B\\
+A_{\text{II}}\\
+B_{\text{II}}\\
+T
+\end{array}\right) & =A_{\text{I}}\left(\begin{array}{c}
+\mins e^{\mins\ii k\frac{d}{2}}\\
+\mins\ii ke^{\ii k\frac{d}{2}}\\
+0\\
+0
+\end{array}\right)
+\end{align*}
+
+\end_inset
+
+For 
+\begin_inset Formula $k_{V}d\gg1$
+\end_inset
+
+ this roughly gives:
+\begin_inset Formula 
+\begin{align*}
+T\left(E\right) & \sim A_{\text{I}}e^{\mins\frac{k_{V}\left(E\right)d}{2}}\\
+\frac{T\left(E,d\right)}{T\left(E,d'\right)} & \sim e^{\mins\frac{k_{V}\left(E\right)}{2}\left(d-d'\right)}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Two formal consequences of the position representation of the Schrödinger
+ equation
+\end_layout
+
+\begin_layout Subsection
+Oscillation theorem 
+\series medium
+(1D, bounded)
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $\BraKet{q|e_{n}}$
+\end_inset
+
+ has 
+\begin_inset Formula $k$
+\end_inset
+
+-nodes, that means 
+\begin_inset Formula $\psi_{n}\left(q\right)=0$
+\end_inset
+
+ is 
+\begin_inset Formula $k$
+\end_inset
+
+ times, then 
+\begin_inset Formula $\BraKet{q|e_{n+1}}$
+\end_inset
+
+ has 
+\begin_inset Formula $k+1$
+\end_inset
+
+ nodes.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+ 
+\backslash
+begin{axis}[width=10cm, axis x line=middle, axis y line=middle, xtick={0},
+ ytick={0}, xlabel=$q$,domain=-6:6,samples=300]
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+addplot[mark=none] {sin(x*114.6)*exp(-x^2*0.1)};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+addplot[mark=*] coordinates {(-4.71,0) (-3.14,0) (-1.57,0) (0,0) (1.57,0) (3.14,0)
+ (4.71,0)};
+\end_layout
+
+\begin_layout Plain Layout
+
+ 
+\backslash
+end{axis}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+The continuity equation
 \end_layout
 
 \begin_layout Chapter
