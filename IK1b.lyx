@@ -5566,7 +5566,7 @@ begin{tikzpicture}
  
 \backslash
 begin{axis}[width=13cm, axis x line=middle, axis y line=middle, xtick={0},
- ytick={0}, xlabel=$q$,domain=-6:6,samples=300]
+ ytick={0}, xlabel=$q$,domain=-6:6,samples=300,smooth]
 \end_layout
 
 \begin_layout Plain Layout
@@ -6107,7 +6107,7 @@ Now we come back to the problem at hand:
 
 \end_inset
 
-We now:
+We know:
 \begin_inset Formula 
 \begin{align*}
 \left[\hat{H},\hat{q}\right] & =\frac{1}{2m}\left[\hat{p}^{2},\hat{q}\right]+\underbrace{\left[V\left(\hat{q}\right),\hat{q}\right]}_{=0}=\frac{1}{2m}\left(\hat{p}\left[\hat{p},\hat{q}\right]+\left[\hat{p},\hat{q}\right]\hat{p}\right)=\mins\frac{\ii\hbar}{m}\hat{p}\\
@@ -6440,7 +6440,7 @@ begin{tikzpicture}
  
 \backslash
 begin{axis}[width=10cm, axis x line=middle, axis y line=middle, xtick={0},
- ytick={0}, xlabel=$q$,domain=-6:6,samples=300]
+ ytick={0}, xlabel=$q$,domain=-6:6,samples=150,smooth]
 \end_layout
 
 \begin_layout Plain Layout
@@ -6481,14 +6481,2233 @@ end{tikzpicture}
 The continuity equation
 \end_layout
 
-\begin_layout Chapter
-Symmetries in quantum mechanics (Angular momentum)
-\begin_inset Argument
+\begin_layout Standard
+Let 
+\begin_inset Formula $\psi\left(\vec{q},t\right)$
+\end_inset
+
+ solve the Schrödinger equation for the Hamilton operator 
+\begin_inset Formula $\hat{H}=\frac{\hat{\vec{p}}^{2}}{2m}+V\left(\hat{\vec{q}}\right)$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $\hat{H}$
+\end_inset
+
+ is Hermitian, 
+\begin_inset Formula $V\left(\vec{q}\right)$
+\end_inset
+
+ has to be real and solve:
+\begin_inset Formula 
+\begin{align*}
+\ii\hbar\partial_{t}\psi\left(\vec{q},t\right) & =\left(-\frac{\hbar^{2}}{2m}\nabla^{2}+V\left(\vec{q}\right)\right)\psi\left(\vec{q},t\right)\\
+-\ii\hbar\partial_{t}\psi^{*}\left(\vec{q},t\right) & =\left(-\frac{\hbar^{2}}{2m}\nabla^{2}+V\left(\vec{q}\right)\right)\psi^{*}\left(\vec{q},t\right)
+\end{align*}
+
+\end_inset
+
+This gives:
+\begin_inset Formula 
+\begin{align*}
+\partial_{t}\abs{\psi}^{2} & =\partial_{t}\left(\psi\psi^{*}\right)=\left(\partial_{t}\psi\right)\psi^{*}+\psi\left(\partial_{t}\psi^{*}\right)=\\
+ & =\psi^{*}\left(\frac{1}{\ii\hbar}\left(-\frac{\hbar^{2}}{2m}\nabla^{2}+V\left(\vec{q}\right)\right)\psi\right)+\psi\left(\frac{-1}{\ii\hbar}\left(-\frac{\hbar^{2}}{2m}\nabla^{2}+V\left(\vec{q}\right)\right)\psi^{*}\right)=\\
+ & =\psi^{*}\left(-\frac{\hbar}{2m\ii}\nabla^{2}\psi\right)+\psi\left(\frac{\hbar}{2m\ii}\nabla^{2}\psi^{*}\right)=\\
+ & =\frac{\hbar}{2m\ii}\left(\psi\nabla^{2}\psi^{*}-\psi^{*}\nabla^{2}\psi\right)=\\
+ & =\frac{\hbar}{2m\ii}\nabla\left(\psi\nabla\psi^{*}-\psi^{*}\nabla\psi\right)
+\end{align*}
+
+\end_inset
+
+Therefore we have the continuity equation:
+\begin_inset Formula 
+\begin{align*}
+\partial_{t}\abs{\psi}^{2}-\frac{\hbar}{2m\ii}\nabla\left(\psi\nabla\psi^{*}-\psi^{*}\nabla\psi\right) & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Define the probability density 
+\begin_inset Formula $\varrho_{\psi}\left(\vec{q},t\right):=\abs{\psi\left(\vec{q},t\right)}^{2}$
+\end_inset
+
+ and the probability current:
+\begin_inset Formula 
+\begin{align*}
+\vec{j}_{\psi}\left(\vec{q},t\right) & :=-\frac{\ii\hbar}{2m}\left(\psi^{*}\nabla\psi-\psi\nabla\psi^{*}\right)
+\end{align*}
+
+\end_inset
+
+They are related by 
+\begin_inset Formula 
+\begin{align*}
+\partial_{t}\varrho_{\psi}\left(\vec{q},t\right)+\nabla\vec{j}_{\psi}\left(\vec{q},t\right) & =0
+\end{align*}
+
+\end_inset
+
+and we can interpret them as expectation values:
+\begin_inset Formula 
+\begin{align*}
+\varrho_{\psi}\left(\vec{q},t\right) & =\abs{\psi\left(\vec{q},t\right)}^{2}=\abs{\left\langle \hat{\vec{q}}|\psi\left(t\right)\right\rangle }^{2}=\BRA{\hat{\vec{q}}}\underbrace{\KET{\psi\left(t\right)}\BRA{\psi\left(t\right)}}_{=:\hat{\varrho}}\KET{\hat{\vec{q}}}=\BraKet{\hat{\vec{q}}|\hat{\varrho}|\hat{\vec{q}}}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\vec{j}\left(\vec{q},t\right) & =\frac{-\ii\hbar}{2m}\left(\psi^{*}\nabla\psi-\psi\nabla\psi^{*}\right)=\frac{-\ii\hbar}{2m}\left(\left\langle \psi|\vec{q}\right\rangle \nabla\left\langle \vec{q}|\psi\right\rangle -\left\langle \vec{q}|\psi\right\rangle \nabla\left\langle \psi|\vec{q}\right\rangle \right)=\\
+ & =\frac{-1}{2m}\left(\left\langle \vec{q}|\hat{\vec{p}}|\psi\right\rangle \left\langle \psi|\vec{q}\right\rangle -\left\langle \vec{q}|\psi\right\rangle \left\langle \psi|\hat{\vec{p}}|\vec{q}\right\rangle \right)=\\
+ & =\frac{-1}{2m}\BRA{\vec{q}}\underbrace{\left(\hat{\vec{p}}\KET{\psi}\BRA{\psi}-\KET{\psi}\BRA{\psi}\hat{\vec{p}}\right)}_{=\left[\hat{\vec{p}},\hat{\varrho}\right]}\KET{\vec{q}}=\frac{-1}{2m}\BRA{\vec{q}}\underbrace{\left[\hat{\vec{p}},\hat{\varrho}\right]}_{=:-2m\hat{\vec{j}}}\KET{\vec{q}}=\BraKet{\vec{q}|\hat{\vec{j}}|\vec{q}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
-Symmetries in quantum mechanics
+
+%DATE: Di 15.5.12
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Symmetries, Rotations and Angular momentum
+\end_layout
+
+\begin_layout Standard
+Remember from classical mechanics:
+\end_layout
+
+\begin_layout Standard
+A symmetry is a physical operation that leaves the system invariant.
+\end_layout
+
+\begin_layout Standard
+In classical mechanics this means we change 
+\begin_inset Formula $\vec{q}$
+\end_inset
+
+ and 
+\begin_inset Formula $\vec{p}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Examples:
+\end_layout
+
+\begin_layout Itemize
+For 
+\begin_inset Formula $\mathcal{R}\in\text{SL}_{n}\left(\mathbb{R}\right)$
+\end_inset
+
+, that means 
+\begin_inset Formula $\mathcal{R}^{-1}=\mathcal{R}^{T}$
+\end_inset
+
+ and 
+\begin_inset Formula $\det\left(\mathcal{R}\right)=1$
+\end_inset
+
+, we define:
+\begin_inset Formula 
+\begin{align*}
+\vec{q}' & =\mathcal{R}\vec{q}\\
+\vec{p}' & =\mathcal{R}\vec{p}
+\end{align*}
+
+\end_inset
+
+This leaves a Lagrangian of the Form 
+\begin_inset Formula ${\displaystyle \mathscr{L}\left(\vec{q},\dot{\vec{q}}\right)=\frac{m}{2}\abs{\dot{\vec{q}}}^{2}-V\left(\abs{\vec{q}}\right)}$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\Rightarrow$
+\end_inset
+
+ 
+\begin_inset Formula $\left\{ H,\vec{L}\right\} =0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+The translation 
+\begin_inset Formula $\vec{q}'=\vec{q}+\vec{q}_{0}$
+\end_inset
+
+ leaves the free particle with Lagrangian
+\begin_inset Formula 
+\begin{align*}
+\mathscr{L}\left(\vec{q},\dot{\vec{q}},t\right) & =\frac{m}{2}\abs{\dot{\vec{q}}}^{2}
+\end{align*}
+
+\end_inset
+
+invariant and therefore 
+\begin_inset Formula $\left\{ H,\vec{p}\right\} =0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Emmy Noether: Symmetry 
+\begin_inset Formula $\Rightarrow$
+\end_inset
+
+ Existence of a constant of motion
+\end_layout
+
+\begin_layout Section
+The tensor product in quantum mechanics
+\end_layout
+
+\begin_layout Standard
+Consider two degrees of freedom (for example two particles in one dimension),
+ described by states in 
+\begin_inset Formula $\mathcal{H}^{\left(1\right)},\mathcal{H}^{\left(2\right)}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A postulate of quantum mechanics says, that the composite system is described
+ by a state in the Hilbert space 
+\begin_inset Formula $\mathcal{H}=\mathcal{H}^{\left(1\right)}\otimes\mathcal{H}^{\left(2\right)}$
+\end_inset
+
+.
+ This space is called 
+\noun on
+tensor product
+\noun default
+.
+\end_layout
+
+\begin_layout Standard
+So the dimension is 
+\begin_inset Formula $\dim\mathcal{H}=\dim\left(\mathcal{H}^{\left(1\right)}\right)\cdot\dim\left(\mathcal{H}^{\left(2\right)}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $\KET{\psi^{\left(1\right)}}\in\mathcal{H}^{\left(1\right)}$
+\end_inset
+
+, 
+\begin_inset Formula $\KET{\psi^{\left(2\right)}}\in\mathcal{H}^{\left(2\right)}$
+\end_inset
+
+ then 
+\begin_inset Formula $\KET{\psi^{\left(1\right)}}\otimes\KET{\psi^{\left(2\right)}}\in\mathcal{H}^{\left(1\right)}\otimes\mathcal{H}^{\left(2\right)}=\mathcal{H}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $\hat{A}^{\left(1\right)}$
+\end_inset
+
+ acts on 
+\begin_inset Formula $\mathcal{H}^{\left(1\right)}$
+\end_inset
+
+ and 
+\begin_inset Formula $\hat{A}^{\left(2\right)}$
+\end_inset
+
+ acts on 
+\begin_inset Formula $\mathcal{H}^{\left(2\right)}$
+\end_inset
+
+, then 
+\begin_inset Formula $\hat{A}^{\left(1\right)}\otimes\hat{A}^{\left(2\right)}$
+\end_inset
+
+ acts on 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+ as follows:
+\begin_inset Formula 
+\begin{align*}
+\left(\hat{A}^{\left(1\right)}\otimes\hat{A}^{\left(2\right)}\right)\left(\KET{\psi^{\left(1\right)}}\otimes\KET{\psi^{\left(2\right)}}\right) & =\left(\hat{A}^{\left(1\right)}\KET{\psi^{\left(1\right)}}\otimes\hat{A}^{\left(2\right)}\KET{\psi^{\left(2\right)}}\right)
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\hat{A}^{\left(1\right)} & \mapsto\hat{A}^{\left(1\right)}\otimes\hat{I}^{\left(2\right)}\\
+\hat{A}^{\left(2\right)} & \mapsto\hat{I}^{\left(1\right)}\otimes\hat{A}^{\left(2\right)}\\
+\left[\hat{A}^{\left(1\right)},\hat{A}^{\left(2\right)}\right] & =0
+\end{align*}
+
+\end_inset
+
+For 
+\begin_inset Formula $\KET{\psi}=\KET{\psi^{\left(1\right)}}\otimes\KET{\psi^{\left(2\right)}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\KET{\varphi}=\KET{\varphi^{\left(1\right)}}\otimes\KET{\varphi^{\left(2\right)}}$
+\end_inset
+
+ we have the scalar product:
+\begin_inset Formula 
+\begin{align*}
+\BraKet{\varphi|\psi} & =\BraKet{\varphi^{\left(1\right)}|\psi^{\left(1\right)}}\BraKet{\varphi^{\left(2\right)}|\psi^{\left(2\right)}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+With all this together one can write any operator 
+\begin_inset Formula $\hat{A}$
+\end_inset
+
+ and any Ket 
+\begin_inset Formula $\KET{\psi}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+\hat{A} & =\sum_{n.m}c_{n,m}\hat{A}_{n}^{\left(1\right)}\otimes\hat{A}_{m}^{\left(2\right)}\\
+\KET{\psi} & =\sum_{n,m}a_{n,m}\KET{\psi_{n}^{\left(1\right)}}\otimes\KET{\psi_{m}^{\left(2\right)}}\stackrel{\text{i.A.}}{\not=}\KET{\varphi^{\left(1\right)}}\otimes\KET{\varphi^{\left(2\right)}}
+\end{align*}
+
+\end_inset
+
+A state in the form 
+\begin_inset Formula $\KET{\psi^{\left(1\right)}}\otimes\KET{\psi^{\left(2\right)}}$
+\end_inset
+
+ is called 
+\emph on
+separable
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+If a state is not separable, it is called 
+\emph on
+entangled
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+For example:
+\begin_inset Formula 
+\begin{align*}
+\left(\hat{A}^{\left(1\right)}\otimes\hat{I}^{\left(2\right)}+\hat{I}\otimes\hat{A}^{\left(2\right)}\right)^{2} & =\left(\hat{A}^{\left(1\right)}\right)^{2}\otimes\hat{I}^{\left(2\right)}+2\hat{A}^{\left(1\right)}\otimes\hat{A}^{\left(2\right)}+\hat{I}\otimes\left(\hat{A}^{\left(2\right)}\right)^{2}
+\end{align*}
+
+\end_inset
+
+Now we can understand better:
+\begin_inset Formula 
+\begin{align*}
+\hat{q}_{\alpha}\KET{\vec{q}} & =q_{\alpha}\KET{\vec{q}}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula $\KET{\vec{q}}$
+\end_inset
+
+ is just a compact way to write:
+\begin_inset Formula 
+\begin{align*}
+\KET{\vec{q}} & =\KET{q_{x},q_{y},q_{z}}:=\KET{q_{x}}\otimes\KET{q_{y}}\otimes\KET{q_{z}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Rotations and angular momentum
+\end_layout
+
+\begin_layout Standard
+Come back to classical mechanics.
+ We know, that 
+\begin_inset Formula $\vec{L}=\vec{q}\times\vec{p}$
+\end_inset
+
+ „generates“ rotations 
+\begin_inset Formula $\mathcal{R}\left(\vec{n},\dd\vartheta\right)$
+\end_inset
+
+ around an normalized axis 
+\begin_inset Formula $\vec{n}$
+\end_inset
+
+ with the angle 
+\begin_inset Formula $\dd\vartheta$
+\end_inset
+
+.
+\begin_inset Formula 
+\begin{align*}
+f\left(\vec{q},\vec{p}\right) & \to f\left(\vec{q}',\vec{p}'\right)=f\left(\mathcal{R}\left(\vec{n},\dd\vartheta\right)\vec{q},\mathcal{R}\left(\vec{n},\dd\vartheta\right)\vec{p}\right)\approx f\left(\vec{q},\vec{p}\right)+\dd\vartheta\left\{ \underbrace{\vec{L}\cdot\vec{n}}_{\text{Generator}},f\left(\vec{q},\vec{p}\right)\right\} +O\left(\left(\dd\vartheta\right)^{2}\right)
+\end{align*}
+
+\end_inset
+
+Another example:
+\begin_inset Formula 
+\begin{align*}
+f\left(\vec{q}\left(t\right),\vec{p}\left(t\right)\right) & \to f\left(\vec{q}\left(t+\delta t\right),\vec{p}\left(t+\delta t\right)\right)\approx f\left(\vec{q},\vec{p}\right)+\dd t\left\{ H,f\left(\vec{q},\vec{p}\right)\right\} 
+\end{align*}
+
+\end_inset
+
+Explicit calculation shows:
+\begin_inset Formula 
+\begin{align*}
+\left\{ L_{i},L_{j}\right\}  & =\varepsilon_{ijk}L_{k}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In quantum mechanics we 
+\noun on
+define
+\noun default
+ angular momentum 
+\begin_inset Formula $\vec{j}$
+\end_inset
+
+ as the generator of rotations.
+ Define:
+\begin_inset Formula 
+\begin{align*}
+\KET{\psi^{\mathcal{R}}} & =\hat{D}\left(\mathcal{R}\right)\KET{\psi}=e^{-\frac{\ii}{\hbar}\left(\vec{j}\cdot\vec{n}\right)\theta}\KET{\psi}
+\end{align*}
+
+\end_inset
+
+Check out, how an operator 
+\begin_inset Formula $\hat{A}$
+\end_inset
+
+ changes:
+\begin_inset Formula 
+\begin{align*}
+\hat{A}^{\mathcal{R}} & =\hat{D}\left(\mathcal{R}\right)^{\dagger}\hat{A}\hat{D}\left(\mathcal{R}\right)\xrightarrow{\theta\to\dd\theta}\hat{A}+\frac{\ii\dd\theta}{\hbar}\left[\vec{j}\cdot\vec{n},\hat{A}\right]+O\left(\dd\theta^{2}\right)
+\end{align*}
+
+\end_inset
+
+We want, that the group properties of the 
+\begin_inset Formula $\mathcal{R}$
+\end_inset
+
+'s, which are
+\begin_inset Formula 
+\begin{align*}
+\mathcal{R}\left(\vec{n},0\right) & =E_{3}\\
+\mathcal{R}\left(\vec{n}_{1},\theta_{1}\right)\mathcal{R}\left(\vec{n}_{2},\theta_{2}\right) & =\mathcal{R}\left(\vec{n}\left(\vec{n}_{1},\vec{n}_{2}\right),\theta\left(\theta_{1},\theta_{2}\right)\right)\quad\text{(cf. Goldstein Classical Mechanics)}\\
+\mathcal{R}\left(\vec{n},\theta\right)^{-1} & =\mathcal{R}\left(\vec{n},-\theta\right)\\
+\left(\mathcal{R}_{1}\mathcal{R}_{2}\right)\mathcal{R}_{3} & =\mathcal{R}_{1}\left(\mathcal{R}_{2}\mathcal{R}_{3}\right)
+\end{align*}
+
+\end_inset
+
+go into the 
+\begin_inset Formula $\hat{D}$
+\end_inset
+
+'s.
+\begin_inset Formula 
+\begin{align*}
+\hat{D}\left(\vec{n},0\right) & =\hat{I}\\
+\hat{D}_{1}\left(\vec{n}_{1},\theta_{1}\right)\hat{D}_{2}\left(\vec{n}_{2},\theta_{2}\right) & =\hat{D}\left(\vec{n}\left(\vec{n}_{1},\vec{n}_{2}\right),\theta\left(\theta_{1},\theta_{2}\right)\right)\\
+\hat{D}\left(\vec{n},\theta\right)^{-1} & =\hat{D}\left(\vec{n},-\theta\right)\\
+\left(\hat{D}_{1}\hat{D}_{2}\right)\hat{D}_{3} & =\hat{D}_{1}\left(\hat{D}_{2}\hat{D}_{3}\right)
+\end{align*}
+
+\end_inset
+
+In particular we want the 
+\begin_inset Formula $\hat{D}$
+\end_inset
+
+'s version of:
+\begin_inset Formula 
+\begin{align*}
+\mathcal{R}\left(\vec{e}_{x},\varepsilon\right)\mathcal{R}\left(\vec{e}_{y},\varepsilon\right)-\mathcal{R}\left(\vec{e}_{y},\varepsilon\right)\mathcal{R}\left(\vec{e}_{x},\varepsilon\right) & \approx\left(\begin{array}{ccc}
+1 & 0 & 0\\
+0 & 1-\frac{\varepsilon^{2}}{2} & -\varepsilon\\
+0 & \varepsilon & 1-\frac{\varepsilon^{2}}{2}
+\end{array}\right)\left(\begin{array}{ccc}
+1-\frac{\varepsilon^{2}}{2} & 0 & \varepsilon\\
+0 & 1 & 0\\
+-\varepsilon & 0 & 1-\frac{\varepsilon^{2}}{2}
+\end{array}\right)-\\
+ & \quad-\left(\begin{array}{ccc}
+1-\frac{\varepsilon^{2}}{2} & 0 & \varepsilon\\
+0 & 1 & 0\\
+-\varepsilon & 0 & 1-\frac{\varepsilon^{2}}{2}
+\end{array}\right)\left(\begin{array}{ccc}
+1 & 0 & 0\\
+0 & 1-\frac{\varepsilon^{2}}{2} & -\varepsilon\\
+0 & \varepsilon & 1-\frac{\varepsilon^{2}}{2}
+\end{array}\right)=\\
+ & =\mathcal{R}\left(\vec{e}_{z},\varepsilon^{2}\right)-E_{3}=\left(\begin{array}{ccc}
+0 & -\varepsilon^{2} & 0\\
+\varepsilon^{2} & 0 & 0\\
+0 & 0 & 0
+\end{array}\right)
+\end{align*}
+
+\end_inset
+
+So we want:
+\begin_inset Formula 
+\begin{align*}
+\left[\hat{D}\left(\vec{e}_{x},\varepsilon\right),\hat{D}\left(\vec{e}_{y},\varepsilon\right)\right] & =\hat{D}\left(\vec{e}_{z},\varepsilon^{2}\right)-\hat{I}+O\left(\varepsilon^{3}\right)
+\end{align*}
+
+\end_inset
+
+Use
+\begin_inset Formula 
+\begin{align*}
+\hat{D}\left(\vec{e}_{i},\varepsilon\right) & =\exp\left(-\frac{\ii}{\hbar}\hat{J}_{i}\varepsilon\right)\approx1-\frac{\ii}{\hbar}\hat{J}_{i}\varepsilon+\left(-\frac{\ii}{\hbar}\right)^{2}\frac{1}{2}\hat{J}_{i}^{2}\varepsilon^{2}+\ldots
+\end{align*}
+
+\end_inset
+
+to get:
+\begin_inset Formula 
+\begin{align*}
+\left[\hat{J}_{i},J_{j}\right] & =\ii\hbar\varepsilon_{ijk}\hat{J}_{k}
+\end{align*}
+
+\end_inset
+
+Funny remark: Take the spin 
+\begin_inset Formula $\hat{\vec{s}}$
+\end_inset
+
+ and calculate:
+\begin_inset Formula 
+\begin{align*}
+\exp\left(-\frac{\ii}{\hbar}\hat{s}_{z}\theta\right)\KET + & =\exp\left(-\ii\frac{\theta}{2}\right)\KET +
+\end{align*}
+
+\end_inset
+
+For electrons you need a rotation of 
+\begin_inset Formula $4\pi$
+\end_inset
+
+ to come back to the same state.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%DATE: Di 22.5.12
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Eigenstates and eigenvalues of 
+\begin_inset Formula $\hat{\vec{j}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+First (again) notice, that since 
+\begin_inset Formula $\left[\hat{J}_{i},\hat{J}_{k}\right]\not=0$
+\end_inset
+
+ for 
+\begin_inset Formula $i\not=k$
+\end_inset
+
+ there is not any common eigenstate for the 
+\begin_inset Formula $\vec{J}$
+\end_inset
+
+'s, but we know:
+\begin_inset Formula 
+\begin{align*}
+\left[\abs{\hat{\vec{J}}}^{2},\hat{J}_{i}\right]:=\left[\hat{\vec{J}}^{2},\hat{J}_{i}\right] & =0
+\end{align*}
+
+\end_inset
+
+Therefore we can find a basis 
+\begin_inset Formula $\KET{a,b}$
+\end_inset
+
+ with:
+\begin_inset Formula 
+\begin{align*}
+\hat{J}^{2}\KET{a,b} & =a\KET{a,b}\\
+\hat{J}_{z}\KET{a,b} & =b\KET{a,b}
+\end{align*}
+
+\end_inset
+
+Now we introduce:
+\begin_inset Formula 
+\begin{align*}
+\hat{J}_{\pm} & :=\hat{J}_{x}\pm\ii\hat{J}_{y}\\
+\hat{J}_{\pm}^{\dagger} & =\hat{J}_{\mp}
+\end{align*}
+
+\end_inset
+
+Note that this gives:
+\begin_inset Formula 
+\begin{align*}
+\left[\hat{J}^{2},\hat{J}_{\pm}\right] & =0 & \left[\hat{J}_{+},\hat{J}_{-}\right] & =2\hbar\hat{J}_{z} & \left[\hat{J}_{z},\hat{J}_{\pm}\right] & =\pm\hbar\hat{J}_{\pm}
+\end{align*}
+
+\end_inset
+
+The trick is always the same:
+\begin_inset Formula 
+\begin{align*}
+\hat{J}_{z}\left(\hat{J}_{\pm}\KET{a,b}\right) & =\hat{J}_{z}\hat{J}_{\pm}\KET{a,b}=\left(\hat{J}_{\pm}\hat{J}_{z}+\left[\hat{J_{z}},\hat{J}_{\pm}\right]\right)\KET{a,b}=\\
+ & =\hat{J}_{\pm}b\KET{a,b}\pm\hbar\hat{J}_{\pm}\KET{a,b}=\left(b\pm\hbar\right)\hat{J}_{\pm}\KET{a,b}
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $\hat{J}_{\pm}\KET{a,b}$
+\end_inset
+
+ is an eigenstate of 
+\begin_inset Formula $\hat{J}_{z}$
+\end_inset
+
+ with the eigenvalue 
+\begin_inset Formula $b\pm\hbar$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+\hat{J}_{\pm}\KET{a,b} & =N^{\pm}\left(a,b\right)\KET{a,b\pm\hbar}
+\end{align*}
+
+\end_inset
+
+Now we show, that 
+\begin_inset Formula $\abs b$
+\end_inset
+
+ has an upper limit.
+ Consider
+\begin_inset Formula 
+\begin{align*}
+\left\langle a,b|\hat{J}_{+}\hat{J}_{+}^{\dagger}|a,b\right\rangle +\left\langle a,b|\hat{J}_{+}^{\dagger}\hat{J}_{+}|a,b\right\rangle  & \in\mathbb{R}_{\ge0}
+\end{align*}
+
+\end_inset
+
+and:
+\begin_inset Formula 
+\begin{align*}
+\hat{J}_{+}\hat{J}_{+}^{\dagger}+\hat{J}_{+}^{\dagger}\hat{J}_{+} & =\hat{J}_{+}\hat{J}_{-}+\hat{J}_{-}\hat{J}_{+}=2\left(\hat{J}^{2}-\hat{J}_{z}^{2}\right)
+\end{align*}
+
+\end_inset
+
+Then we get:
+\begin_inset Formula 
+\begin{align*}
+0\le & \left\langle a,b|\hat{J}^{2}-\hat{J}_{z}^{2}|a,b\right\rangle =\left\langle a,b|a-b^{2}|a,b\right\rangle =a-b^{2}\\
+a & \ge b^{2}\\
+\abs b & \le\sqrt{a}
+\end{align*}
+
+\end_inset
+
+This means, that there is a 
+\begin_inset Formula $b_{\text{max}}$
+\end_inset
+
+ defined by:
+\begin_inset Formula 
+\begin{align*}
+\hat{J}_{+}\KET{a,b_{\text{max}}} & =0
+\end{align*}
+
+\end_inset
+
+From this equation we get
+\begin_inset Formula 
+\begin{align*}
+\hat{J}_{-}\hat{J}_{+}\KET{a,b_{\text{max}}} & =0
+\end{align*}
+
+\end_inset
+
+and:
+\begin_inset Formula 
+\begin{align*}
+\hat{J}^{2}-\hat{J}_{z}^{2}-\hbar\hat{J}_{z} & =a-b_{\text{max}}^{2}-\hbar b_{\text{max}}=0
+\end{align*}
+
+\end_inset
+
+This finally leads to:
+\begin_inset Formula 
+\begin{align*}
+a & =b_{\text{max}}\left(b_{\text{max}}+\hbar\right)
+\end{align*}
+
+\end_inset
+
+Analogously we get for 
+\begin_inset Formula $\hat{J}_{-}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+\hat{J}_{-}\KET{a,b_{\text{min}}} & =0
+\end{align*}
+
+\end_inset
+
+From this equation we get
+\begin_inset Formula 
+\begin{align*}
+\hat{J}_{+}\hat{J}_{-}\KET{a,b_{\text{min}}} & =0
+\end{align*}
+
+\end_inset
+
+and:
+\begin_inset Formula 
+\begin{align*}
+\hat{J}^{2}-\hat{J}_{z}^{2}+\hbar\hat{J}_{z} & =a-b_{\text{min}}^{2}+\hbar b_{\text{min}}=0
+\end{align*}
+
+\end_inset
+
+This finally leads to:
+\begin_inset Formula 
+\begin{align*}
+a & =b_{\text{min}}\left(b_{\text{min}}-\hbar\right)
+\end{align*}
+
+\end_inset
+
+A solution is 
+\begin_inset Formula $b_{\text{max}}=-b_{\text{min}}$
+\end_inset
+
+ and for a 
+\begin_inset Formula $n\in\mathbb{Z}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+b_{\text{max}} & =b_{\text{min}}+n\hbar\\
+b_{\text{max}}-b_{\text{mini}}=2b_{\text{max}} & =n\hbar\\
+b_{\text{max}} & =\frac{n}{2}\hbar\\
+a & =\frac{n}{2}\hbar\left(\frac{n}{2}\hbar+\hbar\right)=\hbar^{2}\underbrace{\frac{n}{2}}_{=:j}\left(\frac{n}{2}+1\right)
+\end{align*}
+
+\end_inset
+
+Some names:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $j\in\frac{1}{2}\mathbb{Z}$
+\end_inset
+
+ is called 
+\emph on
+the total angular momentum quantum number
+\emph default
+ and
+\begin_inset Formula 
+\begin{align*}
+m\in & \left\{ -j,\ldots,-j+1,\ldots,j-1,j\right\} 
+\end{align*}
+
+\end_inset
+
+is called 
+\emph on
+the magnetic quantum number
+\emph default
+:
+\begin_inset Formula 
+\begin{align*}
+b & =m\hbar & a & =\hbar^{2}j\left(j+1\right)
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\hat{J}^{2}\KET{j,m} & =\hbar^{2}j\left(j+1\right)\KET{j,m}\\
+\hat{J}_{z}\KET{j,m} & =\hbar m\KET{j,m}
+\end{align*}
+
+\end_inset
+
+With a bit of algebra we get:
+\begin_inset Formula 
+\begin{align*}
+\hat{J}_{\pm}\KET{j,m} & =\hbar\sqrt{\left(j\mp m\right)\left(j\pm m+1\right)}\KET{j,m\pm1}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Irreducible representations of the rotation operators
+\end_layout
+
+\begin_layout Standard
+We want to construct the matrix representations of 
+\begin_inset Formula $\hat{D}\left(\vec{n},\theta\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In particular in the eigenbasis of 
+\begin_inset Formula $\hat{J}^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $\hat{J}_{z}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Remember:
+\begin_inset Formula 
+\begin{align*}
+\hat{D}\left(\vec{n},\theta\right) & =e^{-\frac{\ii}{\hbar}\hat{\vec{J}}\cdot\vec{n}\theta}
+\end{align*}
+
+\end_inset
+
+We want:
+\begin_inset Formula 
+\begin{align*}
+\left\langle j,m|\hat{D}\left(\vec{n},\theta\right)|j',m'\right\rangle  & =D_{jm}^{j'm'}\left(\vec{n},\theta\right)
+\end{align*}
+
+\end_inset
+
+First note:, because 
+\begin_inset Formula $\left[\hat{\vec{J}}^{2},\hat{\vec{J}}\cdot\vec{n}\right]=0$
+\end_inset
+
+.
+\begin_inset Formula 
+\begin{align*}
+D_{jm}^{j'm'}\left(\vec{n},\theta\right) & =D_{mm'}^{\left(j\right)}\left(\vec{n},\theta\right)\delta_{jj'}
+\end{align*}
+
+\end_inset
+
+The physical reason is, that a rotation doesn't change magnitudes like 
+\begin_inset Formula $j$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula ${\displaystyle j=\frac{1}{2}}$
+\end_inset
+
+ gives a 
+\begin_inset Formula $2\times2$
+\end_inset
+
+-Matrix for 
+\begin_inset Formula $D$
+\end_inset
+
+, because the basis is 
+\begin_inset Formula $\KET{\frac{1}{2},-\frac{1}{2}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\KET{\frac{1}{2},\frac{1}{2}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+left(
+\backslash
+phantom{
+\backslash
+begin{array}{c}a
+\backslash
+
+\backslash
+a
+\backslash
+
+\backslash
+a
+\backslash
+
+\backslash
+a
+\backslash
+
+\backslash
+a
+\backslash
+
+\backslash
+a
+\backslash
+
+\backslash
+a
+\backslash
+
+\backslash
+a
+\backslash
+
+\backslash
+a
+\backslash
+
+\backslash
+a
+\backslash
+
+\backslash
+a
+\backslash
+end{array}}
+\backslash
+right.$
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}[baseline=(current bounding box.west)] 
+\end_layout
+
+\begin_layout Plain Layout
+
+  %j=1/2
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+node (j12) at (0,0) {$
+\backslash
+Bigg( 
+\backslash
+quad j=
+\backslash
+frac{1}{2} 
+\backslash
+quad 
+\backslash
+Bigg)$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[<->] ($(j12.315) + (0.4,0) $) -- node[right]{2} ($ (j12.45) + (0.4,0) $);
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[<->] ($(j12.45) + (0.3,0) $) -- node[above]{2} ($ (j12.135) + (-0.3,0)
+ $);
+\end_layout
+
+\begin_layout Plain Layout
+
+  %j=1
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+node (j1) at (2.5,-2) {$
+\backslash
+Bigg( 
+\backslash
+quad j=1 
+\backslash
+quad 
+\backslash
+Bigg)$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[<->] ($(j1.315) + (0.4,0) $) -- node[right]{3} ($ (j1.45) + (0.4,0) $);
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[<->] ($(j1.45) + (0.3,0) $) -- node[above]{3} ($ (j1.135) + (-0.3,0) $);
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+node at (2.5,0) {0};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+node at (0,-2) {0};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+node at (4,-3) {$
+\backslash
+ddots$};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+$
+\backslash
+left.
+\backslash
+phantom{
+\backslash
+begin{array}{c}a
+\backslash
+
+\backslash
+a
+\backslash
+
+\backslash
+a
+\backslash
+
+\backslash
+a
+\backslash
+
+\backslash
+a
+\backslash
+
+\backslash
+a
+\backslash
+
+\backslash
+a
+\backslash
+
+\backslash
+a
+\backslash
+
+\backslash
+a
+\backslash
+
+\backslash
+a
+\backslash
+
+\backslash
+a
+\backslash
+end{array}}
+\backslash
+right)$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This is the matrix representation of a rotation operator 
+\begin_inset Formula $\hat{D}\left(\vec{n},\theta\right)$
+\end_inset
+
+ in the basis 
+\begin_inset Formula $\KET{j,m}$
+\end_inset
+
+ ordered as
+\begin_inset Formula 
+\begin{align*}
+\KET{\frac{1}{2},-\frac{1}{2}},\KET{\frac{1}{2},+\frac{1}{2}},\KET{1,-1},\KET{1,0},\KET{1,1},\KET{\frac{3}{2},-\frac{3}{2}},\KET{\frac{3}{2},-\frac{1}{2}},\KET{\frac{3}{2},\frac{1}{2}},\KET{\frac{3}{2},\frac{3}{2}},\ldots
+\end{align*}
+
+\end_inset
+
+and it is 
+\noun on
+block-diagonal
+\noun default
+.
+\end_layout
+
+\begin_layout Section
+Orbital angular momentum
+\end_layout
+
+\begin_layout Standard
+Consider now 
+\begin_inset Formula $\hat{J}_{i}=\hat{L}_{i}=\left(\hat{\vec{q}}\times\hat{\vec{p}}\right)_{i}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+General considerations
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{iiilist}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $\left[\hat{L}_{i},\hat{L}_{j}\right]=\ii\hbar\varepsilon_{ijk}\hat{L}_{k}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ Consider:
+\begin_inset Formula 
+\begin{align*}
+\exp\left(-\frac{\ii}{\hbar}\hat{L}_{z}\theta\right)\KET{\vec{q}} & =:\KET{\vec{q}}^{R}\stackrel{?}{=}\KET{\vec{q}^{R}}:=\KET{\mathcal{R}\left(\vec{e}_{z},\theta\right)\vec{q}}
+\end{align*}
+
+\end_inset
+
+Do it infinitesimal:
+\begin_inset Formula 
+\begin{align*}
+\theta & \to\dd\theta
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\KET{\vec{q}}^{R} & \approx\left(1-\frac{\ii}{\hbar}\hat{L}_{z}\dd\theta\right)\KET{\vec{q}}=\left(1-\frac{\ii}{\hbar}\dd\theta\left(\hat{q}_{x}\hat{p}_{y}-\hat{q}_{y}\hat{p}_{x}\right)\right)\KET{\vec{q}}=\\
+ & =\left(1-\frac{\ii}{\hbar}\dd\theta\left(q_{x}\hat{p}_{y}-q_{y}\hat{p}_{x}\right)\right)\KET{q_{x}}\otimes\KET{q_{y}}\otimes\KET{q_{z}}
+\end{align*}
+
+\end_inset
+
+Remember:
+\begin_inset Formula 
+\begin{align*}
+\exp\left(-\frac{\ii}{\hbar}q^{\left(0\right)}\hat{p}_{x}\right)\KET{\vec{q}} & =\KET{q_{x}+q^{\left(0\right)}}\otimes\KET{q_{y}}\otimes\KET{q_{z}}
+\end{align*}
+
+\end_inset
+
+Infinitesimally we get:
+\begin_inset Formula 
+\begin{align*}
+\left(1-\frac{\ii}{\hbar}\dd q^{\left(0\right)}\hat{p}_{x}\right)\KET{\vec{q}} & =\KET{q_{x}+\dd q^{\left(0\right)}}\otimes\KET{q_{y}}\otimes\KET{q_{z}}
+\end{align*}
+
+\end_inset
+
+Now consider the product of two infinitesimal changes:
+\begin_inset Formula 
+\begin{align*}
+\left(1+\frac{\ii}{\hbar}\dd\theta q_{y}\hat{p}_{x}\right)\left(1-\frac{\ii}{\hbar}\dd\theta q_{x}\hat{p}_{y}\right) & \approx1-\frac{\ii}{\hbar}\dd\theta\left(q_{x}\hat{p}_{y}-q_{y}\hat{p}_{x}\right)
+\end{align*}
+
+\end_inset
+
+This gives:
+\begin_inset Formula 
+\begin{align*}
+\KET{\vec{q}}^{R} & \approx\left(1+\frac{\ii}{\hbar}\dd\theta q_{y}\hat{p}_{x}\right)\left(1-\frac{\ii}{\hbar}\dd\theta q_{x}\hat{p}_{y}\right)\KET{q_{x}}\otimes\KET{q_{y}}\otimes\KET{q_{z}}=\\
+ & =\KET{q_{x}-\dd\theta q_{y}}\otimes\KET{q_{y}+\dd\theta q_{x}}\otimes\KET{q_{z}}=\KET{q_{x}-\dd\theta q_{y},q_{y}+\dd\theta q_{x},q_{z}}
+\end{align*}
+
+\end_inset
+
+Compare this with the rotated eigenstate of the position:
+\begin_inset Formula 
+\begin{align*}
+\KET{\vec{q}^{R}} & =\KET{\mathcal{R}\left(\vec{e}_{z},\dd\theta\right)\vec{q}}\approx\KET{\left(\begin{array}{ccc}
+1 & -\dd\theta & 0\\
+\dd\theta & 1 & 0\\
+0 & 0 & 1
+\end{array}\right)\vec{q}}=\KET{q_{x}-\dd\theta q_{y},q_{y}+\dd\theta q_{x},q_{z}}\approx\KET{\vec{q}}^{R}
+\end{align*}
+
+\end_inset
+
+In general we get:
+\begin_inset Formula 
+\begin{align*}
+\exp\left(-\frac{\ii}{\hbar}\hat{\vec{L}}\cdot\vec{n}\eta\right)\KET{\vec{q}} & =\KET{\mathcal{R}\left(\vec{n},\eta\right)\vec{q}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{iiilist}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%DATE: Mi 23.5.12
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Eigenstates in the position representation
+\end_layout
+
+\begin_layout Standard
+We call the eigenstates 
+\begin_inset Formula $\KET{l,m}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+We introduce:
+\begin_inset Formula 
+\begin{align*}
+\hat{r} & =\sqrt{\hat{q}_{x}^{2}+\hat{q}_{y}^{2}+\hat{q}_{z}^{2}}\\
+\hat{q}_{x} & =\hat{r}\sin\hat{\theta}\cos\hat{\varphi}\\
+\hat{q}_{y} & =\hat{r}\sin\hat{\theta}\sin\hat{\varphi}\\
+\hat{q}_{z} & =\hat{r}\cos\theta
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\KET{\vec{q}} & =\KET r\otimes\KET{\theta,\varphi}=\KET r\otimes\KET{\vec{n}}
+\end{align*}
+
+\end_inset
+
+We want to construct 
+\begin_inset Formula $\left\langle \theta,\varphi|l,m\right\rangle $
+\end_inset
+
+.
+ As usual we start with
+\begin_inset Formula 
+\begin{align*}
+\BraKet{\theta,\varphi|\hat{L}_{z}|l,m} & =\hbar m\BraKet{\theta,\varphi|l,m}
+\end{align*}
+
+\end_inset
+
+and do it infinitesimally:
+\begin_inset Formula 
+\begin{align*}
+\left\langle \theta,\varphi|\hat{D}\left(\vec{e}_{z},\dd\varphi\right)|l,m\right\rangle  & =\left\langle \theta,\varphi|\exp\left(-\frac{\ii}{\hbar}\hat{L}_{z}\dd\varphi\right)|l,m\right\rangle =\left\langle \theta,\varphi-\dd\varphi|l,m\right\rangle 
+\end{align*}
+
+\end_inset
+
+We also get for 
+\begin_inset Formula $\dd\varphi\to0$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+\BraKet{\theta,\varphi|\left(1-\frac{\ii}{\hbar}\hat{L}_{z}\dd\varphi\right)|l,m} & =\BraKet{\theta,\varphi|l,m}-\frac{\ii}{\hbar}\dd\varphi\BraKet{\theta,\varphi|\hat{L}_{z}|l,m}
+\end{align*}
+
+\end_inset
+
+This gives:
+\begin_inset Formula 
+\begin{align*}
+m\hbar\BraKet{\theta,\varphi|l,m}=\BraKet{\theta,\varphi|\hat{L}_{z}|l,m} & =-\ii\hbar\partial_{\varphi}\BraKet{\theta,\varphi|l,m}\\
+\partial_{\varphi}\BraKet{\theta,\varphi|l,m} & =\ii m\BraKet{\theta,\varphi|l,m}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\BraKet{\theta,\varphi|l,m} & =f_{l}^{m}\left(\theta\right)e^{\ii m\varphi}
+\end{align*}
+
+\end_inset
+
+Introduce this into
+\begin_inset Formula 
+\begin{align*}
+\left\langle \theta,\varphi|\hat{L}^{2}|l,m\right\rangle  & =\hbar^{2}l\left(l+1\right)\BraKet{\theta,\varphi|l,m}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+-\hbar^{2}\left(\frac{1}{\sin^{2}\theta}\partial_{\varphi}^{2}+\frac{1}{\sin\theta}\partial_{\theta}\left(\sin\theta\partial_{\theta}\right)\right)\BraKet{\theta,\varphi|l,m} & =\hbar^{2}l\left(l+1\right)\BraKet{\theta,\varphi|l,m}
+\end{align*}
+
+\end_inset
+
+to get for 
+\begin_inset Formula $m,l\in\mathbb{Z}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+\left(\frac{1}{\sin\theta}\frac{\dd}{\dd\theta}\left(\sin\theta\partial_{\theta}\right)-\frac{m^{2}}{\sin^{2}\theta}+l\left(l+1\right)\right)f_{l}^{m}\left(\theta\right) & =0
+\end{align*}
+
+\end_inset
+
+Transform 
+\begin_inset Formula $x=\cos\theta$
+\end_inset
+
+ and solve this by a power series.
+ The solutions 
+\begin_inset Formula $P_{l}^{m}\left(\cos\theta\right)$
+\end_inset
+
+ are the 
+\emph on
+associated Legendre polynomials
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+Together we have the 
+\emph on
+spherical harmonics
+\emph default
+:
+\begin_inset Formula 
+\begin{align*}
+\BraKet{\theta,\varphi|l,m} & =Y_{l}^{m}\left(\theta,\varphi\right)=\left(-1\right)^{m}\sqrt{\frac{2l+1}{4\pi}\cdot\frac{\left(l-m\right)!}{\left(l+m\right)!}}\cdot e^{\ii m\varphi}P_{l}^{m}\left(\cos\theta\right)
+\end{align*}
+
+\end_inset
+
+Of course they are normalized:
+\begin_inset Formula 
+\begin{align*}
+\BraKet{l',m'|l,m} & =\delta_{ll'}\delta_{mm'}\\
+\Rightarrow\qquad\int_{0}^{2\pi}\int_{0}^{\pi}Y_{l'}^{m'}\left(\theta,\varphi\right)^{*}Y_{l}^{m}\left(\theta,\varphi\right)\sin\theta\dd\theta & =\delta_{ll'}\delta_{mm'}
+\end{align*}
+
+\end_inset
+
+Therefore any function of
+\begin_inset Formula 
+\begin{align*}
+\vec{n} & =\left(\begin{array}{c}
+\sin\theta\cos\varphi\\
+\sin\theta\sin\varphi\\
+\cos\theta
+\end{array}\right)
+\end{align*}
+
+\end_inset
+
+can be expanded in terms of 
+\begin_inset Formula $Y_{l}^{m}\left(\theta,\varphi\right)$
+\end_inset
+
+'s, because they form a complete basis:
+\begin_inset Formula 
+\begin{align*}
+\sum_{l=0}^{\infty}\sum_{m=-l}^{l}\KET{l,m}\BRA{l,m} & =\hat{I}_{\text{angular}}\\
+\sum_{l=0}^{\infty}\sum_{m=-l}^{l}Y_{l}^{m}\left(\theta,\varphi\right)Y_{l}^{m}\left(\theta',\varphi'\right) & =\delta\left(\vec{n}-\vec{n}'\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+From the general theory we also know:
+\begin_inset Formula 
+\begin{align*}
+\hat{L}_{\pm}\KET{l,m} & =\hbar\sqrt{\left(l\mp m\right)\left(l\pm m+1\right)}\KET{l,m\pm1}
+\end{align*}
+
+\end_inset
+
+For an arbitrary normalized state 
+\begin_inset Formula $\KET{\alpha}$
+\end_inset
+
+ in the angular Hilbert space one gets:
+\begin_inset Formula 
+\begin{align*}
+\BraKet{\theta,\varphi|\hat{L}_{-}|\alpha} & =\ii\hbar e^{\ii\varphi}\left[\ii\partial_{\theta}-\cot\theta\right]\BraKet{\theta,\varphi|\alpha}
+\end{align*}
+
+\end_inset
+
+For example:
+\begin_inset Formula 
+\begin{align*}
+Y_{l}^{l-1}\left(\theta,\varphi\right) & =-N_{l}^{l}e^{\ii\left(l-1\right)\varphi}\left(l\cot\theta-\partial_{\theta}\right)P_{l}^{l}\left(\cos\theta\right)\\
+P_{l}^{l}\left(\cos\theta\right) & =\sin^{l}\left(\theta\right)
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+Y_{l}^{-m}\left(\theta,\varphi\right) & =\left(-1\right)^{m}\left(Y_{l}^{m}\left(\theta,\varphi\right)\right)^{*}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Relation with the kinetic energy
+\end_layout
+
+\begin_layout Standard
+Remember from classical mechanics:
+\begin_inset Formula 
+\begin{align*}
+H\left(\vec{q},\vec{p}\right) & =\frac{1}{2m}p^{2}+V\left(\vec{q}\right)
+\end{align*}
+
+\end_inset
+
+In spherical coordinates we have the canonical transformation
+\begin_inset Formula 
+\begin{align*}
+\left(\begin{array}{c}
+q_{x}\\
+q_{y}\\
+q_{z}
+\end{array}\right) & \to\left(\begin{array}{c}
+r\\
+\theta\\
+\varphi
+\end{array}\right) & \Rightarrow\quad\left(\begin{array}{c}
+p_{x}\\
+p_{y}\\
+p_{z}
+\end{array}\right) & \to\left(\begin{array}{c}
+p_{r}\\
+p_{\theta}\\
+p_{\varphi}
+\end{array}\right)
+\end{align*}
+
+\end_inset
+
+with the commutators
+\begin_inset Formula 
+\begin{align*}
+\left\{ r,p_{r}\right\}  & =\left\{ \theta,p_{\theta}\right\} =\left\{ \varphi,p_{\varphi}\right\} =1
+\end{align*}
+
+\end_inset
+
+and the other commutators are zero.
+ The Hamiltonian is then
+\begin_inset Formula 
+\begin{align*}
+H\left(r,\theta,\varphi,p_{r},p_{\theta},p_{\varphi}\right) & =\frac{1}{2m}p_{r}^{2}+\frac{1}{2mr^{2}}L^{2}+V\left(r,\theta,\varphi\right)
+\end{align*}
+
+\end_inset
+
+with:
+\begin_inset Formula 
+\begin{align*}
+L^{2} & =\frac{1}{\sin^{2}\theta}p_{\varphi}^{2}+p_{\theta}^{2}
+\end{align*}
+
+\end_inset
+
+To see this in quantum mechanics, we use
+\begin_inset Formula 
+\begin{align*}
+\hat{L}^{2} & =\hat{q}^{2}\hat{p}^{2}-\left(\hat{\vec{q}}\cdot\hat{\vec{p}}\right)^{2}+\ii\hbar\hat{\vec{q}}\cdot\hat{\vec{p}}
+\end{align*}
+
+\end_inset
+
+and calculate for an arbitrary state 
+\begin_inset Formula $\KET{\alpha}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+\BraKet{\vec{q}|\hat{L}^{2}|\alpha} & =q^{2}\BraKet{\vec{q}|\hat{p}^{2}|\alpha}-\vec{q}\cdot\left(-\ii\hbar\vec{\nabla}\right)\cdot\vec{q}\cdot\left(-\ii\hbar\vec{\nabla}\right)\BraKet{\vec{q}|\alpha}+\ii\hbar\vec{q}\cdot\left(-\ii\hbar\vec{\nabla}\right)\BraKet{\vec{q}|\alpha}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\BraKet{\vec{q}|\frac{1}{2m}\hat{p}^{2}|\alpha} & =-\frac{\hbar^{2}}{2m}\left(\frac{1}{r}\partial_{r}\left(r\partial_{r}\right)+\frac{1}{r}\partial_{r}\right)\BraKet{\vec{q}|\alpha}+\frac{1}{2mr^{2}}\BraKet{\vec{q}|\hat{L}^{2}|\alpha}=\\
+ & =-\frac{\hbar^{2}}{2m}\left(\frac{1}{r^{2}}\partial_{r}\left(r^{2}\partial_{r}\right)\right)\BraKet{\vec{q}|\alpha}+\frac{1}{2mr^{2}}\BraKet{\vec{q}|\hat{L}^{2}|\alpha}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Central forces
+\end_layout
+
+\begin_layout Standard
+Definition:
+\end_layout
+
+\begin_layout Standard
+A central force has a potential, that depends only on the radial coordinate:
+\begin_inset Formula 
+\begin{align*}
+V\left(\vec{q}\right) & =V\left(\hat{r}\right)
+\end{align*}
+
+\end_inset
+
+Therefore it commutes with 
+\begin_inset Formula $\hat{p}^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $\hat{L}^{2}$
+\end_inset
+
+ and we have a set of common eigenstates:
+\begin_inset Formula 
+\begin{align*}
+\hat{H}\KET{E,l,m} & =E\KET{E,l,m}\\
+\hat{L}^{2}\KET{E,l,m} & =\hbar^{2}l\left(l+1\right)\KET{E,l,m}\\
+\hat{L}_{z}\KET{E,l,m} & =\hbar m\KET{E,l,m}
+\end{align*}
+
+\end_inset
+
+We define
+\begin_inset Formula 
+\begin{align*}
+\psi_{Elm}\left(r,\theta,\varphi\right) & :=\BraKet{r,\theta,\varphi|E,l,m}=R_{Elm}\left(r\right)Y_{l}^{m}\left(\theta,\varphi\right)
+\end{align*}
+
+\end_inset
+
+and get:
+\begin_inset Formula 
+\begin{align*}
+\left(-\frac{\hbar^{2}}{2mr^{2}}\frac{\dd}{\dd r}\left(r^{2}\frac{\dd}{\dd r}\right)+\frac{\hbar^{2}l\left(l+1\right)}{2mr^{2}}+V\left(r\right)\right)R_{Elm}\left(r\right) & =ER_{Elm}\left(r\right)
+\end{align*}
+
+\end_inset
+
+This doesn't depend on the quantum number 
+\begin_inset Formula $m$
+\end_inset
+
+, so we just write 
+\begin_inset Formula $R_{Elm}\left(r\right)$
+\end_inset
+
+.
+ Now we transform
+\begin_inset Formula 
+\begin{align*}
+R_{El}\left(r\right) & :=\frac{U_{El}\left(r\right)}{r}
+\end{align*}
+
+\end_inset
+
+and get:
+\begin_inset Formula 
+\begin{align*}
+\Bigg(-\frac{\hbar^{2}}{2m}\frac{\dd^{2}}{\dd r^{2}}+\underbrace{\left(V\left(r\right)+\frac{\hbar^{2}l\left(l+1\right)}{2mr^{2}}\right)}_{=:V_{\text{eff}}\left(r\right)}\Bigg)U_{El}\left(r\right) & =EU_{El}\left(r\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%DATE: Do 24.5.12
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Addition of angular momentum
+\end_layout
+
+\begin_layout Standard
+Consider two particles with the same mass and momenta 
+\begin_inset Formula $\vec{p}^{\,\left(1\right)}$
+\end_inset
+
+ and 
+\begin_inset Formula $\vec{p}\,^{\left(2\right)}$
+\end_inset
+
+.
+ In classical mechanics they generate translations (
+\begin_inset Formula $k\in\left\{ 1,2\right\} $
+\end_inset
+
+):
+\begin_inset Formula 
+\begin{align*}
+f\left(\vec{q}^{\,\left(k\right)}+\delta\vec{q}^{\,\left(k\right)},\vec{p}^{\,\left(k\right)}\right) & \approx f\left(\vec{q}^{\,\left(k\right)},\vec{p}^{\,\left(k\right)}\right)+\left\{ \vec{p}^{\,\left(k\right)},f\left(\vec{q}^{\,\left(k\right)}\right)\right\} \cdot\delta\vec{q}^{\,\left(k\right)}+O\left(\left(\delta\vec{q}^{\,\left(k\right)}\right)^{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula $\vec{p}:=\left(\vec{p}^{\,\left(1\right)},\vec{p}^{\,\left(2\right)}\right)$
+\end_inset
+
+ generates translations of 
+\begin_inset Formula $\vec{q}:=\left(\vec{q}^{\,\left(1\right)},\vec{q}^{\,\left(2\right)}\right)$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+f\left(\vec{q}+\delta\vec{q},\vec{p}\right) & \approx f\left(\vec{q},\vec{p}\right)+\left\{ \vec{p},f\left(\vec{q}\right)\right\} \cdot\delta\vec{q}+O\left(\left(\delta\vec{q}\right)^{2}\right)
+\end{align*}
+
+\end_inset
+
+What is the meaning (in the sense of generators) of:
+\begin_inset Formula 
+\begin{align*}
+\vec{P} & :=\vec{p}^{\left(1\right)}+\vec{p}^{\left(2\right)}
+\end{align*}
+
+\end_inset
+
+Remember that 
+\begin_inset Formula $\vec{P}$
+\end_inset
+
+ and 
+\begin_inset Formula $\vec{Q}=\frac{1}{2}\left(\vec{q}^{\,\left(1\right)}+\vec{q}^{\,\left(2\right)}\right)$
+\end_inset
+
+ are canonical, that means:
+\begin_inset Formula 
+\begin{align*}
+\left\{ Q_{i},P_{j}\right\}  & =\delta_{ij}
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $\vec{P}$
+\end_inset
+
+ generates translations in 
+\begin_inset Formula $\vec{Q}$
+\end_inset
+
+.
+\begin_inset Formula 
+\begin{align*}
+f\left(\vec{q}^{\,\left(1\right)}+\delta\vec{Q},\vec{q}^{\,\left(2\right)}+\delta\vec{Q},\vec{p}^{\,\left(1\right)},\vec{p}^{\,\left(2\right)}\right) & =f\left(\vec{q}^{\,\left(1\right)},\vec{q}^{\,\left(2\right)},\vec{p}^{\,\left(1\right)},\vec{p}^{\,\left(2\right)}\right)+\\
+ & \quad+\left\{ \vec{P},f\left(\vec{q}^{\,\left(1\right)},\vec{q}^{\,\left(2\right)},\vec{p}^{\,\left(1\right)},\vec{p}^{\,\left(2\right)}\right)\right\} \cdot\delta\vec{Q}+O\left(\left(\delta\vec{Q}\right)^{2}\right)
+\end{align*}
+
+\end_inset
+
+In the same way 
+\begin_inset Formula $\vec{L}^{\,\left(1\right)}+\vec{L}^{\,\left(2\right)}$
+\end_inset
+
+ generates a 
+\noun on
+rigid
+\noun default
+ rotation of the total system.
+\end_layout
+
+\begin_layout Subsection
+Formal theory (2 
+\begin_inset Quotes eld
+\end_inset
+
+particles
+\begin_inset Quotes erd
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+We start with two angular momenta 
+\begin_inset Formula $\hat{\vec{J}}^{\,\left(1\right)}$
+\end_inset
+
+ and 
+\begin_inset Formula $\hat{\vec{J}}^{\,\left(2\right)}$
+\end_inset
+
+ with (
+\begin_inset Formula $n\in\left\{ 1,2\right\} $
+\end_inset
+
+):
+\begin_inset Formula 
+\begin{align*}
+\left[\hat{J}_{i}^{\,\left(n\right)},\hat{J}_{j}^{\,\left(n\right)}\right] & =\ii\hbar\varepsilon_{ijk}\hat{J}_{k}^{\,\left(1\right)}\\
+\left[\hat{J}_{i}^{\,\left(1\right)},\hat{J}_{j}^{\,\left(2\right)}\right] & =0
+\end{align*}
+
+\end_inset
+
+The 
+\begin_inset Quotes eld
+\end_inset
+
+total
+\begin_inset Quotes erd
+\end_inset
+
+ angular momentum is:
+\begin_inset Formula 
+\begin{align*}
+\hat{J}_{i} & :=\hat{J}_{i}^{\left(1\right)}\otimes\hat{I}^{\left(2\right)}+\hat{I}^{\left(1\right)}\otimes\hat{J}_{i}^{\left(2\right)}=:\hat{J}_{i}^{\left(1\right)}+\hat{J}_{i}^{\left(2\right)}
+\end{align*}
+
+\end_inset
+
+And a 
+\begin_inset Quotes eld
+\end_inset
+
+total
+\begin_inset Quotes erd
+\end_inset
+
+ rotation by 
+\begin_inset Formula $\vec{n},\theta$
+\end_inset
+
+ is:
+\begin_inset Formula 
+\begin{align*}
+\hat{D}\left(\vec{n},\theta\right) & :=\hat{D}\left(\vec{n},\theta\right)^{\left(1\right)}\otimes\hat{D}\left(\vec{n},\theta\right)^{\left(2\right)}=e^{-\frac{\ii}{\hbar}\hat{\vec{J}}^{\left(1\right)}\cdot\vec{n}\theta}\cdot e^{-\frac{\ii}{\hbar}\hat{\vec{J}}^{\left(2\right)}\cdot\vec{n}\theta}=e^{-\frac{\ii}{\hbar}\hat{\vec{J}}\cdot\vec{n}\theta}
+\end{align*}
+
+\end_inset
+
+Check whether 
+\begin_inset Formula $\hat{\vec{J}}$
+\end_inset
+
+ is an angular momentum:
+\begin_inset Formula 
+\begin{align*}
+\left[\hat{J}_{i},\hat{J}_{j}\right] & =\ii\hbar\varepsilon_{ijk}\hat{J}_{k}
+\end{align*}
+
+\end_inset
+
+So we have two possible sets of commuting operators:
+\end_layout
+
+\begin_layout Enumerate
+
+\noun on
+Decoupled basis
+\noun default
+: Take 
+\begin_inset Formula $\left\{ \left(\hat{J}^{\left(1\right)}\right)^{2},\left(\hat{J}^{\left(2\right)}\right)^{2},\hat{J}_{z}^{\left(1\right)},\hat{J}_{z}^{\left(1\right)}\right\} $
+\end_inset
+
+ with the common eigenstates:
+\begin_inset Formula 
+\begin{align*}
+\KET{j_{1},j_{2},m_{1},m_{2}} & :=\KET{j_{1},m_{1}}\otimes\KET{j_{2},m_{2}}
+\end{align*}
+
+\end_inset
+
+For 
+\begin_inset Formula $k\in\left\{ 1,2\right\} $
+\end_inset
+
+ we have:
+\begin_inset Formula 
+\begin{align*}
+\left(\hat{J}^{\left(k\right)}\right)^{2}\KET{j_{1},j_{2},m_{1},m_{2}} & =\hbar^{2}\left(j_{k}+1\right)\KET{j_{1},j_{2},m_{1},m_{2}}\\
+\hat{J}_{z}^{\left(k\right)}\KET{j_{1},j_{2},m_{1},m_{2}} & =\hbar m_{k}\KET{j_{1},j_{2},m_{1},m_{2}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\noun on
+Coupled basis
+\noun default
+: Take 
+\begin_inset Formula $\left\{ \left(\hat{J}^{\left(1\right)}\right)^{2},\left(\hat{J}^{\left(2\right)}\right)^{2},\hat{J}^{2},\hat{J}_{z}\right\} $
+\end_inset
+
+ -- observe 
+\begin_inset Formula $\left[\hat{J}^{2},\hat{J}_{z}^{\left(k\right)}\right]\not=0$
+\end_inset
+
+ -- with the common eigenstates 
+\begin_inset Formula $\KET{j_{1},j_{2},j,m}$
+\end_inset
+
+ with:
+\begin_inset Formula 
+\begin{align*}
+\hat{J}^{2}\KET{j_{1},j_{2},j,m} & =\hbar^{2}j\left(j+1\right)\KET{j_{1},j_{2},j,m}\\
+\hat{J}_{z}\KET{j_{1},j_{2},j,m} & =\hbar m\KET{j_{1},j_{2},j,m}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The two bases are related (for fixed 
+\begin_inset Formula $j_{1},j_{2}$
+\end_inset
+
+):
+\begin_inset Formula 
+\begin{align*}
+\KET{j_{1},j_{2},j,m} & =\sum_{m_{1}=-j_{1}}^{j_{1}}\sum_{m_{2}=-j_{2}}^{j_{2}}\underbrace{\left\langle j_{1},j_{2},m_{1},m_{2}|j_{1},j_{2},j,m\right\rangle }_{\text{Lebsch-Gordan coeffizients}}\KET{j_{1},j_{2},m_{1},m_{2}}
+\end{align*}
+
+\end_inset
+
+Some properties of 
+\begin_inset Formula $\left\langle m_{1},m_{2}|j,m\right\rangle :=\left\langle j_{1},j_{2},m_{1},m_{2}|j_{1},j_{2},j,m\right\rangle $
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+Consider
+\begin_inset Formula 
+\begin{align*}
+\hat{J}_{z}-\hat{J}_{z}^{\left(1\right)}-\hat{J}_{z}^{\left(2\right)} & =0
+\end{align*}
+
+\end_inset
+
+and sandwich between 
+\begin_inset Formula $\left\langle j_{1},j_{2},m_{1},m_{2}|\ldots|j_{1},j_{2},j,m\right\rangle $
+\end_inset
+
+ to get:
+\begin_inset Formula 
+\begin{align*}
+\left(m-m_{1}-m_{2}\right)\left\langle m_{1},m_{2}|j,m\right\rangle  & =0
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $\left\langle m_{1},m_{2}|j,m\right\rangle =0$
+\end_inset
+
+ for 
+\begin_inset Formula $m\not=m_{1}+m_{2}$
+\end_inset
+
+ and one can eliminate one of the sums above.
+ One can also proof:
+\begin_inset Formula 
+\begin{align*}
+\abs{j_{1}-j_{2}} & \le j\le j_{1}+j_{2}
+\end{align*}
+
+\end_inset
+
+From unitarity of the matrix for the change of basis we get:
+\begin_inset Formula 
+\begin{align*}
+\sum_{m_{1}=-j_{1}}^{j_{1}}\sum_{m_{2}=-j_{2}}^{j_{2}}\left\langle m_{1}m_{2}|j,m\right\rangle \left\langle m_{1}m_{2}|j',m'\right\rangle ^{*} & =\delta_{jj'}\delta_{mm'}\\
+\sum_{j=\abs{j_{1}-j_{2}}}^{j_{1}+j_{2}}\sum_{m=-j}^{j}\left\langle m_{1}m_{2}|j,m\right\rangle \left\langle m_{1}'m_{2}'|j,m\right\rangle ^{*} & =\delta_{m_{1}m_{1}'}\delta_{m_{2}m_{2}'}
+\end{align*}
+
+\end_inset
+
+Finally using 
+\begin_inset Formula $\hat{J}_{\pm}=\hat{J}_{\pm}^{\left(1\right)}+\hat{J}_{\pm}^{\left(2\right)}$
+\end_inset
+
+ gives:
+\begin_inset Formula 
+\begin{align*}
+\sqrt{\left(j\mp m\right)\left(j\pm m+1\right)}\BraKet{m_{1},m_{2}|j,m\pm1} & =\sqrt{\left(j_{1}\pm m_{1}\right)\left(j_{1}\mp m_{1}+1\right)}\BraKet{m_{1}\mp1,m_{2}|j,m}+\\
+ & \quad+\sqrt{\left(j_{2}\pm m_{2}\right)\left(j_{2}\mp m_{2}+1\right)}\BraKet{m_{1},m_{2}\pm1|j,m}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+The formal theory for many particles
+\end_layout
+
+\begin_layout Standard
+This is a 
+\noun on
+REAL
+\noun default
+ MESS!!
+\end_layout
+
+\begin_layout Subsection
+Example: Two spin 
+\begin_inset Formula ${\displaystyle \frac{1}{2}}$
+\end_inset
+
+ particles
+\end_layout
+
+\begin_layout Standard
+Here the total spin is:
+\begin_inset Formula 
+\begin{align*}
+\hat{\vec{S}} & =\hat{\vec{S}}^{\,\left(1\right)}+\hat{\vec{S}}^{\,\left(2\right)} & \hat{S}_{z} & =\hat{S}_{z}^{\left(1\right)}+\hat{S}_{z}^{\left(2\right)} & \hat{S}^{2} & =\left(\hat{S}^{\left(1\right)}\right)^{2}+\left(\hat{S}^{\left(1\right)}\right)^{2}+2\hat{\vec{S}}^{\,\left(1\right)}\cdot\hat{\vec{S}}^{\,\left(2\right)}
+\end{align*}
+
+\end_inset
+
+And the quantum numbers are 
+\begin_inset Formula $j_{1}=s_{1}=\frac{1}{2}$
+\end_inset
+
+, 
+\begin_inset Formula $j_{2}=s_{2}=\frac{1}{2}$
+\end_inset
+
+.
+ The total is 
+\begin_inset Formula $m=m_{1}+m_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $s$
+\end_inset
+
+ is restricted to:
+\begin_inset Formula 
+\begin{align*}
+\abs{\frac{1}{2}-\frac{1}{2}} & \le s\le\frac{1}{2}+\frac{1}{2}\\
+0 & \le s\le1
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+The decoupled basis (
+\begin_inset Formula $\KET{m_{1},m_{2}}$
+\end_inset
+
+) is:
+\begin_inset Formula 
+\begin{align*}
+\left\{ \KET{\frac{1}{2},\frac{1}{2}},\KET{\frac{1}{2},-\frac{1}{2}},\KET{-\frac{1}{2},\frac{1}{2}},\KET{-\frac{1}{2},-\frac{1}{2}}\right\} 
+\end{align*}
+
+\end_inset
+
+Remember that this basis does not have a well defined 
+\begin_inset Formula $\hat{S}^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The coupled basis (
+\begin_inset Formula $\KET{s,m}$
+\end_inset
+
+) is: 
+\begin_inset Formula 
+\begin{align*}
+ & \left\{ \KET{s=0,m=0},\KET{s=1,m=-1},\KET{s=1,m=0},\KET{s=1,m=1}\right\} =\\
+ & \qquad\qquad\qquad\qquad\qquad=\{\underbrace{\KET{0,0}}_{\text{"Singlet"}},\underbrace{\KET{1,-1},\KET{1,0},\KET{1,1}}_{\text{"Triplet" states}}\}
+\end{align*}
+
+\end_inset
+
+Using 
+\begin_inset Formula $m=m_{1}+m_{2}$
+\end_inset
+
+ we get:
+\begin_inset Formula 
+\begin{align*}
+\KET{s=1,m=1} & =\KET{\frac{1}{2},\frac{1}{2}}:=\KET{\frac{1}{2}}^{\left(1\right)}\otimes\KET{\frac{1}{2}}^{\left(2\right)}\\
+\KET{s=1,m=0} & =\frac{1}{\sqrt{2}}\left(\KET{\frac{1}{2},-\frac{1}{2}}+\KET{-\frac{1}{2},\frac{1}{2}}\right)\\
+\KET{s=1,m=-1} & =\KET{-\frac{1}{2},-\frac{1}{2}}\\
+\KET{s=0,m=0} & =\frac{1}{\sqrt{2}}\left(\KET{\frac{1}{2},-\frac{1}{2}}-\KET{-\frac{1}{2},\frac{1}{2}}\right)
+\end{align*}
+
+\end_inset
+
+(Take a look at: 
+\noun on
+Sakurai
+\noun default
+, Section 3.10: 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+Spin Correlation measurements and Bell's inequality
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+Think about the Hamiltonian for 
+\begin_inset Formula $k\in\mathbb{R}_{<0}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+\hat{H} & =\underbrace{\underbrace{\hbar\omega\left(\hat{S}_{z}^{\left(1\right)}+\hat{S}_{z}^{\left(2\right)}\right)}_{\hat{S}_{z}^{\left(1\right)},\hat{S}_{z}^{\left(2\right)}\text{ are conserved}}+k\hat{\vec{S}}^{\,\left(1\right)}\cdot\hat{\vec{S}}^{\,\left(2\right)}}_{\hat{S}^{2},\hat{S}_{z}\text{ are conserved}}
+\end{align*}
+
+\end_inset
+
+We use:
+\begin_inset Formula 
+\begin{align*}
+\hat{\vec{S}}^{\,\left(1\right)}\cdot\hat{\vec{S}}^{\,\left(2\right)} & =\frac{1}{2}\left(\hat{S}^{2}-\left(\hat{S}^{\left(1\right)}\right)^{2}-\left(\hat{S}^{\left(2\right)}\right)^{2}\right)
+\end{align*}
 
 \end_inset
 

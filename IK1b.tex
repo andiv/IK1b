@@ -11,6 +11,7 @@
 \setlength{\parindent}{0pt}
 \usepackage{babel}
 \usepackage{textcomp}
+\usepackage{mathrsfs}
 \usepackage{url}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -1474,7 +1475,7 @@ This looks like:
 
 \noindent \begin{center}
 \begin{tikzpicture}
- \begin{axis}[width=13cm, axis x line=middle, axis y line=middle, xtick={0}, ytick={0}, xlabel=$q$,domain=-6:6,samples=300]
+ \begin{axis}[width=13cm, axis x line=middle, axis y line=middle, xtick={0}, ytick={0}, xlabel=$q$,domain=-6:6,samples=300,smooth]
 %  \addplot[green,mark=none] {(8*x^3-12*x)*exp(-x^2/2)*0.5};
 %  \addlegendentry{$\psi_3 (q)$}
   \addplot[red,mark=none] {x^2*0.08};
@@ -1653,7 +1654,7 @@ Now we come back to the problem at hand:
 \begin{align*}
 \lambda & =\frac{t}{\hbar} & \hat{B} & =\hat{H} & \hat{A} & =\hat{q}
 \end{align*}
-We now:
+We know:
 \begin{align*}
 \left[\hat{H},\hat{q}\right] & =\frac{1}{2m}\left[\hat{p}^{2},\hat{q}\right]+\underbrace{\left[V\left(\hat{q}\right),\hat{q}\right]}_{=0}=\frac{1}{2m}\left(\hat{p}\left[\hat{p},\hat{q}\right]+\left[\hat{p},\hat{q}\right]\hat{p}\right)=\mins\frac{\ii\hbar}{m}\hat{p}\\
 \left[\hat{H},\hat{p}\right] & =\underbrace{\frac{1}{2m}\left[\hat{p}^{2},\hat{p}\right]}_{=0}+\frac{m\omega_{0}^{2}}{2}\left[\hat{q}^{2},\hat{p}\right]=\ii\hbar m\omega_{0}^{2}\hat{q}
@@ -1747,7 +1748,7 @@ is $k$ times, then $\BraKet{q|e_{n+1}}$ has $k+1$ nodes.
 
 \noindent \begin{center}
 \begin{tikzpicture}
- \begin{axis}[width=10cm, axis x line=middle, axis y line=middle, xtick={0}, ytick={0}, xlabel=$q$,domain=-6:6,samples=300]
+ \begin{axis}[width=10cm, axis x line=middle, axis y line=middle, xtick={0}, ytick={0}, xlabel=$q$,domain=-6:6,samples=150,smooth]
   \addplot[mark=none] {sin(x*114.6)*exp(-x^2*0.1)};
   \addplot[mark=*] coordinates {(-4.71,0) (-3.14,0) (-1.57,0) (0,0) (1.57,0) (3.14,0) (4.71,0)};
  \end{axis}
@@ -1757,8 +1758,786 @@ is $k$ times, then $\BraKet{q|e_{n+1}}$ has $k+1$ nodes.
 
 \subsection{The continuity equation}
 
+Let $\psi\left(\vec{q},t\right)$ solve the Schrödinger equation for
+the Hamilton operator $\hat{H}=\frac{\hat{\vec{p}}^{2}}{2m}+V\left(\hat{\vec{q}}\right)$.
+Since $\hat{H}$ is Hermitian, $V\left(\vec{q}\right)$ has to be
+real and solve:
+\begin{align*}
+\ii\hbar\partial_{t}\psi\left(\vec{q},t\right) & =\left(-\frac{\hbar^{2}}{2m}\nabla^{2}+V\left(\vec{q}\right)\right)\psi\left(\vec{q},t\right)\\
+-\ii\hbar\partial_{t}\psi^{*}\left(\vec{q},t\right) & =\left(-\frac{\hbar^{2}}{2m}\nabla^{2}+V\left(\vec{q}\right)\right)\psi^{*}\left(\vec{q},t\right)
+\end{align*}
+This gives:
+\begin{align*}
+\partial_{t}\abs{\psi}^{2} & =\partial_{t}\left(\psi\psi^{*}\right)=\left(\partial_{t}\psi\right)\psi^{*}+\psi\left(\partial_{t}\psi^{*}\right)=\\
+ & =\psi^{*}\left(\frac{1}{\ii\hbar}\left(-\frac{\hbar^{2}}{2m}\nabla^{2}+V\left(\vec{q}\right)\right)\psi\right)+\psi\left(\frac{-1}{\ii\hbar}\left(-\frac{\hbar^{2}}{2m}\nabla^{2}+V\left(\vec{q}\right)\right)\psi^{*}\right)=\\
+ & =\psi^{*}\left(-\frac{\hbar}{2m\ii}\nabla^{2}\psi\right)+\psi\left(\frac{\hbar}{2m\ii}\nabla^{2}\psi^{*}\right)=\\
+ & =\frac{\hbar}{2m\ii}\left(\psi\nabla^{2}\psi^{*}-\psi^{*}\nabla^{2}\psi\right)=\\
+ & =\frac{\hbar}{2m\ii}\nabla\left(\psi\nabla\psi^{*}-\psi^{*}\nabla\psi\right)
+\end{align*}
+Therefore we have the continuity equation:
+\begin{align*}
+\partial_{t}\abs{\psi}^{2}-\frac{\hbar}{2m\ii}\nabla\left(\psi\nabla\psi^{*}-\psi^{*}\nabla\psi\right) & =0
+\end{align*}
 
-\chapter[Symmetries in quantum mechanics]{Symmetries in quantum mechanics (Angular momentum)}
+
+Define the probability density $\varrho_{\psi}\left(\vec{q},t\right):=\abs{\psi\left(\vec{q},t\right)}^{2}$
+and the probability current:
+\begin{align*}
+\vec{j}_{\psi}\left(\vec{q},t\right) & :=-\frac{\ii\hbar}{2m}\left(\psi^{*}\nabla\psi-\psi\nabla\psi^{*}\right)
+\end{align*}
+They are related by 
+\begin{align*}
+\partial_{t}\varrho_{\psi}\left(\vec{q},t\right)+\nabla\vec{j}_{\psi}\left(\vec{q},t\right) & =0
+\end{align*}
+and we can interpret them as expectation values:
+\begin{align*}
+\varrho_{\psi}\left(\vec{q},t\right) & =\abs{\psi\left(\vec{q},t\right)}^{2}=\abs{\left\langle \hat{\vec{q}}|\psi\left(t\right)\right\rangle }^{2}=\BRA{\hat{\vec{q}}}\underbrace{\KET{\psi\left(t\right)}\BRA{\psi\left(t\right)}}_{=:\hat{\varrho}}\KET{\hat{\vec{q}}}=\BraKet{\hat{\vec{q}}|\hat{\varrho}|\hat{\vec{q}}}
+\end{align*}
+\begin{align*}
+\vec{j}\left(\vec{q},t\right) & =\frac{-\ii\hbar}{2m}\left(\psi^{*}\nabla\psi-\psi\nabla\psi^{*}\right)=\frac{-\ii\hbar}{2m}\left(\left\langle \psi|\vec{q}\right\rangle \nabla\left\langle \vec{q}|\psi\right\rangle -\left\langle \vec{q}|\psi\right\rangle \nabla\left\langle \psi|\vec{q}\right\rangle \right)=\\
+ & =\frac{-1}{2m}\left(\left\langle \vec{q}|\hat{\vec{p}}|\psi\right\rangle \left\langle \psi|\vec{q}\right\rangle -\left\langle \vec{q}|\psi\right\rangle \left\langle \psi|\hat{\vec{p}}|\vec{q}\right\rangle \right)=\\
+ & =\frac{-1}{2m}\BRA{\vec{q}}\underbrace{\left(\hat{\vec{p}}\KET{\psi}\BRA{\psi}-\KET{\psi}\BRA{\psi}\hat{\vec{p}}\right)}_{=\left[\hat{\vec{p}},\hat{\varrho}\right]}\KET{\vec{q}}=\frac{-1}{2m}\BRA{\vec{q}}\underbrace{\left[\hat{\vec{p}},\hat{\varrho}\right]}_{=:-2m\hat{\vec{j}}}\KET{\vec{q}}=\BraKet{\vec{q}|\hat{\vec{j}}|\vec{q}}
+\end{align*}
+
+
+%DATE: Di 15.5.12
+
+
+\chapter{Symmetries, Rotations and Angular momentum}
+
+Remember from classical mechanics:
+
+A symmetry is a physical operation that leaves the system invariant.
+
+In classical mechanics this means we change $\vec{q}$ and $\vec{p}$.
+
+Examples:
+\begin{itemize}
+\item For $\mathcal{R}\in\text{SL}_{n}\left(\mathbb{R}\right)$, that means
+$\mathcal{R}^{-1}=\mathcal{R}^{T}$ and $\det\left(\mathcal{R}\right)=1$,
+we define:
+\begin{align*}
+\vec{q}' & =\mathcal{R}\vec{q}\\
+\vec{p}' & =\mathcal{R}\vec{p}
+\end{align*}
+This leaves a Lagrangian of the Form ${\displaystyle \mathscr{L}\left(\vec{q},\dot{\vec{q}}\right)=\frac{m}{2}\abs{\dot{\vec{q}}}^{2}-V\left(\abs{\vec{q}}\right)}$.
+$\Rightarrow$ $\left\{ H,\vec{L}\right\} =0$
+\item The translation $\vec{q}'=\vec{q}+\vec{q}_{0}$ leaves the free particle
+with Lagrangian
+\begin{align*}
+\mathscr{L}\left(\vec{q},\dot{\vec{q}},t\right) & =\frac{m}{2}\abs{\dot{\vec{q}}}^{2}
+\end{align*}
+invariant and therefore $\left\{ H,\vec{p}\right\} =0$.
+\item Emmy Noether: Symmetry $\Rightarrow$ Existence of a constant of motion
+\end{itemize}
+
+\section{The tensor product in quantum mechanics}
+
+Consider two degrees of freedom (for example two particles in one
+dimension), described by states in $\mathcal{H}^{\left(1\right)},\mathcal{H}^{\left(2\right)}$.
+
+A postulate of quantum mechanics says, that the composite system is
+described by a state in the Hilbert space $\mathcal{H}=\mathcal{H}^{\left(1\right)}\otimes\mathcal{H}^{\left(2\right)}$.
+This space is called \noun{tensor product}.
+
+So the dimension is $\dim\mathcal{H}=\dim\left(\mathcal{H}^{\left(1\right)}\right)\cdot\dim\left(\mathcal{H}^{\left(2\right)}\right)$.
+
+If $\KET{\psi^{\left(1\right)}}\in\mathcal{H}^{\left(1\right)}$,
+$\KET{\psi^{\left(2\right)}}\in\mathcal{H}^{\left(2\right)}$ then
+$\KET{\psi^{\left(1\right)}}\otimes\KET{\psi^{\left(2\right)}}\in\mathcal{H}^{\left(1\right)}\otimes\mathcal{H}^{\left(2\right)}=\mathcal{H}$.
+
+If $\hat{A}^{\left(1\right)}$ acts on $\mathcal{H}^{\left(1\right)}$
+and $\hat{A}^{\left(2\right)}$ acts on $\mathcal{H}^{\left(2\right)}$,
+then $\hat{A}^{\left(1\right)}\otimes\hat{A}^{\left(2\right)}$ acts
+on $\mathcal{H}$ as follows:
+\begin{align*}
+\left(\hat{A}^{\left(1\right)}\otimes\hat{A}^{\left(2\right)}\right)\left(\KET{\psi^{\left(1\right)}}\otimes\KET{\psi^{\left(2\right)}}\right) & =\left(\hat{A}^{\left(1\right)}\KET{\psi^{\left(1\right)}}\otimes\hat{A}^{\left(2\right)}\KET{\psi^{\left(2\right)}}\right)
+\end{align*}
+\begin{align*}
+\hat{A}^{\left(1\right)} & \mapsto\hat{A}^{\left(1\right)}\otimes\hat{I}^{\left(2\right)}\\
+\hat{A}^{\left(2\right)} & \mapsto\hat{I}^{\left(1\right)}\otimes\hat{A}^{\left(2\right)}\\
+\left[\hat{A}^{\left(1\right)},\hat{A}^{\left(2\right)}\right] & =0
+\end{align*}
+For $\KET{\psi}=\KET{\psi^{\left(1\right)}}\otimes\KET{\psi^{\left(2\right)}}$
+and $\KET{\varphi}=\KET{\varphi^{\left(1\right)}}\otimes\KET{\varphi^{\left(2\right)}}$
+we have the scalar product:
+\begin{align*}
+\BraKet{\varphi|\psi} & =\BraKet{\varphi^{\left(1\right)}|\psi^{\left(1\right)}}\BraKet{\varphi^{\left(2\right)}|\psi^{\left(2\right)}}
+\end{align*}
+
+
+With all this together one can write any operator $\hat{A}$ and any
+Ket $\KET{\psi}$:
+\begin{align*}
+\hat{A} & =\sum_{n.m}c_{n,m}\hat{A}_{n}^{\left(1\right)}\otimes\hat{A}_{m}^{\left(2\right)}\\
+\KET{\psi} & =\sum_{n,m}a_{n,m}\KET{\psi_{n}^{\left(1\right)}}\otimes\KET{\psi_{m}^{\left(2\right)}}\stackrel{\text{i.A.}}{\not=}\KET{\varphi^{\left(1\right)}}\otimes\KET{\varphi^{\left(2\right)}}
+\end{align*}
+A state in the form $\KET{\psi^{\left(1\right)}}\otimes\KET{\psi^{\left(2\right)}}$
+is called \emph{separable}.
+
+If a state is not separable, it is called \emph{entangled}.
+
+For example:
+\begin{align*}
+\left(\hat{A}^{\left(1\right)}\otimes\hat{I}^{\left(2\right)}+\hat{I}\otimes\hat{A}^{\left(2\right)}\right)^{2} & =\left(\hat{A}^{\left(1\right)}\right)^{2}\otimes\hat{I}^{\left(2\right)}+2\hat{A}^{\left(1\right)}\otimes\hat{A}^{\left(2\right)}+\hat{I}\otimes\left(\hat{A}^{\left(2\right)}\right)^{2}
+\end{align*}
+Now we can understand better:
+\begin{align*}
+\hat{q}_{\alpha}\KET{\vec{q}} & =q_{\alpha}\KET{\vec{q}}
+\end{align*}
+$\KET{\vec{q}}$ is just a compact way to write:
+\begin{align*}
+\KET{\vec{q}} & =\KET{q_{x},q_{y},q_{z}}:=\KET{q_{x}}\otimes\KET{q_{y}}\otimes\KET{q_{z}}
+\end{align*}
+
+
+
+\section{Rotations and angular momentum}
+
+Come back to classical mechanics. We know, that $\vec{L}=\vec{q}\times\vec{p}$
+\quotedblbase{}generates\textquotedblleft{} rotations $\mathcal{R}\left(\vec{n},\dd\vartheta\right)$
+around an normalized axis $\vec{n}$ with the angle $\dd\vartheta$.
+\begin{align*}
+f\left(\vec{q},\vec{p}\right) & \to f\left(\vec{q}',\vec{p}'\right)=f\left(\mathcal{R}\left(\vec{n},\dd\vartheta\right)\vec{q},\mathcal{R}\left(\vec{n},\dd\vartheta\right)\vec{p}\right)\approx f\left(\vec{q},\vec{p}\right)+\dd\vartheta\left\{ \underbrace{\vec{L}\cdot\vec{n}}_{\text{Generator}},f\left(\vec{q},\vec{p}\right)\right\} +O\left(\left(\dd\vartheta\right)^{2}\right)
+\end{align*}
+Another example:
+\begin{align*}
+f\left(\vec{q}\left(t\right),\vec{p}\left(t\right)\right) & \to f\left(\vec{q}\left(t+\delta t\right),\vec{p}\left(t+\delta t\right)\right)\approx f\left(\vec{q},\vec{p}\right)+\dd t\left\{ H,f\left(\vec{q},\vec{p}\right)\right\} 
+\end{align*}
+Explicit calculation shows:
+\begin{align*}
+\left\{ L_{i},L_{j}\right\}  & =\varepsilon_{ijk}L_{k}
+\end{align*}
+
+
+In quantum mechanics we \noun{define} angular momentum $\vec{j}$
+as the generator of rotations. Define:
+\begin{align*}
+\KET{\psi^{\mathcal{R}}} & =\hat{D}\left(\mathcal{R}\right)\KET{\psi}=e^{-\frac{\ii}{\hbar}\left(\vec{j}\cdot\vec{n}\right)\theta}\KET{\psi}
+\end{align*}
+Check out, how an operator $\hat{A}$ changes:
+\begin{align*}
+\hat{A}^{\mathcal{R}} & =\hat{D}\left(\mathcal{R}\right)^{\dagger}\hat{A}\hat{D}\left(\mathcal{R}\right)\xrightarrow{\theta\to\dd\theta}\hat{A}+\frac{\ii\dd\theta}{\hbar}\left[\vec{j}\cdot\vec{n},\hat{A}\right]+O\left(\dd\theta^{2}\right)
+\end{align*}
+We want, that the group properties of the $\mathcal{R}$'s, which
+are
+\begin{align*}
+\mathcal{R}\left(\vec{n},0\right) & =E_{3}\\
+\mathcal{R}\left(\vec{n}_{1},\theta_{1}\right)\mathcal{R}\left(\vec{n}_{2},\theta_{2}\right) & =\mathcal{R}\left(\vec{n}\left(\vec{n}_{1},\vec{n}_{2}\right),\theta\left(\theta_{1},\theta_{2}\right)\right)\quad\text{(cf. Goldstein Classical Mechanics)}\\
+\mathcal{R}\left(\vec{n},\theta\right)^{-1} & =\mathcal{R}\left(\vec{n},-\theta\right)\\
+\left(\mathcal{R}_{1}\mathcal{R}_{2}\right)\mathcal{R}_{3} & =\mathcal{R}_{1}\left(\mathcal{R}_{2}\mathcal{R}_{3}\right)
+\end{align*}
+go into the $\hat{D}$'s.
+\begin{align*}
+\hat{D}\left(\vec{n},0\right) & =\hat{I}\\
+\hat{D}_{1}\left(\vec{n}_{1},\theta_{1}\right)\hat{D}_{2}\left(\vec{n}_{2},\theta_{2}\right) & =\hat{D}\left(\vec{n}\left(\vec{n}_{1},\vec{n}_{2}\right),\theta\left(\theta_{1},\theta_{2}\right)\right)\\
+\hat{D}\left(\vec{n},\theta\right)^{-1} & =\hat{D}\left(\vec{n},-\theta\right)\\
+\left(\hat{D}_{1}\hat{D}_{2}\right)\hat{D}_{3} & =\hat{D}_{1}\left(\hat{D}_{2}\hat{D}_{3}\right)
+\end{align*}
+In particular we want the $\hat{D}$'s version of:
+\begin{align*}
+\mathcal{R}\left(\vec{e}_{x},\varepsilon\right)\mathcal{R}\left(\vec{e}_{y},\varepsilon\right)-\mathcal{R}\left(\vec{e}_{y},\varepsilon\right)\mathcal{R}\left(\vec{e}_{x},\varepsilon\right) & \approx\left(\begin{array}{ccc}
+1 & 0 & 0\\
+0 & 1-\frac{\varepsilon^{2}}{2} & -\varepsilon\\
+0 & \varepsilon & 1-\frac{\varepsilon^{2}}{2}
+\end{array}\right)\left(\begin{array}{ccc}
+1-\frac{\varepsilon^{2}}{2} & 0 & \varepsilon\\
+0 & 1 & 0\\
+-\varepsilon & 0 & 1-\frac{\varepsilon^{2}}{2}
+\end{array}\right)-\\
+ & \quad-\left(\begin{array}{ccc}
+1-\frac{\varepsilon^{2}}{2} & 0 & \varepsilon\\
+0 & 1 & 0\\
+-\varepsilon & 0 & 1-\frac{\varepsilon^{2}}{2}
+\end{array}\right)\left(\begin{array}{ccc}
+1 & 0 & 0\\
+0 & 1-\frac{\varepsilon^{2}}{2} & -\varepsilon\\
+0 & \varepsilon & 1-\frac{\varepsilon^{2}}{2}
+\end{array}\right)=\\
+ & =\mathcal{R}\left(\vec{e}_{z},\varepsilon^{2}\right)-E_{3}=\left(\begin{array}{ccc}
+0 & -\varepsilon^{2} & 0\\
+\varepsilon^{2} & 0 & 0\\
+0 & 0 & 0
+\end{array}\right)
+\end{align*}
+So we want:
+\begin{align*}
+\left[\hat{D}\left(\vec{e}_{x},\varepsilon\right),\hat{D}\left(\vec{e}_{y},\varepsilon\right)\right] & =\hat{D}\left(\vec{e}_{z},\varepsilon^{2}\right)-\hat{I}+O\left(\varepsilon^{3}\right)
+\end{align*}
+Use
+\begin{align*}
+\hat{D}\left(\vec{e}_{i},\varepsilon\right) & =\exp\left(-\frac{\ii}{\hbar}\hat{J}_{i}\varepsilon\right)\approx1-\frac{\ii}{\hbar}\hat{J}_{i}\varepsilon+\left(-\frac{\ii}{\hbar}\right)^{2}\frac{1}{2}\hat{J}_{i}^{2}\varepsilon^{2}+\ldots
+\end{align*}
+to get:
+\begin{align*}
+\left[\hat{J}_{i},J_{j}\right] & =\ii\hbar\varepsilon_{ijk}\hat{J}_{k}
+\end{align*}
+Funny remark: Take the spin $\hat{\vec{s}}$ and calculate:
+\begin{align*}
+\exp\left(-\frac{\ii}{\hbar}\hat{s}_{z}\theta\right)\KET + & =\exp\left(-\ii\frac{\theta}{2}\right)\KET +
+\end{align*}
+For electrons you need a rotation of $4\pi$ to come back to the same
+state.
+
+%DATE: Di 22.5.12
+
+
+\section{Eigenstates and eigenvalues of $\hat{\vec{j}}$}
+
+First (again) notice, that since $\left[\hat{J}_{i},\hat{J}_{k}\right]\not=0$
+for $i\not=k$ there is not any common eigenstate for the $\vec{J}$'s,
+but we know:
+\begin{align*}
+\left[\abs{\hat{\vec{J}}}^{2},\hat{J}_{i}\right]:=\left[\hat{\vec{J}}^{2},\hat{J}_{i}\right] & =0
+\end{align*}
+Therefore we can find a basis $\KET{a,b}$ with:
+\begin{align*}
+\hat{J}^{2}\KET{a,b} & =a\KET{a,b}\\
+\hat{J}_{z}\KET{a,b} & =b\KET{a,b}
+\end{align*}
+Now we introduce:
+\begin{align*}
+\hat{J}_{\pm} & :=\hat{J}_{x}\pm\ii\hat{J}_{y}\\
+\hat{J}_{\pm}^{\dagger} & =\hat{J}_{\mp}
+\end{align*}
+Note that this gives:
+\begin{align*}
+\left[\hat{J}^{2},\hat{J}_{\pm}\right] & =0 & \left[\hat{J}_{+},\hat{J}_{-}\right] & =2\hbar\hat{J}_{z} & \left[\hat{J}_{z},\hat{J}_{\pm}\right] & =\pm\hbar\hat{J}_{\pm}
+\end{align*}
+The trick is always the same:
+\begin{align*}
+\hat{J}_{z}\left(\hat{J}_{\pm}\KET{a,b}\right) & =\hat{J}_{z}\hat{J}_{\pm}\KET{a,b}=\left(\hat{J}_{\pm}\hat{J}_{z}+\left[\hat{J_{z}},\hat{J}_{\pm}\right]\right)\KET{a,b}=\\
+ & =\hat{J}_{\pm}b\KET{a,b}\pm\hbar\hat{J}_{\pm}\KET{a,b}=\left(b\pm\hbar\right)\hat{J}_{\pm}\KET{a,b}
+\end{align*}
+Therefore $\hat{J}_{\pm}\KET{a,b}$ is an eigenstate of $\hat{J}_{z}$
+with the eigenvalue $b\pm\hbar$:
+\begin{align*}
+\hat{J}_{\pm}\KET{a,b} & =N^{\pm}\left(a,b\right)\KET{a,b\pm\hbar}
+\end{align*}
+Now we show, that $\abs b$ has an upper limit. Consider
+\begin{align*}
+\left\langle a,b|\hat{J}_{+}\hat{J}_{+}^{\dagger}|a,b\right\rangle +\left\langle a,b|\hat{J}_{+}^{\dagger}\hat{J}_{+}|a,b\right\rangle  & \in\mathbb{R}_{\ge0}
+\end{align*}
+and:
+\begin{align*}
+\hat{J}_{+}\hat{J}_{+}^{\dagger}+\hat{J}_{+}^{\dagger}\hat{J}_{+} & =\hat{J}_{+}\hat{J}_{-}+\hat{J}_{-}\hat{J}_{+}=2\left(\hat{J}^{2}-\hat{J}_{z}^{2}\right)
+\end{align*}
+Then we get:
+\begin{align*}
+0\le & \left\langle a,b|\hat{J}^{2}-\hat{J}_{z}^{2}|a,b\right\rangle =\left\langle a,b|a-b^{2}|a,b\right\rangle =a-b^{2}\\
+a & \ge b^{2}\\
+\abs b & \le\sqrt{a}
+\end{align*}
+This means, that there is a $b_{\text{max}}$ defined by:
+\begin{align*}
+\hat{J}_{+}\KET{a,b_{\text{max}}} & =0
+\end{align*}
+From this equation we get
+\begin{align*}
+\hat{J}_{-}\hat{J}_{+}\KET{a,b_{\text{max}}} & =0
+\end{align*}
+and:
+\begin{align*}
+\hat{J}^{2}-\hat{J}_{z}^{2}-\hbar\hat{J}_{z} & =a-b_{\text{max}}^{2}-\hbar b_{\text{max}}=0
+\end{align*}
+This finally leads to:
+\begin{align*}
+a & =b_{\text{max}}\left(b_{\text{max}}+\hbar\right)
+\end{align*}
+Analogously we get for $\hat{J}_{-}$:
+\begin{align*}
+\hat{J}_{-}\KET{a,b_{\text{min}}} & =0
+\end{align*}
+From this equation we get
+\begin{align*}
+\hat{J}_{+}\hat{J}_{-}\KET{a,b_{\text{min}}} & =0
+\end{align*}
+and:
+\begin{align*}
+\hat{J}^{2}-\hat{J}_{z}^{2}+\hbar\hat{J}_{z} & =a-b_{\text{min}}^{2}+\hbar b_{\text{min}}=0
+\end{align*}
+This finally leads to:
+\begin{align*}
+a & =b_{\text{min}}\left(b_{\text{min}}-\hbar\right)
+\end{align*}
+A solution is $b_{\text{max}}=-b_{\text{min}}$ and for a $n\in\mathbb{Z}$:
+\begin{align*}
+b_{\text{max}} & =b_{\text{min}}+n\hbar\\
+b_{\text{max}}-b_{\text{mini}}=2b_{\text{max}} & =n\hbar\\
+b_{\text{max}} & =\frac{n}{2}\hbar\\
+a & =\frac{n}{2}\hbar\left(\frac{n}{2}\hbar+\hbar\right)=\hbar^{2}\underbrace{\frac{n}{2}}_{=:j}\left(\frac{n}{2}+1\right)
+\end{align*}
+Some names:
+
+$j\in\frac{1}{2}\mathbb{Z}$ is called \emph{the total angular momentum
+quantum number} and
+\begin{align*}
+m\in & \left\{ -j,\ldots,-j+1,\ldots,j-1,j\right\} 
+\end{align*}
+is called \emph{the magnetic quantum number}:
+\begin{align*}
+b & =m\hbar & a & =\hbar^{2}j\left(j+1\right)
+\end{align*}
+\begin{align*}
+\hat{J}^{2}\KET{j,m} & =\hbar^{2}j\left(j+1\right)\KET{j,m}\\
+\hat{J}_{z}\KET{j,m} & =\hbar m\KET{j,m}
+\end{align*}
+With a bit of algebra we get:
+\begin{align*}
+\hat{J}_{\pm}\KET{j,m} & =\hbar\sqrt{\left(j\mp m\right)\left(j\pm m+1\right)}\KET{j,m\pm1}
+\end{align*}
+
+
+
+\section{Irreducible representations of the rotation operators}
+
+We want to construct the matrix representations of $\hat{D}\left(\vec{n},\theta\right)$.
+
+In particular in the eigenbasis of $\hat{J}^{2}$ and $\hat{J}_{z}$.
+
+Remember:
+\begin{align*}
+\hat{D}\left(\vec{n},\theta\right) & =e^{-\frac{\ii}{\hbar}\hat{\vec{J}}\cdot\vec{n}\theta}
+\end{align*}
+We want:
+\begin{align*}
+\left\langle j,m|\hat{D}\left(\vec{n},\theta\right)|j',m'\right\rangle  & =D_{jm}^{j'm'}\left(\vec{n},\theta\right)
+\end{align*}
+First note:, because $\left[\hat{\vec{J}}^{2},\hat{\vec{J}}\cdot\vec{n}\right]=0$.
+\begin{align*}
+D_{jm}^{j'm'}\left(\vec{n},\theta\right) & =D_{mm'}^{\left(j\right)}\left(\vec{n},\theta\right)\delta_{jj'}
+\end{align*}
+The physical reason is, that a rotation doesn't change magnitudes
+like $j$.
+
+${\displaystyle j=\frac{1}{2}}$ gives a $2\times2$-Matrix for $D$,
+because the basis is $\KET{\frac{1}{2},-\frac{1}{2}}$ and $\KET{\frac{1}{2},\frac{1}{2}}$.
+
+\noindent \begin{center}
+$\left(\phantom{\begin{array}{c}a\\a\\a\\a\\a\\a\\a\\a\\a\\a\\a\end{array}}\right.$
+\begin{tikzpicture}[baseline=(current bounding box.west)] 
+  %j=1/2
+  \node (j12) at (0,0) {$\Bigg( \quad j=\frac{1}{2} \quad \Bigg)$};
+  \draw[<->] ($(j12.315) + (0.4,0) $) -- node[right]{2} ($ (j12.45) + (0.4,0) $);
+  \draw[<->] ($(j12.45) + (0.3,0) $) -- node[above]{2} ($ (j12.135) + (-0.3,0) $);
+  %j=1
+  \node (j1) at (2.5,-2) {$\Bigg( \quad j=1 \quad \Bigg)$};
+  \draw[<->] ($(j1.315) + (0.4,0) $) -- node[right]{3} ($ (j1.45) + (0.4,0) $);
+  \draw[<->] ($(j1.45) + (0.3,0) $) -- node[above]{3} ($ (j1.135) + (-0.3,0) $);
+  \node at (2.5,0) {0};
+  \node at (0,-2) {0};
+  \node at (4,-3) {$\ddots$};
+\end{tikzpicture}
+$\left.\phantom{\begin{array}{c}a\\a\\a\\a\\a\\a\\a\\a\\a\\a\\a\end{array}}\right)$
+\par\end{center}
+
+This is the matrix representation of a rotation operator $\hat{D}\left(\vec{n},\theta\right)$
+in the basis $\KET{j,m}$ ordered as
+\begin{align*}
+\KET{\frac{1}{2},-\frac{1}{2}},\KET{\frac{1}{2},+\frac{1}{2}},\KET{1,-1},\KET{1,0},\KET{1,1},\KET{\frac{3}{2},-\frac{3}{2}},\KET{\frac{3}{2},-\frac{1}{2}},\KET{\frac{3}{2},\frac{1}{2}},\KET{\frac{3}{2},\frac{3}{2}},\ldots
+\end{align*}
+and it is \noun{block-diagonal}.
+
+
+\section{Orbital angular momentum}
+
+Consider now $\hat{J}_{i}=\hat{L}_{i}=\left(\hat{\vec{q}}\times\hat{\vec{p}}\right)_{i}$.
+
+
+\subsection{General considerations}
+
+\begin{iiilist}
+
+\iii $\left[\hat{L}_{i},\hat{L}_{j}\right]=\ii\hbar\varepsilon_{ijk}\hat{L}_{k}$
+
+\iii Consider:
+\begin{align*}
+\exp\left(-\frac{\ii}{\hbar}\hat{L}_{z}\theta\right)\KET{\vec{q}} & =:\KET{\vec{q}}^{R}\stackrel{?}{=}\KET{\vec{q}^{R}}:=\KET{\mathcal{R}\left(\vec{e}_{z},\theta\right)\vec{q}}
+\end{align*}
+Do it infinitesimal:
+\begin{align*}
+\theta & \to\dd\theta
+\end{align*}
+\begin{align*}
+\KET{\vec{q}}^{R} & \approx\left(1-\frac{\ii}{\hbar}\hat{L}_{z}\dd\theta\right)\KET{\vec{q}}=\left(1-\frac{\ii}{\hbar}\dd\theta\left(\hat{q}_{x}\hat{p}_{y}-\hat{q}_{y}\hat{p}_{x}\right)\right)\KET{\vec{q}}=\\
+ & =\left(1-\frac{\ii}{\hbar}\dd\theta\left(q_{x}\hat{p}_{y}-q_{y}\hat{p}_{x}\right)\right)\KET{q_{x}}\otimes\KET{q_{y}}\otimes\KET{q_{z}}
+\end{align*}
+Remember:
+\begin{align*}
+\exp\left(-\frac{\ii}{\hbar}q^{\left(0\right)}\hat{p}_{x}\right)\KET{\vec{q}} & =\KET{q_{x}+q^{\left(0\right)}}\otimes\KET{q_{y}}\otimes\KET{q_{z}}
+\end{align*}
+Infinitesimally we get:
+\begin{align*}
+\left(1-\frac{\ii}{\hbar}\dd q^{\left(0\right)}\hat{p}_{x}\right)\KET{\vec{q}} & =\KET{q_{x}+\dd q^{\left(0\right)}}\otimes\KET{q_{y}}\otimes\KET{q_{z}}
+\end{align*}
+Now consider the product of two infinitesimal changes:
+\begin{align*}
+\left(1+\frac{\ii}{\hbar}\dd\theta q_{y}\hat{p}_{x}\right)\left(1-\frac{\ii}{\hbar}\dd\theta q_{x}\hat{p}_{y}\right) & \approx1-\frac{\ii}{\hbar}\dd\theta\left(q_{x}\hat{p}_{y}-q_{y}\hat{p}_{x}\right)
+\end{align*}
+This gives:
+\begin{align*}
+\KET{\vec{q}}^{R} & \approx\left(1+\frac{\ii}{\hbar}\dd\theta q_{y}\hat{p}_{x}\right)\left(1-\frac{\ii}{\hbar}\dd\theta q_{x}\hat{p}_{y}\right)\KET{q_{x}}\otimes\KET{q_{y}}\otimes\KET{q_{z}}=\\
+ & =\KET{q_{x}-\dd\theta q_{y}}\otimes\KET{q_{y}+\dd\theta q_{x}}\otimes\KET{q_{z}}=\KET{q_{x}-\dd\theta q_{y},q_{y}+\dd\theta q_{x},q_{z}}
+\end{align*}
+Compare this with the rotated eigenstate of the position:
+\begin{align*}
+\KET{\vec{q}^{R}} & =\KET{\mathcal{R}\left(\vec{e}_{z},\dd\theta\right)\vec{q}}\approx\KET{\left(\begin{array}{ccc}
+1 & -\dd\theta & 0\\
+\dd\theta & 1 & 0\\
+0 & 0 & 1
+\end{array}\right)\vec{q}}=\KET{q_{x}-\dd\theta q_{y},q_{y}+\dd\theta q_{x},q_{z}}\approx\KET{\vec{q}}^{R}
+\end{align*}
+In general we get:
+\begin{align*}
+\exp\left(-\frac{\ii}{\hbar}\hat{\vec{L}}\cdot\vec{n}\eta\right)\KET{\vec{q}} & =\KET{\mathcal{R}\left(\vec{n},\eta\right)\vec{q}}
+\end{align*}
+
+
+\end{iiilist}
+
+%DATE: Mi 23.5.12
+
+
+\subsection{Eigenstates in the position representation}
+
+We call the eigenstates $\KET{l,m}$.
+
+We introduce:
+\begin{align*}
+\hat{r} & =\sqrt{\hat{q}_{x}^{2}+\hat{q}_{y}^{2}+\hat{q}_{z}^{2}}\\
+\hat{q}_{x} & =\hat{r}\sin\hat{\theta}\cos\hat{\varphi}\\
+\hat{q}_{y} & =\hat{r}\sin\hat{\theta}\sin\hat{\varphi}\\
+\hat{q}_{z} & =\hat{r}\cos\theta
+\end{align*}
+\begin{align*}
+\KET{\vec{q}} & =\KET r\otimes\KET{\theta,\varphi}=\KET r\otimes\KET{\vec{n}}
+\end{align*}
+We want to construct $\left\langle \theta,\varphi|l,m\right\rangle $.
+As usual we start with
+\begin{align*}
+\BraKet{\theta,\varphi|\hat{L}_{z}|l,m} & =\hbar m\BraKet{\theta,\varphi|l,m}
+\end{align*}
+and do it infinitesimally:
+\begin{align*}
+\left\langle \theta,\varphi|\hat{D}\left(\vec{e}_{z},\dd\varphi\right)|l,m\right\rangle  & =\left\langle \theta,\varphi|\exp\left(-\frac{\ii}{\hbar}\hat{L}_{z}\dd\varphi\right)|l,m\right\rangle =\left\langle \theta,\varphi-\dd\varphi|l,m\right\rangle 
+\end{align*}
+We also get for $\dd\varphi\to0$:
+\begin{align*}
+\BraKet{\theta,\varphi|\left(1-\frac{\ii}{\hbar}\hat{L}_{z}\dd\varphi\right)|l,m} & =\BraKet{\theta,\varphi|l,m}-\frac{\ii}{\hbar}\dd\varphi\BraKet{\theta,\varphi|\hat{L}_{z}|l,m}
+\end{align*}
+This gives:
+\begin{align*}
+m\hbar\BraKet{\theta,\varphi|l,m}=\BraKet{\theta,\varphi|\hat{L}_{z}|l,m} & =-\ii\hbar\partial_{\varphi}\BraKet{\theta,\varphi|l,m}\\
+\partial_{\varphi}\BraKet{\theta,\varphi|l,m} & =\ii m\BraKet{\theta,\varphi|l,m}
+\end{align*}
+\begin{align*}
+\BraKet{\theta,\varphi|l,m} & =f_{l}^{m}\left(\theta\right)e^{\ii m\varphi}
+\end{align*}
+Introduce this into
+\begin{align*}
+\left\langle \theta,\varphi|\hat{L}^{2}|l,m\right\rangle  & =\hbar^{2}l\left(l+1\right)\BraKet{\theta,\varphi|l,m}
+\end{align*}
+\begin{align*}
+-\hbar^{2}\left(\frac{1}{\sin^{2}\theta}\partial_{\varphi}^{2}+\frac{1}{\sin\theta}\partial_{\theta}\left(\sin\theta\partial_{\theta}\right)\right)\BraKet{\theta,\varphi|l,m} & =\hbar^{2}l\left(l+1\right)\BraKet{\theta,\varphi|l,m}
+\end{align*}
+to get for $m,l\in\mathbb{Z}$:
+\begin{align*}
+\left(\frac{1}{\sin\theta}\frac{\dd}{\dd\theta}\left(\sin\theta\partial_{\theta}\right)-\frac{m^{2}}{\sin^{2}\theta}+l\left(l+1\right)\right)f_{l}^{m}\left(\theta\right) & =0
+\end{align*}
+Transform $x=\cos\theta$ and solve this by a power series. The solutions
+$P_{l}^{m}\left(\cos\theta\right)$ are the \emph{associated Legendre
+polynomials}.
+
+Together we have the \emph{spherical harmonics}:
+\begin{align*}
+\BraKet{\theta,\varphi|l,m} & =Y_{l}^{m}\left(\theta,\varphi\right)=\left(-1\right)^{m}\sqrt{\frac{2l+1}{4\pi}\cdot\frac{\left(l-m\right)!}{\left(l+m\right)!}}\cdot e^{\ii m\varphi}P_{l}^{m}\left(\cos\theta\right)
+\end{align*}
+Of course they are normalized:
+\begin{align*}
+\BraKet{l',m'|l,m} & =\delta_{ll'}\delta_{mm'}\\
+\Rightarrow\qquad\int_{0}^{2\pi}\int_{0}^{\pi}Y_{l'}^{m'}\left(\theta,\varphi\right)^{*}Y_{l}^{m}\left(\theta,\varphi\right)\sin\theta\dd\theta & =\delta_{ll'}\delta_{mm'}
+\end{align*}
+Therefore any function of
+\begin{align*}
+\vec{n} & =\left(\begin{array}{c}
+\sin\theta\cos\varphi\\
+\sin\theta\sin\varphi\\
+\cos\theta
+\end{array}\right)
+\end{align*}
+can be expanded in terms of $Y_{l}^{m}\left(\theta,\varphi\right)$'s,
+because they form a complete basis:
+\begin{align*}
+\sum_{l=0}^{\infty}\sum_{m=-l}^{l}\KET{l,m}\BRA{l,m} & =\hat{I}_{\text{angular}}\\
+\sum_{l=0}^{\infty}\sum_{m=-l}^{l}Y_{l}^{m}\left(\theta,\varphi\right)Y_{l}^{m}\left(\theta',\varphi'\right) & =\delta\left(\vec{n}-\vec{n}'\right)
+\end{align*}
+
+
+From the general theory we also know:
+\begin{align*}
+\hat{L}_{\pm}\KET{l,m} & =\hbar\sqrt{\left(l\mp m\right)\left(l\pm m+1\right)}\KET{l,m\pm1}
+\end{align*}
+For an arbitrary normalized state $\KET{\alpha}$ in the angular Hilbert
+space one gets:
+\begin{align*}
+\BraKet{\theta,\varphi|\hat{L}_{-}|\alpha} & =\ii\hbar e^{\ii\varphi}\left[\ii\partial_{\theta}-\cot\theta\right]\BraKet{\theta,\varphi|\alpha}
+\end{align*}
+For example:
+\begin{align*}
+Y_{l}^{l-1}\left(\theta,\varphi\right) & =-N_{l}^{l}e^{\ii\left(l-1\right)\varphi}\left(l\cot\theta-\partial_{\theta}\right)P_{l}^{l}\left(\cos\theta\right)\\
+P_{l}^{l}\left(\cos\theta\right) & =\sin^{l}\left(\theta\right)
+\end{align*}
+\begin{align*}
+Y_{l}^{-m}\left(\theta,\varphi\right) & =\left(-1\right)^{m}\left(Y_{l}^{m}\left(\theta,\varphi\right)\right)^{*}
+\end{align*}
+
+
+
+\subsection{Relation with the kinetic energy}
+
+Remember from classical mechanics:
+\begin{align*}
+H\left(\vec{q},\vec{p}\right) & =\frac{1}{2m}p^{2}+V\left(\vec{q}\right)
+\end{align*}
+In spherical coordinates we have the canonical transformation
+\begin{align*}
+\left(\begin{array}{c}
+q_{x}\\
+q_{y}\\
+q_{z}
+\end{array}\right) & \to\left(\begin{array}{c}
+r\\
+\theta\\
+\varphi
+\end{array}\right) & \Rightarrow\quad\left(\begin{array}{c}
+p_{x}\\
+p_{y}\\
+p_{z}
+\end{array}\right) & \to\left(\begin{array}{c}
+p_{r}\\
+p_{\theta}\\
+p_{\varphi}
+\end{array}\right)
+\end{align*}
+with the commutators
+\begin{align*}
+\left\{ r,p_{r}\right\}  & =\left\{ \theta,p_{\theta}\right\} =\left\{ \varphi,p_{\varphi}\right\} =1
+\end{align*}
+and the other commutators are zero. The Hamiltonian is then
+\begin{align*}
+H\left(r,\theta,\varphi,p_{r},p_{\theta},p_{\varphi}\right) & =\frac{1}{2m}p_{r}^{2}+\frac{1}{2mr^{2}}L^{2}+V\left(r,\theta,\varphi\right)
+\end{align*}
+with:
+\begin{align*}
+L^{2} & =\frac{1}{\sin^{2}\theta}p_{\varphi}^{2}+p_{\theta}^{2}
+\end{align*}
+To see this in quantum mechanics, we use
+\begin{align*}
+\hat{L}^{2} & =\hat{q}^{2}\hat{p}^{2}-\left(\hat{\vec{q}}\cdot\hat{\vec{p}}\right)^{2}+\ii\hbar\hat{\vec{q}}\cdot\hat{\vec{p}}
+\end{align*}
+and calculate for an arbitrary state $\KET{\alpha}$:
+\begin{align*}
+\BraKet{\vec{q}|\hat{L}^{2}|\alpha} & =q^{2}\BraKet{\vec{q}|\hat{p}^{2}|\alpha}-\vec{q}\cdot\left(-\ii\hbar\vec{\nabla}\right)\cdot\vec{q}\cdot\left(-\ii\hbar\vec{\nabla}\right)\BraKet{\vec{q}|\alpha}+\ii\hbar\vec{q}\cdot\left(-\ii\hbar\vec{\nabla}\right)\BraKet{\vec{q}|\alpha}
+\end{align*}
+\begin{align*}
+\BraKet{\vec{q}|\frac{1}{2m}\hat{p}^{2}|\alpha} & =-\frac{\hbar^{2}}{2m}\left(\frac{1}{r}\partial_{r}\left(r\partial_{r}\right)+\frac{1}{r}\partial_{r}\right)\BraKet{\vec{q}|\alpha}+\frac{1}{2mr^{2}}\BraKet{\vec{q}|\hat{L}^{2}|\alpha}=\\
+ & =-\frac{\hbar^{2}}{2m}\left(\frac{1}{r^{2}}\partial_{r}\left(r^{2}\partial_{r}\right)\right)\BraKet{\vec{q}|\alpha}+\frac{1}{2mr^{2}}\BraKet{\vec{q}|\hat{L}^{2}|\alpha}
+\end{align*}
+
+
+
+\subsection{Central forces}
+
+Definition:
+
+A central force has a potential, that depends only on the radial coordinate:
+\begin{align*}
+V\left(\vec{q}\right) & =V\left(\hat{r}\right)
+\end{align*}
+Therefore it commutes with $\hat{p}^{2}$ and $\hat{L}^{2}$ and we
+have a set of common eigenstates:
+\begin{align*}
+\hat{H}\KET{E,l,m} & =E\KET{E,l,m}\\
+\hat{L}^{2}\KET{E,l,m} & =\hbar^{2}l\left(l+1\right)\KET{E,l,m}\\
+\hat{L}_{z}\KET{E,l,m} & =\hbar m\KET{E,l,m}
+\end{align*}
+We define
+\begin{align*}
+\psi_{Elm}\left(r,\theta,\varphi\right) & :=\BraKet{r,\theta,\varphi|E,l,m}=R_{Elm}\left(r\right)Y_{l}^{m}\left(\theta,\varphi\right)
+\end{align*}
+and get:
+\begin{align*}
+\left(-\frac{\hbar^{2}}{2mr^{2}}\frac{\dd}{\dd r}\left(r^{2}\frac{\dd}{\dd r}\right)+\frac{\hbar^{2}l\left(l+1\right)}{2mr^{2}}+V\left(r\right)\right)R_{Elm}\left(r\right) & =ER_{Elm}\left(r\right)
+\end{align*}
+This doesn't depend on the quantum number $m$, so we just write $R_{Elm}\left(r\right)$.
+Now we transform
+\begin{align*}
+R_{El}\left(r\right) & :=\frac{U_{El}\left(r\right)}{r}
+\end{align*}
+and get:
+\begin{align*}
+\Bigg(-\frac{\hbar^{2}}{2m}\frac{\dd^{2}}{\dd r^{2}}+\underbrace{\left(V\left(r\right)+\frac{\hbar^{2}l\left(l+1\right)}{2mr^{2}}\right)}_{=:V_{\text{eff}}\left(r\right)}\Bigg)U_{El}\left(r\right) & =EU_{El}\left(r\right)
+\end{align*}
+
+
+%DATE: Do 24.5.12
+
+
+\section{Addition of angular momentum}
+
+Consider two particles with the same mass and momenta $\vec{p}^{\,\left(1\right)}$
+and $\vec{p}\,^{\left(2\right)}$. In classical mechanics they generate
+translations ($k\in\left\{ 1,2\right\} $):
+\begin{align*}
+f\left(\vec{q}^{\,\left(k\right)}+\delta\vec{q}^{\,\left(k\right)},\vec{p}^{\,\left(k\right)}\right) & \approx f\left(\vec{q}^{\,\left(k\right)},\vec{p}^{\,\left(k\right)}\right)+\left\{ \vec{p}^{\,\left(k\right)},f\left(\vec{q}^{\,\left(k\right)}\right)\right\} \cdot\delta\vec{q}^{\,\left(k\right)}+O\left(\left(\delta\vec{q}^{\,\left(k\right)}\right)^{2}\right)
+\end{align*}
+$\vec{p}:=\left(\vec{p}^{\,\left(1\right)},\vec{p}^{\,\left(2\right)}\right)$
+generates translations of $\vec{q}:=\left(\vec{q}^{\,\left(1\right)},\vec{q}^{\,\left(2\right)}\right)$:
+\begin{align*}
+f\left(\vec{q}+\delta\vec{q},\vec{p}\right) & \approx f\left(\vec{q},\vec{p}\right)+\left\{ \vec{p},f\left(\vec{q}\right)\right\} \cdot\delta\vec{q}+O\left(\left(\delta\vec{q}\right)^{2}\right)
+\end{align*}
+What is the meaning (in the sense of generators) of:
+\begin{align*}
+\vec{P} & :=\vec{p}^{\left(1\right)}+\vec{p}^{\left(2\right)}
+\end{align*}
+Remember that $\vec{P}$ and $\vec{Q}=\frac{1}{2}\left(\vec{q}^{\,\left(1\right)}+\vec{q}^{\,\left(2\right)}\right)$
+are canonical, that means:
+\begin{align*}
+\left\{ Q_{i},P_{j}\right\}  & =\delta_{ij}
+\end{align*}
+Therefore $\vec{P}$ generates translations in $\vec{Q}$.
+\begin{align*}
+f\left(\vec{q}^{\,\left(1\right)}+\delta\vec{Q},\vec{q}^{\,\left(2\right)}+\delta\vec{Q},\vec{p}^{\,\left(1\right)},\vec{p}^{\,\left(2\right)}\right) & =f\left(\vec{q}^{\,\left(1\right)},\vec{q}^{\,\left(2\right)},\vec{p}^{\,\left(1\right)},\vec{p}^{\,\left(2\right)}\right)+\\
+ & \quad+\left\{ \vec{P},f\left(\vec{q}^{\,\left(1\right)},\vec{q}^{\,\left(2\right)},\vec{p}^{\,\left(1\right)},\vec{p}^{\,\left(2\right)}\right)\right\} \cdot\delta\vec{Q}+O\left(\left(\delta\vec{Q}\right)^{2}\right)
+\end{align*}
+In the same way $\vec{L}^{\,\left(1\right)}+\vec{L}^{\,\left(2\right)}$
+generates a \noun{rigid} rotation of the total system.
+
+
+\subsection{Formal theory (2 ``particles'')}
+
+We start with two angular momenta $\hat{\vec{J}}^{\,\left(1\right)}$
+and $\hat{\vec{J}}^{\,\left(2\right)}$ with ($n\in\left\{ 1,2\right\} $):
+\begin{align*}
+\left[\hat{J}_{i}^{\,\left(n\right)},\hat{J}_{j}^{\,\left(n\right)}\right] & =\ii\hbar\varepsilon_{ijk}\hat{J}_{k}^{\,\left(1\right)}\\
+\left[\hat{J}_{i}^{\,\left(1\right)},\hat{J}_{j}^{\,\left(2\right)}\right] & =0
+\end{align*}
+The ``total'' angular momentum is:
+\begin{align*}
+\hat{J}_{i} & :=\hat{J}_{i}^{\left(1\right)}\otimes\hat{I}^{\left(2\right)}+\hat{I}^{\left(1\right)}\otimes\hat{J}_{i}^{\left(2\right)}=:\hat{J}_{i}^{\left(1\right)}+\hat{J}_{i}^{\left(2\right)}
+\end{align*}
+And a ``total'' rotation by $\vec{n},\theta$ is:
+\begin{align*}
+\hat{D}\left(\vec{n},\theta\right) & :=\hat{D}\left(\vec{n},\theta\right)^{\left(1\right)}\otimes\hat{D}\left(\vec{n},\theta\right)^{\left(2\right)}=e^{-\frac{\ii}{\hbar}\hat{\vec{J}}^{\left(1\right)}\cdot\vec{n}\theta}\cdot e^{-\frac{\ii}{\hbar}\hat{\vec{J}}^{\left(2\right)}\cdot\vec{n}\theta}=e^{-\frac{\ii}{\hbar}\hat{\vec{J}}\cdot\vec{n}\theta}
+\end{align*}
+Check whether $\hat{\vec{J}}$ is an angular momentum:
+\begin{align*}
+\left[\hat{J}_{i},\hat{J}_{j}\right] & =\ii\hbar\varepsilon_{ijk}\hat{J}_{k}
+\end{align*}
+So we have two possible sets of commuting operators:
+\begin{enumerate}
+\item \noun{Decoupled basis}: Take $\left\{ \left(\hat{J}^{\left(1\right)}\right)^{2},\left(\hat{J}^{\left(2\right)}\right)^{2},\hat{J}_{z}^{\left(1\right)},\hat{J}_{z}^{\left(1\right)}\right\} $
+with the common eigenstates:
+\begin{align*}
+\KET{j_{1},j_{2},m_{1},m_{2}} & :=\KET{j_{1},m_{1}}\otimes\KET{j_{2},m_{2}}
+\end{align*}
+For $k\in\left\{ 1,2\right\} $ we have:
+\begin{align*}
+\left(\hat{J}^{\left(k\right)}\right)^{2}\KET{j_{1},j_{2},m_{1},m_{2}} & =\hbar^{2}\left(j_{k}+1\right)\KET{j_{1},j_{2},m_{1},m_{2}}\\
+\hat{J}_{z}^{\left(k\right)}\KET{j_{1},j_{2},m_{1},m_{2}} & =\hbar m_{k}\KET{j_{1},j_{2},m_{1},m_{2}}
+\end{align*}
+
+\item \noun{Coupled basis}: Take $\left\{ \left(\hat{J}^{\left(1\right)}\right)^{2},\left(\hat{J}^{\left(2\right)}\right)^{2},\hat{J}^{2},\hat{J}_{z}\right\} $
+-- observe $\left[\hat{J}^{2},\hat{J}_{z}^{\left(k\right)}\right]\not=0$
+-- with the common eigenstates $\KET{j_{1},j_{2},j,m}$ with:
+\begin{align*}
+\hat{J}^{2}\KET{j_{1},j_{2},j,m} & =\hbar^{2}j\left(j+1\right)\KET{j_{1},j_{2},j,m}\\
+\hat{J}_{z}\KET{j_{1},j_{2},j,m} & =\hbar m\KET{j_{1},j_{2},j,m}
+\end{align*}
+
+\end{enumerate}
+The two bases are related (for fixed $j_{1},j_{2}$):
+\begin{align*}
+\KET{j_{1},j_{2},j,m} & =\sum_{m_{1}=-j_{1}}^{j_{1}}\sum_{m_{2}=-j_{2}}^{j_{2}}\underbrace{\left\langle j_{1},j_{2},m_{1},m_{2}|j_{1},j_{2},j,m\right\rangle }_{\text{Lebsch-Gordan coeffizients}}\KET{j_{1},j_{2},m_{1},m_{2}}
+\end{align*}
+Some properties of $\left\langle m_{1},m_{2}|j,m\right\rangle :=\left\langle j_{1},j_{2},m_{1},m_{2}|j_{1},j_{2},j,m\right\rangle $:
+
+Consider
+\begin{align*}
+\hat{J}_{z}-\hat{J}_{z}^{\left(1\right)}-\hat{J}_{z}^{\left(2\right)} & =0
+\end{align*}
+and sandwich between $\left\langle j_{1},j_{2},m_{1},m_{2}|\ldots|j_{1},j_{2},j,m\right\rangle $
+to get:
+\begin{align*}
+\left(m-m_{1}-m_{2}\right)\left\langle m_{1},m_{2}|j,m\right\rangle  & =0
+\end{align*}
+Therefore $\left\langle m_{1},m_{2}|j,m\right\rangle =0$ for $m\not=m_{1}+m_{2}$
+and one can eliminate one of the sums above. One can also proof:
+\begin{align*}
+\abs{j_{1}-j_{2}} & \le j\le j_{1}+j_{2}
+\end{align*}
+From unitarity of the matrix for the change of basis we get:
+\begin{align*}
+\sum_{m_{1}=-j_{1}}^{j_{1}}\sum_{m_{2}=-j_{2}}^{j_{2}}\left\langle m_{1}m_{2}|j,m\right\rangle \left\langle m_{1}m_{2}|j',m'\right\rangle ^{*} & =\delta_{jj'}\delta_{mm'}\\
+\sum_{j=\abs{j_{1}-j_{2}}}^{j_{1}+j_{2}}\sum_{m=-j}^{j}\left\langle m_{1}m_{2}|j,m\right\rangle \left\langle m_{1}'m_{2}'|j,m\right\rangle ^{*} & =\delta_{m_{1}m_{1}'}\delta_{m_{2}m_{2}'}
+\end{align*}
+Finally using $\hat{J}_{\pm}=\hat{J}_{\pm}^{\left(1\right)}+\hat{J}_{\pm}^{\left(2\right)}$
+gives:
+\begin{align*}
+\sqrt{\left(j\mp m\right)\left(j\pm m+1\right)}\BraKet{m_{1},m_{2}|j,m\pm1} & =\sqrt{\left(j_{1}\pm m_{1}\right)\left(j_{1}\mp m_{1}+1\right)}\BraKet{m_{1}\mp1,m_{2}|j,m}+\\
+ & \quad+\sqrt{\left(j_{2}\pm m_{2}\right)\left(j_{2}\mp m_{2}+1\right)}\BraKet{m_{1},m_{2}\pm1|j,m}
+\end{align*}
+
+
+
+\subsection{The formal theory for many particles}
+
+This is a \noun{REAL} MESS!!
+
+
+\subsection{Example: Two spin ${\displaystyle \frac{1}{2}}$ particles}
+
+Here the total spin is:
+\begin{align*}
+\hat{\vec{S}} & =\hat{\vec{S}}^{\,\left(1\right)}+\hat{\vec{S}}^{\,\left(2\right)} & \hat{S}_{z} & =\hat{S}_{z}^{\left(1\right)}+\hat{S}_{z}^{\left(2\right)} & \hat{S}^{2} & =\left(\hat{S}^{\left(1\right)}\right)^{2}+\left(\hat{S}^{\left(1\right)}\right)^{2}+2\hat{\vec{S}}^{\,\left(1\right)}\cdot\hat{\vec{S}}^{\,\left(2\right)}
+\end{align*}
+And the quantum numbers are $j_{1}=s_{1}=\frac{1}{2}$, $j_{2}=s_{2}=\frac{1}{2}$.
+The total is $m=m_{1}+m_{2}$ and $s$ is restricted to:
+\begin{align*}
+\abs{\frac{1}{2}-\frac{1}{2}} & \le s\le\frac{1}{2}+\frac{1}{2}\\
+0 & \le s\le1
+\end{align*}
+
+\begin{itemize}
+\item The decoupled basis ($\KET{m_{1},m_{2}}$) is:
+\begin{align*}
+\left\{ \KET{\frac{1}{2},\frac{1}{2}},\KET{\frac{1}{2},-\frac{1}{2}},\KET{-\frac{1}{2},\frac{1}{2}},\KET{-\frac{1}{2},-\frac{1}{2}}\right\} 
+\end{align*}
+Remember that this basis does not have a well defined $\hat{S}^{2}$.
+\item The coupled basis ($\KET{s,m}$) is: 
+\begin{align*}
+ & \left\{ \KET{s=0,m=0},\KET{s=1,m=-1},\KET{s=1,m=0},\KET{s=1,m=1}\right\} =\\
+ & \qquad\qquad\qquad\qquad\qquad=\{\underbrace{\KET{0,0}}_{\text{"Singlet"}},\underbrace{\KET{1,-1},\KET{1,0},\KET{1,1}}_{\text{"Triplet" states}}\}
+\end{align*}
+Using $m=m_{1}+m_{2}$ we get:
+\begin{align*}
+\KET{s=1,m=1} & =\KET{\frac{1}{2},\frac{1}{2}}:=\KET{\frac{1}{2}}^{\left(1\right)}\otimes\KET{\frac{1}{2}}^{\left(2\right)}\\
+\KET{s=1,m=0} & =\frac{1}{\sqrt{2}}\left(\KET{\frac{1}{2},-\frac{1}{2}}+\KET{-\frac{1}{2},\frac{1}{2}}\right)\\
+\KET{s=1,m=-1} & =\KET{-\frac{1}{2},-\frac{1}{2}}\\
+\KET{s=0,m=0} & =\frac{1}{\sqrt{2}}\left(\KET{\frac{1}{2},-\frac{1}{2}}-\KET{-\frac{1}{2},\frac{1}{2}}\right)
+\end{align*}
+(Take a look at: \noun{Sakurai}, Section 3.10: ``\emph{Spin Correlation
+measurements and Bell's inequality}'')
+\end{itemize}
+Think about the Hamiltonian for $k\in\mathbb{R}_{<0}$:
+\begin{align*}
+\hat{H} & =\underbrace{\underbrace{\hbar\omega\left(\hat{S}_{z}^{\left(1\right)}+\hat{S}_{z}^{\left(2\right)}\right)}_{\hat{S}_{z}^{\left(1\right)},\hat{S}_{z}^{\left(2\right)}\text{ are conserved}}+k\hat{\vec{S}}^{\,\left(1\right)}\cdot\hat{\vec{S}}^{\,\left(2\right)}}_{\hat{S}^{2},\hat{S}_{z}\text{ are conserved}}
+\end{align*}
+We use:
+\begin{align*}
+\hat{\vec{S}}^{\,\left(1\right)}\cdot\hat{\vec{S}}^{\,\left(2\right)} & =\frac{1}{2}\left(\hat{S}^{2}-\left(\hat{S}^{\left(1\right)}\right)^{2}-\left(\hat{S}^{\left(2\right)}\right)^{2}\right)
+\end{align*}
+
 
 
 \chapter{Perturbation theory (time-independent)}
