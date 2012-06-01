@@ -6,7 +6,7 @@
 \begin_preamble
 \usepackage{tikz,pgfplots}
 %\usepackage{tikz-3dplot}
-\usetikzlibrary{matrix,arrows,calc,decorations.pathmorphing,snakes}
+\usetikzlibrary{matrix,arrows,calc,decorations.pathmorphing,snakes,intersections}
 \usepackage{latexsym,stmaryrd,stackrel,array,tabularx,multirow,icomma,braket,polynom,cancel}
 \usepackage[explicit]{titlesec}
 
@@ -8714,6 +8714,771 @@ We use:
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%DATE: Do 31.5.12
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Symmetry in quantum mechanics
+\end_layout
+
+\begin_layout Subsection
+Continuous symmetries
+\end_layout
+
+\begin_layout Standard
+If we have 
+\begin_inset Formula $\left[\hat{H},\hat{G}\right]=0$
+\end_inset
+
+, 
+\begin_inset Formula $\hat{G}=\hat{G}^{\dagger}$
+\end_inset
+
+ and 
+\begin_inset Formula $\hat{G}\KET{g_{n}}=g_{n}\KET{g_{n}}$
+\end_inset
+
+, then we know:
+\begin_inset Formula 
+\begin{align*}
+\frac{\dd}{\dd t}\hat{G}_{H}\left(t\right) & =0\\
+\hat{U}_{\tau} & :=e^{-\frac{\ii}{\hbar}\hat{G}\tau}\\
+\hat{G}\left(\hat{U}\left(t,t_{0}\right)\KET{g_{n}}\right) & =g_{n}\hat{U}\left(t,t_{0}\right)\KET{g_{n}}
+\end{align*}
+
+\end_inset
+
+Example:
+\begin_inset Formula 
+\begin{align*}
+\hat{H} & =\frac{1}{2m}\hat{p}^{2} & \left[\hat{H},\hat{p}\right] & =0
+\end{align*}
+
+\end_inset
+
+Therefore 
+\begin_inset Formula $\hat{U}\left(t\right)\KET{\hat{p}}$
+\end_inset
+
+ is always an eigenstate of 
+\begin_inset Formula $\hat{p}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A new concept, a purely quantum mechanical consequence of symmetry is the
+ concept of 
+\begin_inset Quotes eld
+\end_inset
+
+degeneracies
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Consider 
+\begin_inset Formula $\left[\hat{H},\hat{G}\right]=\left[\hat{H},\hat{U}_{\tau}\right]=0$
+\end_inset
+
+, then, trivially we get:
+\begin_inset Formula 
+\begin{align*}
+\hat{H}\left(\hat{U}_{\tau}\KET{e_{n}}\right) & =e_{n}\left(\hat{U}_{\tau}\KET{e_{n}}\right)
+\end{align*}
+
+\end_inset
+
+There are two possibilities:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{iiilist}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $\hat{U}\KET{e_{n}}=e^{\ii\delta}\KET{e_{n}}$
+\end_inset
+
+ (nothing special)
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $\hat{U}\KET{e_{n}}\not=e^{\ii\delta}\KET{e_{n}}$
+\end_inset
+
+ then 
+\begin_inset Formula $\KET{e_{n}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\hat{U}_{\tau}\KET{e_{n}}$
+\end_inset
+
+ are two degenerate eigenstates with eigenvalue 
+\begin_inset Formula $e_{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{iiilist}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Example: 
+\begin_inset Formula $\left[\hat{U},\hat{L}_{i}\right]=0$
+\end_inset
+
+, 
+\begin_inset Formula $\hat{H}\KET{n,l,m}=E_{nl}\KET{n,l,m}$
+\end_inset
+
+ and:
+\begin_inset Formula 
+\begin{align*}
+\BraKet{\vec{q}|n,l,m} & =R_{nl}\left(r\right)Y_{l}^{m}\left(\theta,\varphi\right)
+\end{align*}
+
+\end_inset
+
+The symmetry operator is:
+\begin_inset Formula 
+\begin{align*}
+\exp\left(-\frac{\ii}{\hbar}\hat{\vec{L}}\cdot\vec{n}\theta\right)
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\exp\left(-\frac{\ii}{\hbar}\hat{\vec{L}}\cdot\vec{n}\theta\right)\KET{n,l,m} & =\sum_{m'=-l}^{l}D_{m,m'}^{\left(l\right)}\left(\vec{n},\theta\right)\KET{n,l,m'}
+\end{align*}
+
+\end_inset
+
+So the energy 
+\begin_inset Formula $E_{nl}$
+\end_inset
+
+ is 
+\emph on
+
+\begin_inset Formula $\left(2l+1\right)$
+\end_inset
+
+-fold degenerate
+\emph default
+.
+ The reason at the end is, that 
+\begin_inset Formula $\left[\hat{L}_{i},\hat{L}_{j}\right]\not=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Example: 
+\begin_inset Formula $\hat{H}=\frac{1}{2m}\hat{\vec{p}}^{2}+V\left(\hat{r}\right)+V_{ls}\left(\hat{r}\right)\hat{\vec{l}}\cdot\hat{\vec{s}}$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\left[\hat{H},\hat{\vec{l}}\right] & \not=0 & \left[\hat{H},\hat{\vec{s}}\right] & \not=0 & \left[\hat{H},\hat{\vec{j}}\right] & =0
+\end{align*}
+
+\end_inset
+
+The eigenstates are 
+\begin_inset Formula $\KET{n,j,m}$
+\end_inset
+
+ and therefore 
+\begin_inset Formula $E_{nj}$
+\end_inset
+
+ is 
+\begin_inset Formula $\left(2j+1\right)$
+\end_inset
+
+-fold degenerate.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw (0,0) node[left]{$E_{nj}$} -- (6,0)  (3,0) -- (4,1) (3,0) -- (4,-1)
+\end_layout
+
+\begin_layout Plain Layout
+
+        (4,1) -- (6,1) (3.5,0.5) -- (6,0.5) (3.5,-0.5) -- (6,-0.5) (4,-1) -- (6,-1);
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[<->] (6.5,1) -- node[right]{$2j+1$} (6.5,-1);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Quotes eld
+\end_inset
+
+Splitting
+\begin_inset Quotes erd
+\end_inset
+
+ of the 
+\begin_inset Quotes eld
+\end_inset
+
+multiplett
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}[domain=0:4]
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[->] (-0.2,0) -- (4.2,0) node[right] {$B$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[->] (0,-0.2) -- (0,4.2) node[above] {$E$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[color=blue] plot (
+\backslash
+x,{0.1*(
+\backslash
+x)^2+1.5});
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[color=blue] plot (
+\backslash
+x,{-0.1*(
+\backslash
+x)^2+1.5});
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[color=blue] plot (
+\backslash
+x,1.5);
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw plot (
+\backslash
+x,{0.1*(
+\backslash
+x)^2+2.5});
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw plot (
+\backslash
+x,{-0.1*(
+\backslash
+x)^2+2.5});
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw plot (
+\backslash
+x,2.5);
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+node at (0,1.5) [left] {$E_{nl}$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+node at (0,2.5) [left] {$E_{n'l'}$};
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[->] (-0.5,-0.5) node[below]{systematic degeneracy} -- (-0.03,1.4);
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[->] (2,-1) node[below]{accidental degeneracy} -- (2.22,1.9);
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[fill=black] (2.23,2) circle (2pt);
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+draw[fill=black] (0,1.5) circle (2pt);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Discrete symmetries
+\end_layout
+
+\begin_layout Standard
+You do not see them in classical mechanics.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{iiilist}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ Parity inverts position and momentum vectors:
+\begin_inset Formula 
+\begin{align*}
+\hat{\pi}^{\dagger}\hat{q}_{i}\hat{\pi} & =-\hat{q}_{i}\\
+\hat{\pi}^{\dagger}\hat{p}_{i}\hat{\pi} & =-\hat{p}_{i}
+\end{align*}
+
+\end_inset
+
+But angular momentum doesn't change:
+\begin_inset Formula 
+\begin{align*}
+\hat{\pi}^{\dagger}\hat{j}_{i}\hat{\pi} & =\hat{j}_{i}
+\end{align*}
+
+\end_inset
+
+These are called 
+\begin_inset Quotes eld
+\end_inset
+
+pseudo-vectors
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+States:
+\begin_inset Formula 
+\begin{align*}
+\hat{\pi}\KET{\vec{q}} & =\KET{-\vec{q}}\\
+\hat{\pi}\KET{\vec{p}} & =\KET{-\vec{p}}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\hat{\pi}^{2} & =\hat{I} & \hat{\pi}^{\dagger} & =\hat{\pi}^{-1} & \hat{\pi}^{\dagger} & =\hat{\pi}
+\end{align*}
+
+\end_inset
+
+From these properties follows, that the eigenvalues of 
+\begin_inset Formula $\pi$
+\end_inset
+
+ are 
+\begin_inset Formula $\pm1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A 
+\begin_inset Formula $+1$
+\end_inset
+
+ eigenstate is called 
+\emph on
+even
+\emph default
+ and a 
+\begin_inset Formula $-1$
+\end_inset
+
+ eigenstate is called 
+\emph on
+odd under parity
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+If we have 
+\begin_inset Formula $\hat{\pi}\KET{\alpha_{\pm}}=\pm\KET{\alpha_{\pm}}$
+\end_inset
+
+ with 
+\begin_inset Formula $\psi_{\pm}\left(\vec{q}\right)=\left\langle \vec{q}|\alpha_{\pm}\right\rangle $
+\end_inset
+
+ then we get:
+\begin_inset Formula 
+\begin{align*}
+\psi_{\pm}\left(\pm\vec{q}\right) & =\pm\psi_{\pm}\left(\vec{q}\right)
+\end{align*}
+
+\end_inset
+
+Example: 
+\begin_inset Formula $\hat{p}\KET p=p\KET p$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\left\langle q|p\right\rangle  & =\frac{1}{\sqrt{2m}}e^{\frac{\ii}{\hbar}pq}
+\end{align*}
+
+\end_inset
+
+They are 
+\emph on
+not
+\emph default
+ eigenstates of 
+\begin_inset Formula $\hat{\pi}$
+\end_inset
+
+.
+\begin_inset Formula 
+\begin{align*}
+\KET{\alpha_{\pm}} & :=\frac{1}{\sqrt{2}}\left(\KET{\vec{p}}\pm\KET{-\vec{p}}\right)
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\left\langle q|\alpha_{\pm}\right\rangle  & =\begin{cases}
+\frac{1}{\sqrt{2}}\cos\left(\frac{1}{\hbar}pq\right)\\
+\frac{1}{\sqrt{2}}\sin\left(\frac{1}{\hbar}pq\right)
+\end{cases}
+\end{align*}
+
+\end_inset
+
+Example: Eigenstates of a central force 
+\begin_inset Formula $\KET{n,l,m}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+We know, 
+\begin_inset Formula $\left[\hat{\vec{L}},\hat{\pi}\right]=0$
+\end_inset
+
+, so automatically 
+\begin_inset Formula $\KET{n,l,m}$
+\end_inset
+
+ has a well defined parity.
+ This means:
+\begin_inset Formula 
+\begin{align*}
+\hat{\pi}\KET{n,l,m} & =\pm\KET{n,l,m}
+\end{align*}
+
+\end_inset
+
+Do your job:
+\begin_inset Formula 
+\begin{align*}
+\left\langle \vec{q}|n,l,m\right\rangle  & =R_{nl}\left(r\right)Y_{l}^{m}\left(\theta,\varphi\right)
+\end{align*}
+
+\end_inset
+
+Change 
+\begin_inset Formula $\vec{q}\to-\vec{q}$
+\end_inset
+
+.
+ In spherical coordinates 
+\begin_inset Formula $\left(r,\theta,\varphi\right)\to\left(r,\pi-\theta,\varphi+\pi\right)$
+\end_inset
+
+.
+ Remember:
+\begin_inset Formula 
+\begin{align*}
+Y_{l}^{m}\left(\theta,\varphi\right) & =\left(-1\right)^{m}\sqrt{\frac{\left(2l+1\right)\left(l-m\right)!}{4\pi\left(l+m\right)!}}\cdot P_{l}^{m}\left(\cos\theta\right)e^{\ii m\varphi}\\
+Y_{l}^{m}\left(\pi-\theta,\varphi+\pi\right) & =\left(-1\right)^{l}Y_{l}^{m}\left(\theta,\varphi\right)
+\end{align*}
+
+\end_inset
+
+Tips to construct 
+\begin_inset Formula $\hat{\pi}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+1D harmonic oscillator:
+\begin_inset Formula 
+\begin{align*}
+\hat{H} & =\frac{1}{2m}\hat{p}^{2}+\frac{m\omega_{0}^{2}}{2}\hat{q}^{2}
+\end{align*}
+
+\end_inset
+
+Check as an exercise:
+\begin_inset Formula 
+\begin{align*}
+\hat{\pi} & =e^{\ii\pi\hat{n}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Theorem:
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $\hat{H}\KET{e_{n}}=e_{n}\KET{e_{n}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\left[\hat{H},\hat{\pi}\right]=0$
+\end_inset
+
+.
+ If the spectrum 
+\begin_inset Formula $e_{n}$
+\end_inset
+
+ is 
+\emph on
+not
+\emph default
+ degenerate, the eigenstates of 
+\begin_inset Formula $\hat{H}$
+\end_inset
+
+ have well defined parity.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{iiilist}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Chapter
 Perturbation theory (time-independent)
 \end_layout
@@ -8728,6 +9493,479 @@ Many-particle systems
 
 \begin_layout Chapter
 Scattering theory
+\end_layout
+
+\begin_layout Chapter
+Orthogonal Polynomials
+\end_layout
+
+\begin_layout Standard
+Sturm-Liouville equations:
+\end_layout
+
+\begin_layout Standard
+Take 
+\begin_inset Formula $x\in\left[x_{0},x_{1}\right]$
+\end_inset
+
+ and 
+\begin_inset Formula $a\left(x\right)\not=0$
+\end_inset
+
+ and 
+\begin_inset Formula $a\left(x\right),b\left(x\right),c\left(x\right)\in C^{0}\left(\left[x_{0},x_{1}\right],\mathbb{R}\right)$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+a\left(x\right)\frac{\dd^{2}}{\dd x^{2}}y\left(x\right)+b\left(x\right)\frac{\dd}{\dd x}y\left(x\right)+c\left(x\right)y\left(x\right)+\lambda y\left(x\right) & =0
+\end{align*}
+
+\end_inset
+
+Boundary condition:
+\begin_inset Formula 
+\begin{align*}
+\left[\alpha_{1}y\left(x\right)+\alpha_{2}\frac{\dd}{\dd x}y\left(x\right)\right]_{x=x_{0}} & =0\\
+\left[\beta_{1}y\left(x\right)+\beta_{2}\frac{\dd}{\dd x}y\left(x\right)\right]_{x=x_{1}} & =0
+\end{align*}
+
+\end_inset
+
+Define
+\begin_inset Formula 
+\begin{align*}
+p\left(x\right) & :=\exp\left(\int_{x_{0}}^{x}\frac{b\left(s\right)}{a\left(s\right)}\dd s\right)\\
+r\left(x\right) & :=\frac{1}{a\left(x\right)}p\left(x\right)\\
+q\left(x\right) & :=\frac{c\left(x\right)}{a\left(x\right)}p\left(x\right)
+\end{align*}
+
+\end_inset
+
+to get:
+\begin_inset Formula 
+\begin{align*}
+\frac{\dd}{\dd x}\left(p\left(x\right)\frac{\dd}{\dd x}y\left(x\right)\right)+\left(q\left(x\right)+\lambda r\left(x\right)\right)y\left(x\right) & =0
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\hat{\mathscr{L}} & :=\frac{1}{r\left(x\right)}\left(\frac{\dd}{\dd x}\left(p\left(x\right)\frac{\dd}{\dd x}\right)+q\left(x\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\hat{\mathscr{L}}y_{n}\left(x\right) & =-\lambda_{n}y_{n}\left(x\right)
+\end{align*}
+
+\end_inset
+
+This equation is solved by non-zero functions 
+\begin_inset Formula $y_{n}\left(x\right)$
+\end_inset
+
+ for some 
+\begin_inset Formula $\lambda_{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Theorem: If 
+\begin_inset Formula $p\left(x\right)>0,r\left(x\right)>0$
+\end_inset
+
+ and 
+\begin_inset Formula $q\left(x\right)\ge0$
+\end_inset
+
+, then the set 
+\begin_inset Formula $\left\{ y_{n}\left(x\right)\right\} _{n=1}$
+\end_inset
+
+ is orthogonal, that is:
+\begin_inset Formula 
+\begin{align*}
+\left\langle y_{n}|y_{m}\right\rangle :=\int_{x_{0}}^{x_{1}}r\left(x\right)y_{n}\left(x\right)y_{m}\left(x\right)\dd x & =k_{n}^{2}\delta_{nm}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula $r\left(x\right)$
+\end_inset
+
+ is called 
+\begin_inset Quotes eld
+\end_inset
+
+weight
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Introduce a new set of functions
+\begin_inset Formula 
+\begin{align*}
+\varphi_{n}\left(x\right) & :=y_{n}\left(x\right)\frac{\sqrt{r\left(x\right)}}{k_{n}}
+\end{align*}
+
+\end_inset
+
+to get:
+\begin_inset Formula 
+\begin{align*}
+\int_{x_{0}}^{x_{1}}\varphi_{n}\left(x\right)\varphi_{m}\left(x\right)\dd x & =\delta_{nm}
+\end{align*}
+
+\end_inset
+
+But the 
+\begin_inset Formula $\varphi_{n}\left(x\right)$
+\end_inset
+
+ do not solve the differential equation, so physicist don't use them.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{iiilist}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ Legendre:
+\begin_inset Formula 
+\begin{align*}
+\underbrace{\left(1-x\right)^{2}}_{=a\left(x\right)}\frac{\dd^{2}y}{\dd x^{2}}\underbrace{-2x}_{=b\left(x\right)}\frac{\dd y}{\dd x}+\underbrace{n\left(n+1\right)}_{=\lambda}y & =0
+\end{align*}
+
+\end_inset
+
+Defined for 
+\begin_inset Formula $x\in\left[-1,1\right]$
+\end_inset
+
+.
+ We get:
+\begin_inset Formula 
+\begin{align*}
+p\left(x\right) & =\exp\left(\int_{-1}^{x}\frac{-2s}{1-s^{2}}\dd s\right)=1-x^{2}\\
+q\left(x\right) & =0\\
+r\left(x\right) & =1
+\end{align*}
+
+\end_inset
+
+This is the simplest value for 
+\begin_inset Formula $r\left(x\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Extra: The set 
+\begin_inset Formula $\left\{ 1,x,x^{2},\ldots,\right\} $
+\end_inset
+
+ is linearly independent.
+\begin_inset Formula 
+\begin{align*}
+\int_{-1}^{1}r\left(x\right)x^{n}x^{m}\dd x & \not=\delta_{nm}
+\end{align*}
+
+\end_inset
+
+Using the Gram-Schmidt-formalism to make orthogonal polynomials gives for
+ 
+\begin_inset Formula $r=1$
+\end_inset
+
+ the Legendre polynomials.
+\end_layout
+
+\begin_layout Standard
+In the Sturm-Liouville form:
+\begin_inset Formula 
+\begin{align*}
+\underbrace{\frac{\dd}{\dd x}\left(\left(1-x^{2}\right)\frac{\dd}{\dd x}\right)}_{=\hat{\mathscr{L}}}y\left(x\right) & =-n\left(n+1\right)y\left(x\right)
+\end{align*}
+
+\end_inset
+
+Use power series and get normalized solutions:
+\begin_inset Formula 
+\begin{align*}
+p_{0}\left(x\right) & =1\\
+p_{1}\left(x\right) & =x\\
+p_{2}\left(x\right) & =\frac{1}{2}\left(3x^{2}-1\right)
+\end{align*}
+
+\end_inset
+
+For each set of orthogonal polynomials there is a 
+\emph on
+Rodrigues formula
+\emph default
+:
+\begin_inset Formula 
+\begin{align*}
+P_{n}\left(x\right) & =\frac{1}{2^{n}n!}\frac{\dd^{n}}{\dd x^{n}}\left(x^{2}-1\right)^{n}
+\end{align*}
+
+\end_inset
+
+The 
+\emph on
+recursion relation
+\emph default
+ is:
+\begin_inset Formula 
+\begin{align*}
+\left(n+1\right)P_{n+1}\left(x\right) & -\left(2n+1\right)xP_{n}\left(x\right)+nP_{n-1}\left(x\right)=0
+\end{align*}
+
+\end_inset
+
+Every Sturm-Liouville equation solution satisfy a three term recursion relation,
+ because it is a second order equation.
+\end_layout
+
+\begin_layout Standard
+The 
+\emph on
+Generating function
+\emph default
+ is:
+\begin_inset Formula 
+\begin{align*}
+\frac{1}{\sqrt{1-2tz+t^{2}}} & =\sum_{n=0}^{\infty}t^{n}P_{n}\left(z\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ Chebyshev:
+\begin_inset Formula 
+\begin{align*}
+\left(1-x^{2}\right)\frac{\dd^{2}y}{\dd x^{2}}-x\frac{\dd y}{\dd x}+\underbrace{n^{2}}_{=\lambda}y & =0
+\end{align*}
+
+\end_inset
+
+for 
+\begin_inset Formula $x\in\left[-1,1\right]$
+\end_inset
+
+.
+\begin_inset Formula 
+\begin{align*}
+p\left(x\right) & =\sqrt{1-x^{2}}\\
+q\left(x\right) & =0\\
+r\left(x\right) & =\frac{1}{\sqrt{1-x^{2}}}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+T_{0}\left(x\right) & =1\\
+T_{1}\left(x\right) & =x\\
+T_{2}\left(x\right) & =2x^{2}-1
+\end{align*}
+
+\end_inset
+
+Rodrigues formula:
+\begin_inset Formula 
+\begin{align*}
+T_{n}\left(x\right) & =\cos\left(n\cos^{-1}\left(x\right)\right)
+\end{align*}
+
+\end_inset
+
+What is the related potential in quantum mechanics?
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\int_{-1}^{1}\frac{T_{n}\left(x\right)T_{m}\left(x\right)}{\sqrt{1-x^{2}}} & =\begin{cases}
+\pi\delta_{nm} & n=0\\
+\frac{\pi}{2}\delta_{nm} & n>0
+\end{cases}
+\end{align*}
+
+\end_inset
+
+Recursion:
+\begin_inset Formula 
+\begin{align*}
+T_{n+1}-2xT_{n}+T_{n-1} & =0
+\end{align*}
+
+\end_inset
+
+Generating function:
+\begin_inset Formula 
+\begin{align*}
+\frac{1-t^{2}}{1-2tz+t^{2}} & =T_{0}\left(x\right)+2\sum_{n=1}^{\infty}T_{n}\left(x\right)t^{n}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+iii
+\end_layout
+
+\end_inset
+
+ Hermite:
+\begin_inset Formula 
+\begin{align*}
+\frac{\dd^{2}}{\dd x^{2}}y-2x\frac{\dd y}{\dd x}+\lambda y & =0
+\end{align*}
+
+\end_inset
+
+We can take without trouble 
+\begin_inset Formula $x\in\left(-\infty,\infty\right)$
+\end_inset
+
+.
+\begin_inset Formula 
+\begin{align*}
+p\left(x\right) & =e^{-x^{2}}\\
+q\left(x\right) & =0\\
+r\left(x\right) & =e^{-x^{2}}
+\end{align*}
+
+\end_inset
+
+In Storm-Liouville form:
+\begin_inset Formula 
+\begin{align*}
+e^{x^{2}}\frac{\dd}{\dd x}\left(\left(e^{-x^{2}}\frac{\dd}{\dd x}\right)y\left(x\right)\right) & =-\lambda y\left(x\right)
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+H_{0}\left(x\right) & =1\\
+H_{1}\left(x\right) & =2x\\
+H_{2}\left(x\right) & =4x^{2}-2
+\end{align*}
+
+\end_inset
+
+Rodrigues formula:
+\begin_inset Formula 
+\begin{align*}
+H_{n}\left(x\right) & =\left(-1\right)^{n}e^{x^{2}}\frac{\dd^{n}}{\dd x^{n}}e^{-x^{2}}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\int_{-\infty}^{\infty}e^{-x^{2}}H_{n}\left(x\right)H_{m}\left(x\right)\dd x & =2^{n}n!\sqrt{\pi}\delta_{nm}
+\end{align*}
+
+\end_inset
+
+Recursion:
+\begin_inset Formula 
+\begin{align*}
+H_{n+1}-2xH_{n}+2nH_{n-1} & =0
+\end{align*}
+
+\end_inset
+
+Generating function:
+\begin_inset Formula 
+\begin{align*}
+e^{-t^{2}+2tx} & =\sum_{n=0}^{\infty}\frac{t^{n}}{n!}H_{n}\left(x\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{iiilist}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Part*
